@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 class="mb-4">Dashboard</h2>
+
+<div class="row">
+
+    <div class="col-md-4 mb-3">
+        <div class="card bg-primary text-white">
+            <div class="card-body">
+                <h5>Total Bikes</h5>
+                <h2>25</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+        <div class="card bg-success text-white">
+            <div class="card-body">
+                <h5>Available Bikes</h5>
+                <h2>18</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+        <div class="card bg-danger text-white">
+            <div class="card-body">
+                <h5>Rented Bikes</h5>
+                <h2>7</h2>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+
+    <div class="col-md-6 mb-3">
+        <div class="card bg-warning">
+            <div class="card-body">
+                <h5>Total Customers</h5>
+                <h2>120</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 mb-3">
+        <div class="card bg-info text-white">
+            <div class="card-body">
+                <h5>Today's Income</h5>
+                <h2>₹15,000</h2>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

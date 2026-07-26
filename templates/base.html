@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Bike Rental</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+{% include 'partials/navbar.html' %}
+
+<div class="d-flex">
+
+    {% include 'partials/sidebar.html' %}
+
+    <div class="container-fluid p-4">
+
+        {% block content %}
+
+        {% endblock %}
+
+    </div>
+
+</div>
+
+{% include 'partials/footer.html' %}
+
+</body>
+
+</html>
