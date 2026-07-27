@@ -6,13 +6,45 @@
 
     <h2>Customer List</h2>
 
+    <form method="GET" class="row mb-3">
+
+    <div class="col-md-8">
+
+        <input
+            type="text"
+            name="search"
+            class="form-control"
+            placeholder="Search by Name, Mobile, Aadhaar, Driving License"
+            value="{{ search }}">
+
+    </div>
+
+    <div class="col-md-2">
+
+        <button class="btn btn-primary w-100">
+            Search
+        </button>
+
+    </div>
+
+    <div class="col-md-2">
+
+        <a href="{% url 'customer_list' %}"
+           class="btn btn-secondary w-100">
+            Reset
+        </a>
+
+    </div>
+
+</form>
+
     <a href="{% url 'add_customer' %}" class="btn btn-success">
         + Add Customer
     </a>
 
 </div>
 
-<table class="table table-bordered table-striped table-hover">
+<table id="customerTable" class="table table-bordered table-striped table-hover">
 
     <thead class="table-dark">
 
@@ -73,3 +105,10 @@
 </table>
 
 {% endblock %}
+
+
+<script>
+$(document).ready(function () {
+    $('#customerTable').DataTable();
+});
+</script>

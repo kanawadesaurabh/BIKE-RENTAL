@@ -2,20 +2,38 @@
 
 {% block content %}
 
-<h2>Rent Bike</h2>
+<div class="container-fluid">
 
-<form method="POST">
+    <div class="card shadow">
 
-    {% csrf_token %}
+        <div class="card-header bg-primary text-white">
+            <h3 class="mb-0">Rent Bike</h3>
+        </div>
 
-    {{ form.errors }}
+        <div class="card-body">
 
-    {{ form.as_p }}
+            <form method="POST">
 
-    <button class="btn btn-success">
-        Save Rental
-    </button>
+                {% csrf_token %}
 
-</form>
+                {{ form.errors }}
+
+                {{ form.as_p }}
+
+                <button type="submit" class="btn btn-success">
+                    Save Rental
+                </button>
+
+                <a href="{% url 'rental_list' %}" class="btn btn-secondary">
+                    Cancel
+                </a>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
 
 {% endblock %}

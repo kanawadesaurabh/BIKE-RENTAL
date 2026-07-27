@@ -2,33 +2,88 @@
 
 {% block content %}
 
-<h2>Dashboard</h2>
+<div class="content-header">
+    <h2 class="mb-4">
+        <i class="fas fa-tachometer-alt"></i> Dashboard
+    </h2>
+</div>
 
 <div class="row">
 
-    <div class="col-md-4">
-        <div class="card bg-primary text-white mb-3">
-            <div class="card-body">
-                <h5>Total Bikes</h5>
-                <h2>{{ total_bikes }}</h2>
+    <!-- Total Bikes -->
+    <div class="col-lg-4 col-md-6">
+        <div class="small-box bg-primary">
+            <div class="inner">
+                <h3>{{ total_bikes }}</h3>
+                <p>Total Bikes</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-motorcycle"></i>
             </div>
         </div>
     </div>
 
-    <div class="col-md-4">
-        <div class="card bg-success text-white mb-3">
-            <div class="card-body">
-                <h5>Available Bikes</h5>
-                <h2>{{ available_bikes }}</h2>
+    <!-- Available -->
+    <div class="col-lg-4 col-md-6">
+        <div class="small-box bg-success">
+            <div class="inner">
+                <h3>{{ available_bikes }}</h3>
+                <p>Available Bikes</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-check-circle"></i>
             </div>
         </div>
     </div>
 
-    <div class="col-md-4">
-        <div class="card bg-danger text-white mb-3">
-            <div class="card-body">
-                <h5>Rented Bikes</h5>
-                <h2>{{ rented_bikes }}</h2>
+    <!-- Rented -->
+    <div class="col-lg-4 col-md-6">
+        <div class="small-box bg-danger">
+            <div class="inner">
+                <h3>{{ rented_bikes }}</h3>
+                <p>Rented Bikes</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-key"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Customers -->
+    <div class="col-lg-4 col-md-6">
+        <div class="small-box bg-info">
+            <div class="inner">
+                <h3>{{ total_customers }}</h3>
+                <p>Total Customers</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-users"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Active Rentals -->
+    <div class="col-lg-4 col-md-6">
+        <div class="small-box bg-warning">
+            <div class="inner">
+                <h3>{{ active_rentals }}</h3>
+                <p>Active Rentals</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-file-contract"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Income -->
+    <div class="col-lg-4 col-md-6">
+        <div class="small-box bg-secondary">
+            <div class="inner">
+                <h3>₹ {{ today_income }}</h3>
+                <p>Today's Income</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-rupee-sign"></i>
             </div>
         </div>
     </div>

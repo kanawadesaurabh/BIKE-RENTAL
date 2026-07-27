@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Customer
 from .forms import CustomerForm
+from django.db.models import Q
 
 def customer_list(request):
 
@@ -54,3 +55,28 @@ def delete_customer(request, id):
     customer.delete()
 
     return redirect("customer_list")
+
+
+
+def customer_list(request):
+
+    search = request.GET.get('search')
+
+    if search:
+        customers = Customer.objects.filter(
+            Q(customer_name__icontains=search) |
+            Q(mobile__icontains=search) |
+            Q(aadhaar_number__icontains=search) |
+            Q(driving_license__icontains=search)
+        )
+    else:
+        customers = Customer.objects.all()
+
+    return render(
+        request,
+        "customers/customer_list.html",
+        {
+            "customers": customers,
+            "search": search,
+        }
+    )

@@ -2,6 +2,12 @@ from django.shortcuts import render, redirect
 from .models import Rental
 from .forms import RentalForm
 from bikes.models import Bike
+from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
+from django.utils import timezone
+from .models import Rental
+
+
 
 
 def rental_list(request):
@@ -44,3 +50,18 @@ def add_rental(request):
         "rentals/add_rental.html",
         {"form": form}
     )
+
+
+def return_bike(request, id):
+
+    rental = get_object_or_404(Rental, id=id)
+
+    rental.return_date = timezone.now().date()
+    rental.status = "Completed"
+    rental.save()
+
+    bike = rental.bike
+    bike.status = "Available"
+    bike.save()
+
+    return redirect("rental_list")

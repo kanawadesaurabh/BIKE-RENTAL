@@ -12,8 +12,7 @@
 
 </div>
 
-<table class="table table-bordered table-striped">
-
+<table id="rentalTable" class="table table-bordered table-striped">
     <thead class="table-dark">
 
         <tr>
@@ -23,6 +22,10 @@
             <th>Return Date</th>
             <th>Daily Rent</th>
             <th>Status</th>
+            <th>Action</th>
+            <th>Total Days</th>
+            <th>Total Rent</th>
+            <th>Remaining</th>
         </tr>
 
     </thead>
@@ -38,14 +41,49 @@
             <td>{{ rental.rent_date }}</td>
             <td>{{ rental.return_date }}</td>
             <td>₹ {{ rental.daily_rent }}</td>
-            <td>{{ rental.status }}</td>
+            <td>{{ rental.total_days }}</td>
+
+            <td>₹ {{ rental.total_amount }}</td>
+
+            <td>₹ {{ rental.remaining_amount }}</td>
+
+            <td>
+                {% if rental.status == "Active" %}
+                    <span class="badge bg-success">
+                        Active
+                    </span>
+                {% else %}
+                    <span class="badge bg-secondary">
+                        Completed
+                    </span>
+                {% endif %}
+            </td>
+
+            <td>
+
+                {% if rental.status == "Active" %}
+
+                    <a href="{% url 'return_bike' rental.id %}"
+                       class="btn btn-warning btn-sm">
+                        Return
+                    </a>
+
+                {% else %}
+
+                    <button class="btn btn-secondary btn-sm" disabled>
+                        Returned
+                    </button>
+
+                {% endif %}
+
+            </td>
 
         </tr>
 
     {% empty %}
 
         <tr>
-            <td colspan="6" class="text-center">
+            <td colspan="7" class="text-center">
                 No Rentals Found
             </td>
         </tr>
@@ -57,3 +95,11 @@
 </table>
 
 {% endblock %}
+
+
+
+<script>
+$(document).ready(function () {
+    $('#rentalTable').DataTable();
+});
+</script>
