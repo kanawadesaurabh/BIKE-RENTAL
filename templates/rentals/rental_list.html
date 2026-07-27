@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+
+    <h2>Rental List</h2>
+
+    <a href="{% url 'add_rental' %}" class="btn btn-primary">
+        + New Rental
+    </a>
+
+</div>
+
+<table class="table table-bordered table-striped">
+
+    <thead class="table-dark">
+
+        <tr>
+            <th>Customer</th>
+            <th>Bike</th>
+            <th>Rent Date</th>
+            <th>Return Date</th>
+            <th>Daily Rent</th>
+            <th>Status</th>
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+    {% for rental in rentals %}
+
+        <tr>
+
+            <td>{{ rental.customer }}</td>
+            <td>{{ rental.bike }}</td>
+            <td>{{ rental.rent_date }}</td>
+            <td>{{ rental.return_date }}</td>
+            <td>₹ {{ rental.daily_rent }}</td>
+            <td>{{ rental.status }}</td>
+
+        </tr>
+
+    {% empty %}
+
+        <tr>
+            <td colspan="6" class="text-center">
+                No Rentals Found
+            </td>
+        </tr>
+
+    {% endfor %}
+
+    </tbody>
+
+</table>
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Dashboard</h2>
+
+<div class="row">
+
+    <div class="col-md-4">
+        <div class="card bg-primary text-white mb-3">
+            <div class="card-body">
+                <h5>Total Bikes</h5>
+                <h2>{{ total_bikes }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card bg-success text-white mb-3">
+            <div class="card-body">
+                <h5>Available Bikes</h5>
+                <h2>{{ available_bikes }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card bg-danger text-white mb-3">
+            <div class="card-body">
+                <h5>Rented Bikes</h5>
+                <h2>{{ rented_bikes }}</h2>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
