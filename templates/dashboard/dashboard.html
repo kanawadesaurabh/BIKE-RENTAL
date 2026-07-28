@@ -11,7 +11,7 @@
 <div class="row">
 
     <!-- Total Bikes -->
-    <div class="col-lg-4 col-md-6">
+    <div class="col-lg-3 col-md-6">
         <div class="small-box bg-primary">
             <div class="inner">
                 <h3>{{ total_bikes }}</h3>
@@ -23,8 +23,8 @@
         </div>
     </div>
 
-    <!-- Available -->
-    <div class="col-lg-4 col-md-6">
+    <!-- Available Bikes -->
+    <div class="col-lg-3 col-md-6">
         <div class="small-box bg-success">
             <div class="inner">
                 <h3>{{ available_bikes }}</h3>
@@ -36,8 +36,8 @@
         </div>
     </div>
 
-    <!-- Rented -->
-    <div class="col-lg-4 col-md-6">
+    <!-- Rented Bikes -->
+    <div class="col-lg-3 col-md-6">
         <div class="small-box bg-danger">
             <div class="inner">
                 <h3>{{ rented_bikes }}</h3>
@@ -50,7 +50,7 @@
     </div>
 
     <!-- Customers -->
-    <div class="col-lg-4 col-md-6">
+    <div class="col-lg-3 col-md-6">
         <div class="small-box bg-info">
             <div class="inner">
                 <h3>{{ total_customers }}</h3>
@@ -63,7 +63,7 @@
     </div>
 
     <!-- Active Rentals -->
-    <div class="col-lg-4 col-md-6">
+    <div class="col-lg-3 col-md-6">
         <div class="small-box bg-warning">
             <div class="inner">
                 <h3>{{ active_rentals }}</h3>
@@ -75,8 +75,8 @@
         </div>
     </div>
 
-    <!-- Income -->
-    <div class="col-lg-4 col-md-6">
+    <!-- Today's Income -->
+    <div class="col-lg-3 col-md-6">
         <div class="small-box bg-secondary">
             <div class="inner">
                 <h3>₹ {{ today_income }}</h3>
@@ -84,6 +84,32 @@
             </div>
             <div class="icon">
                 <i class="fas fa-rupee-sign"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Monthly Income -->
+    <div class="col-lg-3 col-md-6">
+        <div class="small-box bg-indigo">
+            <div class="inner">
+                <h3>₹ {{ monthly_income }}</h3>
+                <p>Monthly Income</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-chart-line"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pending Payments -->
+    <div class="col-lg-3 col-md-6">
+        <div class="small-box bg-maroon">
+            <div class="inner">
+                <h3>{{ pending_payments }}</h3>
+                <p>Pending Payments</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-exclamation-circle"></i>
             </div>
         </div>
     </div>

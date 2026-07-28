@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card">
+
+    <div class="card-header bg-danger text-white">
+
+        <h3>Return Bike</h3>
+
+    </div>
+
+    <div class="card-body">
+
+        <h5>Customer : {{ rental.customer }}</h5>
+
+        <h5>Bike : {{ rental.bike }}</h5>
+
+        <h5>Rent Date : {{ rental.rent_date }}</h5>
+
+        <hr>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button class="btn btn-success">
+
+                Complete Return
+
+            </button>
+
+            <a href="{% url 'rental_list' %}" class="btn btn-secondary">
+
+                Cancel
+
+            </a>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -41,6 +41,9 @@ INSTALLED_APPS = [
     'bikes',
     'customers',
     'rentals',
+    'payments',
+    'reports',
+    'expenses',
 ]
 
 MIDDLEWARE = [

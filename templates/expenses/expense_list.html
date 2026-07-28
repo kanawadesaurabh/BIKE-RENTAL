@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card">
+
+    <div class="card-header bg-danger text-white d-flex justify-content-between">
+
+        <h3 class="mb-0">
+            Expense List
+        </h3>
+
+        <a href="{% url 'add_expense' %}" class="btn btn-light">
+
+            <i class="fas fa-plus"></i>
+
+            Add Expense
+
+        </a>
+
+    </div>
+
+    <div class="card-body">
+
+        <table id="expenseTable" class="table table-bordered table-striped">
+
+            <thead class="table-dark">
+
+                <tr>
+
+                    <th>Date</th>
+
+                    <th>Category</th>
+
+                    <th>Amount</th>
+
+                    <th>Description</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for expense in expenses %}
+
+                <tr>
+
+                    <td>{{ expense.expense_date }}</td>
+
+                    <td>{{ expense.category }}</td>
+
+                    <td>₹ {{ expense.amount }}</td>
+
+                    <td>{{ expense.description }}</td>
+
+                </tr>
+
+                {% empty %}
+
+                <tr>
+
+                    <td colspan="4" class="text-center">
+
+                        No Expense Found
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+
+$(document).ready(function(){
+
+    $('#expenseTable').DataTable({
+
+        responsive:true
+
+    });
+
+});
+
+</script>
+
+{% endblock %}

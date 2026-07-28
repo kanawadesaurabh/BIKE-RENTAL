@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card">
+
+    <div class="card-header bg-success text-white">
+
+        <h3>Add Payment</h3>
+
+    </div>
+
+    <div class="card-body">
+
+        <h5>
+
+            Customer :
+            {{ rental.customer.customer_name }}
+
+        </h5>
+
+        <h5>
+
+            Bike :
+            {{ rental.bike.bike_name }}
+
+        </h5>
+
+        <h5 class="text-danger">
+
+            Balance :
+            ₹ {{ rental.remaining_amount }}
+
+        </h5>
+
+        <hr>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button class="btn btn-success">
+
+                Save Payment
+
+            </button>
+
+            <a href="{% url 'payment_list' %}"
+               class="btn btn-secondary">
+
+                Cancel
+
+            </a>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

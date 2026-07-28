@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card">
+
+    <div class="card-header bg-primary text-white d-flex justify-content-between">
+
+        <h3 class="mb-0">Rental List</h3>
+
+        <a href="{% url 'add_rental' %}" class="btn btn-light">
+            <i class="fas fa-plus"></i> Add Rental
+        </a>
+
+    </div>
+
+    <div class="card-body">
+
+        <table id="rentalTable" class="table table-bordered table-striped">
+
+            <thead class="table-dark">
+
+                <tr>
+
+                    <th>Customer</th>
+                    <th>Bike</th>
+                    <th>Rent Date</th>
+                    <th>Return Date</th>
+                    <th>Daily Rent</th>
+                    <th>Status</th>
+                    <th>Remaining</th>
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for rental in rentals %}
+
+                <tr>
+
+                    <td>{{ rental.customer.customer_name }}</td>
+
+                    <td>{{ rental.bike.bike_name }}</td>
+
+                    <td>{{ rental.rent_date }}</td>
+
+                    <td>{{ rental.return_date|default:"-" }}</td>
+
+                    <td>₹ {{ rental.daily_rent }}</td>
+
+                    <td>
+
+                        {% if rental.status == "Completed" %}
+
+                            <span class="badge bg-success">
+                                Completed
+                            </span>
+
+                        {% else %}
+
+                            <span class="badge bg-warning">
+                                Active
+                            </span>
+
+                        {% endif %}
+
+                    </td>
+
+                    <td>
+                        ₹ {{ rental.remaining_amount }}
+                    </td>
+
+                    <td>
+
+                        <a href="{% url 'rental_detail' rental.id %}"
+                           class="btn btn-primary btn-sm">
+
+                            <i class="fas fa-eye"></i>
+
+                        </a>
+
+                        {% if rental.status == "Active" %}
+
+                        <a href="{% url 'return_bike' rental.id %}"
+                           class="btn btn-success btn-sm">
+
+                            <i class="fas fa-undo"></i>
+
+                        </a>
+
+                        {% endif %}
+
+                        {% if rental.status == "Completed" and rental.remaining_amount > 0 %}
+
+                        <a href="{% url 'add_payment' rental.id %}"
+                           class="btn btn-info btn-sm">
+
+                            <i class="fas fa-money-bill-wave"></i>
+
+                        </a>
+
+                        {% endif %}
+
+                    </td>
+
+                </tr>
+
+                {% empty %}
+
+                <tr>
+
+                    <td colspan="8" class="text-center">
+
+                        No Rentals Found
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+
+$(document).ready(function(){
+
+    $('#rentalTable').DataTable({
+
+        responsive: true,
+
+        pageLength: 10,
+
+        ordering: true
+
+    });
+
+});
+
+</script>
+
+{% endblock %}

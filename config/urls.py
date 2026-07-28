@@ -23,4 +23,7 @@ urlpatterns = [
     path('bikes/', include('bikes.urls')),
     path('customers/', include('customers.urls')),
     path('rentals/', include('rentals.urls')),
+    path("payments/",include("payments.urls")),
+    path("reports/",include("reports.urls")),
+    path("expenses/",include("expenses.urls")),
 ]
