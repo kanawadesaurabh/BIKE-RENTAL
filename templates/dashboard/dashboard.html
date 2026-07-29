@@ -3,9 +3,12 @@
 {% block content %}
 
 <div class="content-header">
+
     <h2 class="mb-4">
-        <i class="fas fa-tachometer-alt"></i> Dashboard
+        <i class="fas fa-tachometer-alt"></i>
+        Dashboard
     </h2>
+
 </div>
 
 <div class="row">
@@ -114,6 +117,315 @@
         </div>
     </div>
 
+    <!-- Total Income -->
+    <div class="col-lg-3 col-md-6">
+        <div class="small-box bg-success">
+            <div class="inner">
+                <h3>₹ {{ total_income }}</h3>
+                <p>Total Income</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-wallet"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Total Expense -->
+    <div class="col-lg-3 col-md-6">
+        <div class="small-box bg-danger">
+            <div class="inner">
+                <h3>₹ {{ total_expense }}</h3>
+                <p>Total Expense</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-money-bill-wave"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Total Profit -->
+    <div class="col-lg-3 col-md-6">
+        <div class="small-box bg-primary">
+            <div class="inner">
+                <h3>₹ {{ total_profit }}</h3>
+                <p>Total Profit</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-chart-line"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Today's Expense -->
+    <div class="col-lg-3 col-md-6">
+        <div class="small-box bg-warning">
+            <div class="inner">
+                <h3>₹ {{ today_expense }}</h3>
+                <p>Today's Expense</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-coins"></i>
+            </div>
+        </div>
+    </div>
+
 </div>
+
+<hr>
+
+<div class="row">
+
+    <div class="col-lg-8">
+
+        <div class="card shadow">
+
+            <div class="card-header bg-primary text-white">
+
+                <h5 class="mb-0">
+
+                    <i class="fas fa-chart-bar"></i>
+
+                    Income vs Expense
+
+                </h5>
+
+            </div>
+
+            <div class="card-body">
+
+                <canvas id="incomeChart" style="height:320px;"></canvas>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-lg-4">
+
+        <div class="card shadow">
+
+            <div class="card-header bg-success text-white">
+
+                <h5 class="mb-0">
+
+                    Recent Payments
+
+                </h5>
+
+            </div>
+
+            <div class="card-body">
+
+                <table class="table table-sm table-hover">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Customer</th>
+
+                            <th>Amount</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for payment in recent_payments %}
+
+                        <tr>
+
+                            <td>{{ payment.rental.customer.customer_name }}</td>
+
+                            <td>₹ {{ payment.amount }}</td>
+
+                        </tr>
+
+                        {% empty %}
+
+                        <tr>
+
+                            <td colspan="2">
+
+                                No Payment Found
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="row mt-3">
+
+    <div class="col-md-6">
+
+        <div class="card">
+
+            <div class="card-header bg-info text-white">
+
+                Recent Rentals
+
+            </div>
+
+            <div class="card-body">
+
+                <table class="table table-sm">
+
+                    {% for rental in recent_rentals %}
+
+                    <tr>
+
+                        <td>{{ rental.customer.customer_name }}</td>
+
+                        <td>{{ rental.bike.bike_name }}</td>
+
+                    </tr>
+
+                    {% empty %}
+
+                    <tr>
+
+                        <td>No Rental Found</td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-6">
+
+        <div class="card">
+
+            <div class="card-header bg-danger text-white">
+
+                Recent Expenses
+
+            </div>
+
+            <div class="card-body">
+
+                <table class="table table-sm">
+
+                    {% for expense in recent_expenses %}
+
+                    <tr>
+
+                        <td>{{ expense.category }}</td>
+
+                        <td>₹ {{ expense.amount }}</td>
+
+                    </tr>
+
+                    {% empty %}
+
+                    <tr>
+
+                        <td>No Expense Found</td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+{% block scripts %}
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const canvas = document.getElementById("incomeChart");
+
+    if (canvas) {
+
+        new Chart(canvas, {
+
+            type: "bar",
+
+            data: {
+
+                labels: [
+
+                    "Income",
+
+                    "Expense",
+
+                    "Profit"
+
+                ],
+
+                datasets: [{
+
+                    label: "Business Summary",
+
+                    data: [
+
+                        {{ total_income }},
+
+                        {{ total_expense }},
+
+                        {{ total_profit }}
+
+                    ],
+
+                    backgroundColor: [
+
+                        "#28a745",
+
+                        "#dc3545",
+
+                        "#007bff"
+
+                    ]
+
+                }]
+
+            },
+
+            options: {
+
+                responsive: true,
+
+                maintainAspectRatio: false
+
+            }
+
+        });
+
+    }
+
+});
+
+</script>
 
 {% endblock %}

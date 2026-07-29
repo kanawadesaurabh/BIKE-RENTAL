@@ -2,75 +2,83 @@
 
 {% block content %}
 
-<div class="card">
+<div class="card shadow">
 
     <div class="card-header bg-primary text-white">
 
-        <h3>Payment History</h3>
+        <h2 class="mb-0">
+            <i class="fas fa-money-bill-wave"></i>
+            Payment History
+        </h2>
 
     </div>
 
     <div class="card-body">
 
-        <table id="paymentTable" class="table table-bordered table-striped">
+        <div class="table-responsive">
 
-            <thead class="table-dark">
+            <table id="paymentTable" class="table table-bordered table-striped">
 
-                <tr>
+                <thead class="table-dark">
 
-                    <th>Date</th>
+                    <tr>
+                        <th>Date</th>
+                        <th>Customer</th>
+                        <th>Bike</th>
+                        <th>Amount</th>
+                        <th>Payment Mode</th>
+                        <th>Remarks</th>
+                    </tr>
 
-                    <th>Customer</th>
+                </thead>
 
-                    <th>Bike</th>
+                <tbody>
 
-                    <th>Amount</th>
+                    {% for payment in payments %}
 
-                    <th>Mode</th>
+                    <tr>
 
-                    <th>Remarks</th>
+                        <td>{{ payment.payment_date }}</td>
 
-                </tr>
+                        <td>{{ payment.rental.customer.customer_name }}</td>
 
-            </thead>
+                        <td>{{ payment.rental.bike.bike_name }}</td>
 
-            <tbody>
+                        <td class="text-success fw-bold">
+                            ₹ {{ payment.amount }}
+                        </td>
 
-                {% for payment in payments %}
+                        <td>
+                            <span class="badge bg-success">
+                                {{ payment.payment_mode }}
+                            </span>
+                        </td>
 
-                <tr>
+                        <td>
+                            {{ payment.remarks|default:"-" }}
+                        </td>
 
-                    <td>{{ payment.payment_date }}</td>
+                    </tr>
 
-                    <td>{{ payment.rental.customer.customer_name }}</td>
+                    {% empty %}
 
-                    <td>{{ payment.rental.bike.bike_name }}</td>
+                    <tr>
 
-                    <td>₹ {{ payment.amount }}</td>
+                        <td colspan="6" class="text-center text-danger">
 
-                    <td>{{ payment.payment_mode }}</td>
+                            No Payments Found
 
-                    <td>{{ payment.remarks }}</td>
+                        </td>
 
-                </tr>
+                    </tr>
 
-                {% empty %}
+                    {% endfor %}
 
-                <tr>
+                </tbody>
 
-                    <td colspan="6" class="text-center">
+            </table>
 
-                        No Payments Found
-
-                    </td>
-
-                </tr>
-
-                {% endfor %}
-
-            </tbody>
-
-        </table>
+        </div>
 
     </div>
 
@@ -82,9 +90,16 @@
 
 <script>
 
-$(document).ready(function(){
+$(document).ready(function () {
 
-    $('#paymentTable').DataTable();
+    $('#paymentTable').DataTable({
+
+        responsive: true,
+        pageLength: 10,
+        ordering: true,
+        searching: true
+
+    });
 
 });
 
