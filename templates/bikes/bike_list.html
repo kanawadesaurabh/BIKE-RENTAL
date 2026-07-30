@@ -2,111 +2,164 @@
 
 {% block content %}
 
-<div class="card">
+<div class="card shadow">
 
-    <div class="card-header d-flex justify-content-between align-items-center">
+    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
 
-        <h3 class="card-title">
-            <i class="fas fa-motorcycle"></i> Bike List
+        <h3 class="mb-0">
+            <i class="fas fa-motorcycle"></i>
+            Bike List
         </h3>
 
-        <a href="{% url 'add_bike' %}" class="btn btn-success">
-            <i class="fas fa-plus"></i> Add Bike
+        <a href="{% url 'add_bike' %}" class="btn btn-light">
+            <i class="fas fa-plus"></i>
+            Add Bike
         </a>
 
     </div>
 
     <div class="card-body">
 
-        <table id="bikeTable" class="table table-bordered table-striped table-hover">
+        <form method="GET" class="row mb-4">
 
-            <thead>
+            <div class="col-md-8">
 
-                <tr>
-                    <th>Bike</th>
-                    <th>Brand</th>
-                    <th>Registration No.</th>
-                    <th>Daily Rent</th>
-                    <th>Status</th>
-                    <th width="180">Action</th>
-                </tr>
+                <input
+                    type="text"
+                    name="search"
+                    class="form-control"
+                    placeholder="Search by Bike Name, Brand, Model, Registration Number"
+                    value="{{ search }}">
 
-            </thead>
+            </div>
 
-            <tbody>
+            <div class="col-md-2">
 
-                {% for bike in bikes %}
+                <button class="btn btn-primary w-100">
+                    <i class="fas fa-search"></i>
+                    Search
+                </button>
 
-                <tr>
+            </div>
 
-                    <td>{{ bike.bike_name }}</td>
+            <div class="col-md-2">
 
-                    <td>{{ bike.brand }}</td>
+                <a href="{% url 'bike_list' %}"
+                   class="btn btn-secondary w-100">
 
-                    <td>{{ bike.registration_number }}</td>
+                    Reset
 
-                    <td>₹ {{ bike.daily_rent }}</td>
+                </a>
 
-                    <td>
+            </div>
 
-                        {% if bike.status == "Available" %}
+        </form>
 
-                            <span class="badge bg-success">
-                                Available
-                            </span>
+        <div class="table-responsive">
 
-                        {% elif bike.status == "Rented" %}
+            <table id="bikeTable"
+                   class="table table-bordered table-striped table-hover">
 
-                            <span class="badge bg-danger">
-                                Rented
-                            </span>
+                <thead class="table-dark">
 
-                        {% else %}
+                    <tr>
 
-                            <span class="badge bg-warning">
-                                Service
-                            </span>
+                        <th>ID</th>
+                        <th>Bike</th>
+                        <th>Brand</th>
+                        <th>Registration No.</th>
+                        <th>Daily Rent</th>
+                        <th>Status</th>
+                        <th width="180">Action</th>
 
-                        {% endif %}
+                    </tr>
 
-                    </td>
+                </thead>
 
-                    <td>
+                <tbody>
 
-                        <a href="{% url 'edit_bike' bike.id %}"
-                           class="btn btn-warning btn-sm">
-                            <i class="fas fa-edit"></i>
-                        </a>
+                    {% for bike in bikes %}
 
-                        <a href="{% url 'delete_bike' bike.id %}"
-                           class="btn btn-danger btn-sm"
-                           onclick="return confirm('Are you sure you want to delete this bike?')">
+                    <tr>
 
-                            <i class="fas fa-trash"></i>
+                        <td>{{ bike.id }}</td>
 
-                        </a>
+                        <td>{{ bike.bike_name }}</td>
 
-                    </td>
+                        <td>{{ bike.brand }}</td>
 
-                </tr>
+                        <td>
+                            <strong>{{ bike.registration_number }}</strong>
+                        </td>
 
-                {% empty %}
+                        <td>
+                            ₹ {{ bike.daily_rent }}
+                        </td>
 
-                <tr>
+                        <td>
 
-                    <td colspan="6" class="text-center">
+                            {% if bike.status == "Available" %}
 
-                        No Bikes Found
+                                <span class="badge bg-success">
+                                    Available
+                                </span>
 
-                    </td>
+                            {% elif bike.status == "Rented" %}
 
-                </tr>
+                                <span class="badge bg-danger">
+                                    Rented
+                                </span>
 
-                {% endfor %}
+                            {% else %}
 
-            </tbody>
+                                <span class="badge bg-warning text-dark">
+                                    Service
+                                </span>
 
-        </table>
+                            {% endif %}
+
+                        </td>
+
+                        <td>
+
+                            <a href="{% url 'edit_bike' bike.id %}"
+                               class="btn btn-warning btn-sm">
+
+                                <i class="fas fa-edit"></i>
+
+                            </a>
+
+                            <a href="{% url 'delete_bike' bike.id %}"
+                               class="btn btn-danger btn-sm"
+                               onclick="return confirm('Delete this bike?')">
+
+                                <i class="fas fa-trash"></i>
+
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                    {% empty %}
+
+                    <tr>
+
+                        <td colspan="7" class="text-center">
+
+                            No Bikes Found
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
 
     </div>
 
@@ -114,49 +167,19 @@
 
 {% endblock %}
 
-
 {% block scripts %}
 
 <script>
 
-$(document).ready(function () {
+$(document).ready(function(){
 
     $('#bikeTable').DataTable({
 
-        responsive: true,
+        responsive:true,
 
-        pageLength: 10,
+        pageLength:10,
 
-        lengthMenu: [[10,25,50,100,-1],[10,25,50,100,"All"]],
-
-        ordering: true,
-
-        searching: true,
-
-        info: true,
-
-        autoWidth: false,
-
-        language: {
-
-            search: "🔍 Search :",
-
-
-            lengthMenu: "Show _MENU_ Records",
-
-            info: "Showing _START_ to _END_ of _TOTAL_ Bikes",
-
-            zeroRecords: "No Bike Found",
-
-            paginate: {
-
-                previous: "Previous",
-
-                next: "Next"
-
-            }
-
-        }
+        ordering:true
 
     });
 

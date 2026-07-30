@@ -2,18 +2,101 @@
 
 {% block content %}
 
-<h2 class="mb-4">Add Customer</h2>
+<div class="card shadow">
 
-<form method="POST">
+    <div class="card-header bg-primary text-white">
 
-    {% csrf_token %}
+        <h3 class="mb-0">
+            <i class="fas fa-user-plus"></i>
+            Add Customer
+        </h3>
 
-    {{ form.as_p }}
+    </div>
 
-    <button class="btn btn-success">
-        Save Customer
-    </button>
+    <div class="card-body">
 
-</form>
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="form-label">
+                        Customer Name <span class="text-danger">*</span>
+                    </label>
+
+                    {{ form.customer_name }}
+
+                </div>
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="form-label">
+                        Mobile Number <span class="text-danger">*</span>
+                    </label>
+
+                    {{ form.mobile }}
+
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="form-label">
+                        Aadhaar Number
+                    </label>
+
+                    {{ form.aadhaar_number }}
+
+                </div>
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="form-label">
+                        Driving License
+                    </label>
+
+                    {{ form.driving_license }}
+
+                </div>
+
+            </div>
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Address
+                </label>
+
+                {{ form.address }}
+
+            </div>
+
+            <hr>
+
+            <button type="submit" class="btn btn-success">
+
+                <i class="fas fa-save"></i>
+                Save Customer
+
+            </button>
+
+            <a href="{% url 'customer_list' %}" class="btn btn-secondary">
+
+                <i class="fas fa-times"></i>
+                Cancel
+
+            </a>
+
+        </form>
+
+    </div>
+
+</div>
 
 {% endblock %}

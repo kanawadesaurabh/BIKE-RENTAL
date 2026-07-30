@@ -2,212 +2,191 @@
 
 {% block content %}
 
-<div class="card shadow">
+<div class="container mt-4">
 
-    <div class="card-header bg-dark text-white">
+    <div class="card shadow">
 
-        <div class="d-flex justify-content-between align-items-center">
+        <div class="card-header bg-dark text-white d-flex justify-content-between">
 
             <h3 class="mb-0">
                 <i class="fas fa-file-invoice"></i>
                 Bike Rental Invoice
             </h3>
 
-            <button onclick="window.print()" class="btn btn-warning">
-                <i class="fas fa-print"></i> Print
+            <button onclick="window.print()" class="btn btn-light">
+                <i class="fas fa-print"></i>
+                Print
             </button>
 
         </div>
 
-    </div>
+        <div class="card-body">
 
-    <div class="card-body">
+            <h4 class="text-center mb-4">
 
-        <!-- Company Details -->
+                <strong>YOUR BIKE RENTAL SHOP NAME</strong><br>
 
-        <div class="text-center mb-4">
+                <small>Pune, Maharashtra</small>
 
-            <h2 class="text-primary font-weight-bold">
-                GURUDATTA MOTORS
-            </h2>
+            </h4>
 
-            <h5>Bike Rental Service</h5>
+            <hr>
 
-            <p class="mb-0">
-                Near Bhumkar Chowk, Wakad, Pune
-            </p>
+            <div class="row">
 
-            <p class="mb-0">
-                Owner : Arvind Rane | Swapnil Lende
-            </p>
+                <div class="col-md-6">
 
-            <p class="mb-0">
-                Mobile : +91 9111091212
-            </p>
+                    <h5>Customer Details</h5>
 
-            <p>
-                Email : gurudattamotors@gmail.com
-            </p>
+                    <table class="table table-bordered">
 
-        </div>
+                        <tr>
+                            <th>Name</th>
+                            <td>{{ rental.customer.customer_name }}</td>
+                        </tr>
 
-        <hr>
+                        <tr>
+                            <th>Mobile</th>
+                            <td>{{ rental.customer.mobile }}</td>
+                        </tr>
 
-        <!-- Invoice Details -->
+                        <tr>
+                            <th>Driving License</th>
+                            <td>{{ rental.customer.driving_license }}</td>
+                        </tr>
 
-        <table class="table table-bordered">
+                    </table>
 
-            <tr class="table-secondary">
-                <th width="35%">Invoice No.</th>
-                <td>
-                    INV-{{ rental.id|stringformat:"05d" }}
-                </td>
-            </tr>
+                </div>
 
-            <tr>
-                <th>Customer Name</th>
-                <td>{{ rental.customer.customer_name }}</td>
-            </tr>
+                <div class="col-md-6">
 
-            <tr>
-                <th>Bike Name</th>
-                <td>{{ rental.bike.bike_name }}</td>
-            </tr>
+                    <h5>Bike Details</h5>
 
-            <tr>
-                <th>Registration Number</th>
-                <td>{{ rental.bike.registration_number }}</td>
-            </tr>
+                    <table class="table table-bordered">
 
-            <tr>
-                <th>Rent Date</th>
-                <td>{{ rental.rent_date }}</td>
-            </tr>
+                        <tr>
+                            <th>Bike</th>
+                            <td>{{ rental.bike.bike_name }}</td>
+                        </tr>
 
-            <tr>
-                <th>Return Date</th>
-                <td>{{ rental.return_date }}</td>
-            </tr>
+                        <tr>
+                            <th>Registration No</th>
+                            <td>{{ rental.bike.registration_number }}</td>
+                        </tr>
 
-            <tr>
-                <th>Total Days</th>
-                <td>{{ rental.total_days }}</td>
-            </tr>
+                        <tr>
+                            <th>Brand</th>
+                            <td>{{ rental.bike.brand }}</td>
+                        </tr>
 
-            <tr>
-                <th>Daily Rent</th>
-                <td>₹ {{ rental.daily_rent }}</td>
-            </tr>
+                    </table>
 
-            <tr class="table-success">
-                <th>Total Rent</th>
-                <td>
-                    <strong>₹ {{ rental.total_amount }}</strong>
-                </td>
-            </tr>
-
-            <tr>
-                <th>Advance Payment</th>
-                <td>₹ {{ rental.advance_payment }}</td>
-            </tr>
-
-            <tr>
-                <th>Late Fine</th>
-                <td>₹ {{ rental.late_fine }}</td>
-            </tr>
-
-            <tr>
-                <th>Damage Charge</th>
-                <td>₹ {{ rental.damage_charge }}</td>
-            </tr>
-
-            <tr>
-                <th>Security Deposit</th>
-                <td>₹ {{ rental.security_deposit }}</td>
-            </tr>
-
-            <tr>
-                <th>Deposit Refund</th>
-                <td>₹ {{ rental.deposit_refund }}</td>
-            </tr>
-
-            <tr class="table-danger">
-                <th>Remaining Amount</th>
-                <td>
-                    <strong>
-                        ₹ {{ rental.remaining_amount }}
-                    </strong>
-                </td>
-            </tr>
-
-            <tr>
-                <th>Remarks</th>
-                <td>{{ rental.remarks }}</td>
-            </tr>
-
-            <tr>
-                <th>Status</th>
-
-                <td>
-
-                    {% if rental.status == "Completed" %}
-
-                        <span class="badge bg-success">
-                            Completed
-                        </span>
-
-                    {% else %}
-
-                        <span class="badge bg-warning">
-                            Active
-                        </span>
-
-                    {% endif %}
-
-                </td>
-
-            </tr>
-
-        </table>
-
-        <br>
-
-        <div class="row">
-
-            <div class="col-md-6 text-center">
-
-                _______________________
-
-                <br>
-
-                Customer Signature
+                </div>
 
             </div>
 
-            <div class="col-md-6 text-center">
+            <hr>
 
-                _______________________
+            <h5>Rental Summary</h5>
 
-                <br>
+            <table class="table table-bordered">
 
-                Authorized Signature
+                <tr>
+
+                    <th>Rent Date</th>
+                    <td>{{ rental.rent_date }}</td>
+
+                    <th>Return Date</th>
+                    <td>{{ rental.return_date }}</td>
+
+                </tr>
+
+                <tr>
+
+                    <th>Total Days</th>
+                    <td>{{ rental.total_days }}</td>
+
+                    <th>Daily Rent</th>
+                    <td>₹ {{ rental.daily_rent }}</td>
+
+                </tr>
+
+            </table>
+
+            <h5 class="mt-4">Payment Summary</h5>
+
+            <table class="table table-bordered">
+
+                <tr>
+
+                    <th>Total Rent</th>
+                    <td>₹ {{ rental.total_amount }}</td>
+
+                </tr>
+
+                <tr>
+
+                    <th>Advance Payment</th>
+                    <td>₹ {{ rental.advance_payment }}</td>
+
+                </tr>
+
+                <tr>
+
+                    <th>Late Fine</th>
+                    <td>₹ {{ rental.late_fine }}</td>
+
+                </tr>
+
+                <tr>
+
+                    <th>Damage Charge</th>
+                    <td>₹ {{ rental.damage_charge }}</td>
+
+                </tr>
+
+                <tr>
+
+                    <th>Deposit Refund</th>
+                    <td>₹ {{ rental.deposit_refund }}</td>
+
+                </tr>
+
+                <tr class="table-danger">
+
+                    <th>Remaining Amount</th>
+                    <th>₹ {{ rental.remaining_amount }}</th>
+
+                </tr>
+
+            </table>
+
+            <br><br>
+
+            <div class="row">
+
+                <div class="col-md-6 text-center">
+
+                    _______________________
+
+                    <br>
+
+                    Customer Signature
+
+                </div>
+
+                <div class="col-md-6 text-center">
+
+                    _______________________
+
+                    <br>
+
+                    Authorized Signature
+
+                </div>
 
             </div>
-
-        </div>
-
-        <br>
-
-        <div class="alert alert-success text-center">
-
-            <h5 class="mb-1">
-                Thank You For Choosing
-                <strong>GURUDATTA MOTORS</strong>
-            </h5>
-
-            <small>
-                Ride Safe • Visit Again
-            </small>
 
         </div>
 

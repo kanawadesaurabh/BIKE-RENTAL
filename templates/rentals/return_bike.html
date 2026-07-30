@@ -2,21 +2,58 @@
 
 {% block content %}
 
-<div class="card">
+<div class="card shadow">
 
     <div class="card-header bg-danger text-white">
 
-        <h3>Return Bike</h3>
+        <h3 class="mb-0">
+            <i class="fas fa-undo"></i>
+            Return Bike
+        </h3>
 
     </div>
 
     <div class="card-body">
 
-        <h5>Customer : {{ rental.customer }}</h5>
+        <div class="row mb-3">
 
-        <h5>Bike : {{ rental.bike }}</h5>
+            <div class="col-md-6">
 
-        <h5>Rent Date : {{ rental.rent_date }}</h5>
+                <strong>Customer :</strong><br>
+
+                {{ rental.customer.customer_name }}
+
+            </div>
+
+            <div class="col-md-6">
+
+                <strong>Bike :</strong><br>
+
+                {{ rental.bike.bike_name }}
+
+            </div>
+
+        </div>
+
+        <div class="row mb-4">
+
+            <div class="col-md-6">
+
+                <strong>Registration No :</strong><br>
+
+                {{ rental.bike.registration_number }}
+
+            </div>
+
+            <div class="col-md-6">
+
+                <strong>Rent Date :</strong><br>
+
+                {{ rental.rent_date }}
+
+            </div>
+
+        </div>
 
         <hr>
 
@@ -24,15 +61,87 @@
 
             {% csrf_token %}
 
-            {{ form.as_p }}
+            {% if form.errors %}
 
-            <button class="btn btn-success">
+            <div class="alert alert-danger">
+
+                Please correct the errors below.
+
+            </div>
+
+            {% endif %}
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="form-label">
+
+                        Late Fine (₹)
+
+                    </label>
+
+                    {{ form.late_fine }}
+
+                </div>
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="form-label">
+
+                        Damage Charge (₹)
+
+                    </label>
+
+                    {{ form.damage_charge }}
+
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="form-label">
+
+                        Deposit Refund (₹)
+
+                    </label>
+
+                    {{ form.deposit_refund }}
+
+                </div>
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="form-label">
+
+                        Remarks
+
+                    </label>
+
+                    {{ form.remarks }}
+
+                </div>
+
+            </div>
+
+            <hr>
+
+            <button type="submit" class="btn btn-success">
+
+                <i class="fas fa-check-circle"></i>
 
                 Complete Return
 
             </button>
 
-            <a href="{% url 'rental_list' %}" class="btn btn-secondary">
+            <a href="{% url 'rental_list' %}"
+
+               class="btn btn-secondary">
+
+                <i class="fas fa-times"></i>
 
                 Cancel
 

@@ -9,11 +9,12 @@ from payments.models import Payment
 from expenses.models import Expense
 
 
+# ==========================
+# Dashboard
+# ==========================
 def dashboard(request):
 
-    # ==========================
     # Bike Details
-    # ==========================
     total_bikes = Bike.objects.count()
 
     available_bikes = Bike.objects.filter(
@@ -24,14 +25,10 @@ def dashboard(request):
         status="Rented"
     ).count()
 
-    # ==========================
     # Customer Details
-    # ==========================
     total_customers = Customer.objects.count()
 
-    # ==========================
     # Rental Details
-    # ==========================
     active_rentals = Rental.objects.filter(
         status="Active"
     ).count()
@@ -40,14 +37,10 @@ def dashboard(request):
         remaining_amount__gt=0
     ).count()
 
-    # ==========================
     # Today's Date
-    # ==========================
     today = timezone.now().date()
 
-    # ==========================
     # Income
-    # ==========================
     today_income = Payment.objects.filter(
         payment_date=today
     ).aggregate(
@@ -65,9 +58,7 @@ def dashboard(request):
         total=Sum("amount")
     )["total"] or 0
 
-    # ==========================
     # Expense
-    # ==========================
     today_expense = Expense.objects.filter(
         expense_date=today
     ).aggregate(
@@ -78,23 +69,16 @@ def dashboard(request):
         total=Sum("amount")
     )["total"] or 0
 
-    # ==========================
     # Profit
-    # ==========================
     total_profit = total_income - total_expense
 
-    # ==========================
     # Recent Records
-    # ==========================
     recent_rentals = Rental.objects.order_by("-id")[:5]
 
     recent_payments = Payment.objects.order_by("-id")[:5]
 
     recent_expenses = Expense.objects.order_by("-id")[:5]
 
-    # ==========================
-    # Context
-    # ==========================
     context = {
 
         "total_bikes": total_bikes,
@@ -125,4 +109,33 @@ def dashboard(request):
         request,
         "dashboard/dashboard.html",
         context
+    )
+
+
+# ==========================
+# Bike Search
+# ==========================
+def bike_search(request):
+
+    rental = None
+
+    search = request.GET.get("bike_number")
+
+    if search:
+
+        rental = Rental.objects.filter(
+            bike__registration_number__icontains=search,
+            status="Active"
+        ).select_related(
+            "bike",
+            "customer"
+        ).first()
+
+    return render(
+        request,
+        "dashboard/bike_search.html",
+        {
+            "rental": rental,
+            "search": search,
+        }
     )

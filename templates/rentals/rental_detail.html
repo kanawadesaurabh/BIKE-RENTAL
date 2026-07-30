@@ -2,154 +2,232 @@
 
 {% block content %}
 
-<div class="card">
+<div class="card shadow">
 
-    <div class="card-header bg-primary text-white d-flex justify-content-between">
+    <div class="card-header bg-primary text-white">
 
-        <h3 class="mb-0">Rental List</h3>
-
-        <a href="{% url 'add_rental' %}" class="btn btn-light">
-            <i class="fas fa-plus"></i> Add Rental
-        </a>
+        <h3 class="mb-0">
+            <i class="fas fa-file-invoice"></i>
+            Rental Details
+        </h3>
 
     </div>
 
     <div class="card-body">
 
-        <table id="rentalTable" class="table table-bordered table-striped">
+        <div class="row">
 
-            <thead class="table-dark">
+            <div class="col-md-6">
 
-                <tr>
+                <h5 class="text-primary">
+                    Customer Information
+                </h5>
 
-                    <th>Customer</th>
-                    <th>Bike</th>
-                    <th>Rent Date</th>
-                    <th>Return Date</th>
-                    <th>Daily Rent</th>
-                    <th>Status</th>
-                    <th>Remaining</th>
-                    <th>Action</th>
+                <table class="table table-bordered">
 
-                </tr>
+                    <tr>
+                        <th width="40%">Customer</th>
+                        <td>{{ rental.customer.customer_name }}</td>
+                    </tr>
 
-            </thead>
+                    <tr>
+                        <th>Mobile</th>
+                        <td>{{ rental.customer.mobile }}</td>
+                    </tr>
 
-            <tbody>
+                    <tr>
+                        <th>Aadhaar</th>
+                        <td>{{ rental.customer.aadhaar_number }}</td>
+                    </tr>
 
-                {% for rental in rentals %}
+                    <tr>
+                        <th>Driving License</th>
+                        <td>{{ rental.customer.driving_license }}</td>
+                    </tr>
 
-                <tr>
+                </table>
 
-                    <td>{{ rental.customer.customer_name }}</td>
+            </div>
 
-                    <td>{{ rental.bike.bike_name }}</td>
+            <div class="col-md-6">
 
-                    <td>{{ rental.rent_date }}</td>
+                <h5 class="text-success">
+                    Bike Information
+                </h5>
 
-                    <td>{{ rental.return_date|default:"-" }}</td>
+                <table class="table table-bordered">
 
-                    <td>₹ {{ rental.daily_rent }}</td>
+                    <tr>
+                        <th width="40%">Bike</th>
+                        <td>{{ rental.bike.bike_name }}</td>
+                    </tr>
 
-                    <td>
+                    <tr>
+                        <th>Brand</th>
+                        <td>{{ rental.bike.brand }}</td>
+                    </tr>
 
-                        {% if rental.status == "Completed" %}
+                    <tr>
+                        <th>Registration No</th>
+                        <td>
+                            <strong>{{ rental.bike.registration_number }}</strong>
+                        </td>
+                    </tr>
 
-                            <span class="badge bg-success">
-                                Completed
-                            </span>
+                    <tr>
+                        <th>Status</th>
+                        <td>
 
-                        {% else %}
+                            {% if rental.status == "Completed" %}
 
-                            <span class="badge bg-warning">
-                                Active
-                            </span>
+                                <span class="badge bg-success">
+                                    Completed
+                                </span>
 
-                        {% endif %}
+                            {% else %}
 
-                    </td>
+                                <span class="badge bg-warning text-dark">
+                                    Active
+                                </span>
 
-                    <td>
+                            {% endif %}
+
+                        </td>
+                    </tr>
+
+                </table>
+
+            </div>
+
+        </div>
+
+        <hr>
+
+        <h5 class="text-danger">
+
+            Rental & Payment Details
+
+        </h5>
+
+        <table class="table table-bordered">
+
+            <tr>
+
+                <th>Rent Date</th>
+
+                <td>{{ rental.rent_date }}</td>
+
+                <th>Return Date</th>
+
+                <td>{{ rental.return_date|default:"-" }}</td>
+
+            </tr>
+
+            <tr>
+
+                <th>Total Days</th>
+
+                <td>{{ rental.total_days }}</td>
+
+                <th>Daily Rent</th>
+
+                <td>₹ {{ rental.daily_rent }}</td>
+
+            </tr>
+
+            <tr>
+
+                <th>Total Amount</th>
+
+                <td>₹ {{ rental.total_amount }}</td>
+
+                <th>Advance Payment</th>
+
+                <td>₹ {{ rental.advance_payment }}</td>
+
+            </tr>
+
+            <tr>
+
+                <th>Late Fine</th>
+
+                <td>₹ {{ rental.late_fine }}</td>
+
+                <th>Damage Charge</th>
+
+                <td>₹ {{ rental.damage_charge }}</td>
+
+            </tr>
+
+            <tr>
+
+                <th>Deposit Refund</th>
+
+                <td>₹ {{ rental.deposit_refund }}</td>
+
+                <th>Remaining Amount</th>
+
+                <td class="text-danger">
+
+                    <strong>
+
                         ₹ {{ rental.remaining_amount }}
-                    </td>
 
-                    <td>
+                    </strong>
 
-                        <a href="{% url 'rental_detail' rental.id %}"
-                           class="btn btn-primary btn-sm">
+                </td>
 
-                            <i class="fas fa-eye"></i>
+            </tr>
 
-                        </a>
+            <tr>
 
-                        {% if rental.status == "Active" %}
+                <th>Remarks</th>
 
-                        <a href="{% url 'return_bike' rental.id %}"
-                           class="btn btn-success btn-sm">
+                <td colspan="3">
 
-                            <i class="fas fa-undo"></i>
+                    {{ rental.remarks|default:"-" }}
 
-                        </a>
+                </td>
 
-                        {% endif %}
-
-                        {% if rental.status == "Completed" and rental.remaining_amount > 0 %}
-
-                        <a href="{% url 'add_payment' rental.id %}"
-                           class="btn btn-info btn-sm">
-
-                            <i class="fas fa-money-bill-wave"></i>
-
-                        </a>
-
-                        {% endif %}
-
-                    </td>
-
-                </tr>
-
-                {% empty %}
-
-                <tr>
-
-                    <td colspan="8" class="text-center">
-
-                        No Rentals Found
-
-                    </td>
-
-                </tr>
-
-                {% endfor %}
-
-            </tbody>
+            </tr>
 
         </table>
+
+        <hr>
+
+        <a href="{% url 'print_invoice' rental.id %}"
+           class="btn btn-primary">
+
+            <i class="fas fa-print"></i>
+
+            Print Invoice
+
+        </a>
+
+        {% if rental.remaining_amount > 0 %}
+
+        <a href="{% url 'add_payment' rental.id %}"
+           class="btn btn-success">
+
+            <i class="fas fa-money-bill-wave"></i>
+
+            Add Payment
+
+        </a>
+
+        {% endif %}
+
+        <a href="{% url 'rental_list' %}"
+           class="btn btn-secondary">
+
+            <i class="fas fa-arrow-left"></i>
+
+            Back
+
+        </a>
 
     </div>
 
 </div>
-
-{% endblock %}
-
-{% block scripts %}
-
-<script>
-
-$(document).ready(function(){
-
-    $('#rentalTable').DataTable({
-
-        responsive: true,
-
-        pageLength: 10,
-
-        ordering: true
-
-    });
-
-});
-
-</script>
 
 {% endblock %}

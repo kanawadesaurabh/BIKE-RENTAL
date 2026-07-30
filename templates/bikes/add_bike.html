@@ -2,82 +2,161 @@
 
 {% block content %}
 
-<div class="container mt-4">
+<div class="card shadow">
 
-    <div class="card shadow">
+    <div class="card-header bg-primary text-white">
 
-        <div class="card-header bg-primary text-white">
-            <h3>Add Bike</h3>
-        </div>
+        <h3 class="mb-0">
+            <i class="fas fa-motorcycle"></i>
+            Add Bike
+        </h3>
 
-        <div class="card-body">
+    </div>
 
-            <form method="POST">
+    <div class="card-body">
 
-                {% csrf_token %}
+        <form method="POST">
 
-                {% if form.errors %}
-                <div class="alert alert-danger">
-                    {{ form.errors }}
-                </div>
-                {% endif %}
+            {% csrf_token %}
 
-                <div class="mb-3">
-                    <label>Bike Name</label>
+            {% if form.errors %}
+
+            <div class="alert alert-danger">
+
+                Please correct the errors below.
+
+            </div>
+
+            {% endif %}
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="form-label">
+                        Bike Name <span class="text-danger">*</span>
+                    </label>
+
                     {{ form.bike_name }}
+
                 </div>
 
-                <div class="mb-3">
-                    <label>Brand</label>
+                <div class="col-md-6 mb-3">
+
+                    <label class="form-label">
+                        Brand <span class="text-danger">*</span>
+                    </label>
+
                     {{ form.brand }}
+
                 </div>
 
-                <div class="mb-3">
-                    <label>Model</label>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="form-label">
+                        Model <span class="text-danger">*</span>
+                    </label>
+
                     {{ form.model }}
+
                 </div>
 
-                <div class="mb-3">
-                    <label>Registration Number</label>
+                <div class="col-md-6 mb-3">
+
+                    <label class="form-label">
+                        Registration Number <span class="text-danger">*</span>
+                    </label>
+
                     {{ form.registration_number }}
+
                 </div>
 
-                <div class="mb-3">
-                    <label>Color</label>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="form-label">
+                        Color
+                    </label>
+
                     {{ form.color }}
+
                 </div>
 
-                <div class="mb-3">
-                    <label>Year</label>
+                <div class="col-md-6 mb-3">
+
+                    <label class="form-label">
+                        Year
+                    </label>
+
                     {{ form.year }}
+
                 </div>
 
-                <div class="mb-3">
-                    <label>Daily Rent</label>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="form-label">
+                        Daily Rent (₹)
+                    </label>
+
                     {{ form.daily_rent }}
+
                 </div>
 
-                <div class="mb-3">
-                    <label>Security Deposit</label>
+                <div class="col-md-6 mb-3">
+
+                    <label class="form-label">
+                        Security Deposit (₹)
+                    </label>
+
                     {{ form.security_deposit }}
+
                 </div>
 
-                <div class="mb-3">
-                    <label>Status</label>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="form-label">
+                        Status
+                    </label>
+
                     {{ form.status }}
+
                 </div>
 
-                <button type="submit" class="btn btn-success">
-                    Save Bike
-                </button>
+            </div>
 
-                <a href="{% url 'bike_list' %}" class="btn btn-secondary">
-                    Cancel
-                </a>
+            <hr>
 
-            </form>
+            <button type="submit" class="btn btn-success">
 
-        </div>
+                <i class="fas fa-save"></i>
+                Save Bike
+
+            </button>
+
+            <a href="{% url 'bike_list' %}"
+               class="btn btn-secondary">
+
+                <i class="fas fa-times"></i>
+                Cancel
+
+            </a>
+
+        </form>
 
     </div>
 

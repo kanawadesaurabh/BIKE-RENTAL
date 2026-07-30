@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card shadow">
+
+    <div class="card-header bg-primary text-white">
+
+        <h3 class="mb-0">
+            <i class="fas fa-search"></i>
+            Bike Search
+        </h3>
+
+    </div>
+
+    <div class="card-body">
+
+        <form method="GET" class="row mb-4">
+
+            <div class="col-md-10">
+
+                <input
+                    type="text"
+                    name="bike_number"
+                    class="form-control"
+                    placeholder="Enter Bike Registration Number"
+                    value="{{ search }}">
+
+            </div>
+
+            <div class="col-md-2">
+
+                <button class="btn btn-primary w-100">
+
+                    <i class="fas fa-search"></i>
+
+                    Search
+
+                </button>
+
+            </div>
+
+        </form>
+
+        {% if rental %}
+
+        <table class="table table-bordered">
+
+            <tr>
+                <th width="30%">Bike Name</th>
+                <td>{{ rental.bike.bike_name }}</td>
+            </tr>
+
+            <tr>
+                <th>Registration No</th>
+                <td>{{ rental.bike.registration_number }}</td>
+            </tr>
+
+            <tr>
+                <th>Status</th>
+
+                <td>
+
+                    <span class="badge bg-danger">
+
+                        {{ rental.bike.status }}
+
+                    </span>
+
+                </td>
+
+            </tr>
+
+            <tr>
+                <th>Customer</th>
+                <td>{{ rental.customer.customer_name }}</td>
+            </tr>
+
+            <tr>
+                <th>Mobile</th>
+                <td>{{ rental.customer.mobile }}</td>
+            </tr>
+
+            <tr>
+                <th>Rent Date</th>
+                <td>{{ rental.rent_date }}</td>
+            </tr>
+
+            <tr>
+                <th>Return Date</th>
+                <td>{{ rental.return_date|default:"Not Returned" }}</td>
+            </tr>
+
+            <tr>
+                <th>Remaining Amount</th>
+
+                <td class="text-danger">
+
+                    <strong>
+
+                        ₹ {{ rental.remaining_amount }}
+
+                    </strong>
+
+                </td>
+
+            </tr>
+
+        </table>
+
+        <a href="{% url 'add_payment' rental.id %}"
+           class="btn btn-success">
+
+            <i class="fas fa-money-bill-wave"></i>
+
+            Add Payment
+
+        </a>
+
+        <a href="{% url 'return_bike' rental.id %}"
+           class="btn btn-warning">
+
+            <i class="fas fa-undo"></i>
+
+            Return Bike
+
+        </a>
+
+        {% elif search %}
+
+        <div class="alert alert-danger">
+
+            <i class="fas fa-times-circle"></i>
+
+            No Active Rental Found for this Bike Number.
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}

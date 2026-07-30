@@ -1,34 +1,41 @@
-from django.shortcuts import render, redirect
-from .models import Rental
-from .forms import RentalForm
-from bikes.models import Bike
-from django.shortcuts import get_object_or_404
-from django.shortcuts import get_object_or_404, redirect
-from django.utils import timezone
-from .models import Rental
+from decimal import Decimal
 from datetime import date
+
+from django.shortcuts import render, redirect, get_object_or_404
+
+from bikes.models import Bike
+from .models import Rental
 from .forms import RentalForm, ReturnBikeForm
 
 
+# ==========================
+# Rental List
+# ==========================
 def rental_list(request):
 
-    rentals = Rental.objects.all()
+    rentals = Rental.objects.all().order_by("-id")
 
     return render(
         request,
         "rentals/rental_list.html",
-        {"rentals": rentals}
+        {
+            "rentals": rentals
+        }
     )
 
 
+# ==========================
+# Add Rental
+# ==========================
 def add_rental(request):
 
     if request.method == "POST":
 
         form = RentalForm(request.POST)
 
-        # POST मध्येही फक्त Available Bikes
-        form.fields['bike'].queryset = Bike.objects.filter(status="Available")
+        form.fields["bike"].queryset = Bike.objects.filter(
+            status="Available"
+        )
 
         if form.is_valid():
 
@@ -43,23 +50,29 @@ def add_rental(request):
     else:
 
         form = RentalForm()
-        form.fields['bike'].queryset = Bike.objects.filter(status="Available")
+
+        form.fields["bike"].queryset = Bike.objects.filter(
+            status="Available"
+        )
 
     return render(
         request,
         "rentals/add_rental.html",
-        {"form": form}
+        {
+            "form": form
+        }
     )
 
 
-
-
-from decimal import Decimal
-from datetime import date
-
+# ==========================
+# Return Bike
+# ==========================
 def return_bike(request, id):
 
-    rental = get_object_or_404(Rental, id=id)
+    rental = get_object_or_404(
+        Rental,
+        id=id
+    )
 
     if request.method == "POST":
 
@@ -86,8 +99,8 @@ def return_bike(request, id):
             rental.total_days = total_days
 
             rental.total_amount = (
-                Decimal(total_days) *
-                rental.daily_rent
+                Decimal(total_days)
+                * rental.daily_rent
             )
 
             rental.remaining_amount = (
@@ -97,17 +110,27 @@ def return_bike(request, id):
                 - rental.advance_payment
             )
 
+            if rental.remaining_amount < 0:
+                rental.remaining_amount = 0
+
             rental.save()
 
             bike = rental.bike
+
             bike.status = "Available"
+
             bike.save()
 
-            return redirect("rental_detail", id=rental.id)
+            return redirect(
+                "rental_detail",
+                id=rental.id
+            )
 
     else:
 
-        form = ReturnBikeForm(instance=rental)
+        form = ReturnBikeForm(
+            instance=rental
+        )
 
     return render(
         request,
@@ -118,13 +141,16 @@ def return_bike(request, id):
         }
     )
 
-from django.shortcuts import render, redirect, get_object_or_404
-from .models import Rental
 
-# नवीन View
+# ==========================
+# Rental Detail
+# ==========================
 def rental_detail(request, id):
 
-    rental = get_object_or_404(Rental, id=id)
+    rental = get_object_or_404(
+        Rental,
+        id=id
+    )
 
     return render(
         request,
@@ -134,9 +160,16 @@ def rental_detail(request, id):
         }
     )
 
+
+# ==========================
+# Print Invoice
+# ==========================
 def print_invoice(request, id):
 
-    rental = get_object_or_404(Rental, id=id)
+    rental = get_object_or_404(
+        Rental,
+        id=id
+    )
 
     return render(
         request,

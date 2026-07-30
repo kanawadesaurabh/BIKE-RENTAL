@@ -1,6 +1,13 @@
 from django.db import models
 
+
 class Bike(models.Model):
+
+    STATUS_CHOICES = [
+        ("Available", "Available"),
+        ("Rented", "Rented"),
+        ("Service", "Service"),
+    ]
 
     bike_name = models.CharField(max_length=100)
 
@@ -8,23 +15,35 @@ class Bike(models.Model):
 
     model = models.CharField(max_length=50)
 
-    registration_number = models.CharField(max_length=20, unique=True)
+    registration_number = models.CharField(
+        max_length=20,
+        unique=True
+    )
 
     color = models.CharField(max_length=30)
 
     year = models.IntegerField()
 
-    daily_rent = models.DecimalField(max_digits=8, decimal_places=2)
+    daily_rent = models.DecimalField(
+        max_digits=8,
+        decimal_places=2
+    )
 
-    security_deposit = models.DecimalField(max_digits=8, decimal_places=2)
+    security_deposit = models.DecimalField(
+        max_digits=8,
+        decimal_places=2
+    )
 
-    STATUS_CHOICES = [
-        ('Available', 'Available'),
-        ('Rented', 'Rented'),
-        ('Service', 'Service'),
-    ]
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default="Available"
+    )
 
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Available')
+    class Meta:
+        ordering = ["registration_number"]
+        verbose_name = "Bike"
+        verbose_name_plural = "Bikes"
 
     def __str__(self):
-        return f"{self.bike_name} ({self.registration_number})"
+        return f"{self.registration_number} - {self.bike_name}"
