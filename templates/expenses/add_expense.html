@@ -2,37 +2,175 @@
 
 {% block content %}
 
-<div class="card">
+<div class="row justify-content-center">
 
-    <div class="card-header bg-success text-white">
+    <div class="col-lg-8">
 
-        <h3>Add Expense</h3>
+        <div class="card shadow">
 
-    </div>
+            <!-- Header -->
+            <div class="card-header bg-danger text-white">
 
-    <div class="card-body">
+                <h3 class="mb-0">
 
-        <form method="POST">
+                    <i class="fas fa-wallet"></i>
 
-            {% csrf_token %}
+                    {% if expense %}
+                        Edit Expense
+                    {% else %}
+                        Add New Expense
+                    {% endif %}
 
-            {{ form.as_p }}
+                </h3>
 
-            <button type="submit" class="btn btn-success">
+            </div>
 
-                <i class="fas fa-save"></i>
 
-                Save Expense
+            <!-- Body -->
+            <div class="card-body">
 
-            </button>
+                <form method="POST">
 
-            <a href="{% url 'expense_list' %}" class="btn btn-secondary">
+                    {% csrf_token %}
 
-                Cancel
 
-            </a>
+                    {% if form.errors %}
 
-        </form>
+                    <div class="alert alert-danger">
+
+                        <i class="fas fa-exclamation-triangle"></i>
+
+                        Please correct the errors below.
+
+                    </div>
+
+                    {% endif %}
+
+
+                    <!-- Category -->
+
+                    <div class="mb-4">
+
+                        <label class="form-label fw-bold">
+
+                            <i class="fas fa-list text-danger"></i>
+
+                            Expense Category
+
+                        </label>
+
+                        {{ form.category }}
+
+                        {% if form.category.errors %}
+
+                            <div class="text-danger small mt-1">
+
+                                {{ form.category.errors }}
+
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <!-- Amount -->
+
+                    <div class="mb-4">
+
+                        <label class="form-label fw-bold">
+
+                            <i class="fas fa-rupee-sign text-success"></i>
+
+                            Amount
+
+                        </label>
+
+                        {{ form.amount }}
+
+                        {% if form.amount.errors %}
+
+                            <div class="text-danger small mt-1">
+
+                                {{ form.amount.errors }}
+
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <!-- Description -->
+
+                    <div class="mb-4">
+
+                        <label class="form-label fw-bold">
+
+                            <i class="fas fa-align-left text-primary"></i>
+
+                            Description
+
+                        </label>
+
+                        {{ form.description }}
+
+                        {% if form.description.errors %}
+
+                            <div class="text-danger small mt-1">
+
+                                {{ form.description.errors }}
+
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <hr>
+
+
+                    <!-- Buttons -->
+
+                    <div class="d-flex justify-content-between">
+
+                        <a href="{% url 'expense_list' %}"
+                           class="btn btn-secondary">
+
+                            <i class="fas fa-arrow-left"></i>
+
+                            Cancel
+
+                        </a>
+
+
+                        <button type="submit"
+                                class="btn btn-danger px-4">
+
+                            {% if expense %}
+
+                                <i class="fas fa-save"></i>
+
+                                Update Expense
+
+                            {% else %}
+
+                                <i class="fas fa-plus-circle"></i>
+
+                                Save Expense
+
+                            {% endif %}
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
 
     </div>
 

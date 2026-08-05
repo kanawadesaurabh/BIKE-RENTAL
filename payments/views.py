@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 from django.shortcuts import render, redirect, get_object_or_404
 
 from .models import Payment
@@ -5,9 +7,16 @@ from .forms import PaymentForm
 from rentals.models import Rental
 
 
+# ==========================
+# Payment List
+# ==========================
 def payment_list(request):
 
-    payments = Payment.objects.all().order_by("-payment_date")
+    payments = Payment.objects.select_related(
+        "rental",
+        "rental__customer",
+        "rental__bike"
+    ).order_by("-payment_date", "-id")
 
     return render(
         request,
@@ -18,6 +27,9 @@ def payment_list(request):
     )
 
 
+# ==========================
+# Add Payment
+# ==========================
 def add_payment(request, rental_id):
 
     rental = get_object_or_404(
@@ -25,26 +37,57 @@ def add_payment(request, rental_id):
         id=rental_id
     )
 
+    # Current remaining amount
+    remaining_amount = rental.remaining_amount or Decimal("0.00")
+
     if request.method == "POST":
 
         form = PaymentForm(request.POST)
 
         if form.is_valid():
 
-            payment = form.save(commit=False)
+            payment_amount = form.cleaned_data["amount"]
 
-            payment.rental = rental
+            # Prevent zero / negative payment
+            if payment_amount <= 0:
 
-            payment.save()
+                form.add_error(
+                    "amount",
+                    "Payment amount must be greater than ₹0."
+                )
 
-            rental.remaining_amount -= payment.amount
+            # Prevent overpayment
+            elif payment_amount > remaining_amount:
 
-            if rental.remaining_amount < 0:
-                rental.remaining_amount = 0
+                form.add_error(
+                    "amount",
+                    f"Maximum payment allowed is ₹{remaining_amount}."
+                )
 
-            rental.save()
+            else:
 
-            return redirect("payment_list")
+                payment = form.save(commit=False)
+
+                payment.rental = rental
+
+                payment.save()
+
+                # Update remaining amount
+                rental.remaining_amount = (
+                    remaining_amount - payment_amount
+                )
+
+                if rental.remaining_amount < 0:
+                    rental.remaining_amount = Decimal("0.00")
+
+                rental.save(
+                    update_fields=["remaining_amount"]
+                )
+
+                return redirect(
+                    "rental_detail",
+                    id=rental.id
+                )
 
     else:
 
@@ -55,6 +98,7 @@ def add_payment(request, rental_id):
         "payments/add_payment.html",
         {
             "form": form,
-            "rental": rental
+            "rental": rental,
+            "remaining_amount": remaining_amount,
         }
     )

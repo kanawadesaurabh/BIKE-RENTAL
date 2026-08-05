@@ -2,126 +2,838 @@
 
 {% block content %}
 
-<div class="card shadow">
+<div class="container-fluid">
 
-    <div class="card-header bg-primary text-white">
+    <!-- ================================================= -->
+    <!-- PAGE HEADER -->
+    <!-- ================================================= -->
 
-        <h3 class="mb-0">
-            <i class="fas fa-motorcycle"></i>
-            Rent Bike
-        </h3>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+
+            <h2 class="mb-1">
+                <i class="fas fa-motorcycle text-primary"></i>
+                Give Bike on Rent
+            </h2>
+
+            <p class="text-muted mb-0">
+                Create a new bike rental
+            </p>
+
+        </div>
+
+        <a href="{% url 'rental_list' %}"
+           class="btn btn-outline-secondary">
+
+            <i class="fas fa-arrow-left"></i>
+            Back to Rentals
+
+        </a>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- ERRORS -->
+    <!-- ================================================= -->
+
+    {% if form.errors %}
+
+    <div class="alert alert-danger shadow-sm">
+
+        <div class="d-flex">
+
+            <i class="fas fa-exclamation-circle fa-lg mr-2"></i>
+
+            <div>
+
+                <strong>Please correct the following errors:</strong>
+
+                <div class="mt-2">
+                    {{ form.errors }}
+                </div>
+
+            </div>
+
+        </div>
 
     </div>
 
-    <div class="card-body">
+    {% endif %}
 
-        <form method="POST">
 
-            {% csrf_token %}
+    <form method="POST">
 
-            {% if form.errors %}
+        {% csrf_token %}
 
-            <div class="alert alert-danger">
 
-                Please correct the errors below.
+        <!-- ================================================= -->
+        <!-- CUSTOMER & BIKE -->
+        <!-- ================================================= -->
 
-            </div>
+        <div class="card shadow-sm mb-4">
 
-            {% endif %}
+            <div class="card-header bg-primary text-white">
 
-            <div class="row">
+                <h5 class="mb-0">
 
-                <div class="col-md-6 mb-3">
+                    <i class="fas fa-user-circle"></i>
 
-                    <label class="form-label">
-                        Customer
-                    </label>
+                    Customer & Bike
 
-                    {{ form.customer }}
-
-                </div>
-
-                <div class="col-md-6 mb-3">
-
-                    <label class="form-label">
-                        Bike
-                    </label>
-
-                    {{ form.bike }}
-
-                </div>
+                </h5>
 
             </div>
 
-            <div class="row">
 
-                <div class="col-md-6 mb-3">
+            <div class="card-body">
 
-                    <label class="form-label">
-                        Rent Date
-                    </label>
+                <div class="row">
 
-                    {{ form.rent_date }}
+                    <!-- CUSTOMER -->
 
-                </div>
+                    <div class="col-md-6 mb-3">
 
-                <div class="col-md-6 mb-3">
+                        <label class="font-weight-bold">
 
-                    <label class="form-label">
-                        Daily Rent (₹)
-                    </label>
+                            <i class="fas fa-user text-primary"></i>
 
-                    {{ form.daily_rent }}
+                            Customer
 
-                </div>
+                        </label>
 
-            </div>
+                        {{ form.customer }}
 
-            <div class="row">
+                        <small class="text-muted">
+                            Select the customer.
+                        </small>
 
-                <div class="col-md-6 mb-3">
+                    </div>
 
-                    <label class="form-label">
-                        Security Deposit (₹)
-                    </label>
 
-                    {{ form.security_deposit }}
+                    <!-- BIKE -->
 
-                </div>
+                    <div class="col-md-6 mb-3">
 
-                <div class="col-md-6 mb-3">
+                        <label class="font-weight-bold">
 
-                    <label class="form-label">
-                        Advance Payment (₹)
-                    </label>
+                            <i class="fas fa-motorcycle text-primary"></i>
 
-                    {{ form.advance_payment }}
+                            Bike
+
+                        </label>
+
+                        {{ form.bike }}
+
+                        <small class="text-muted">
+                            Only available bikes are shown.
+                        </small>
+
+                    </div>
 
                 </div>
 
             </div>
 
-            <hr>
+        </div>
 
-            <button type="submit" class="btn btn-success">
 
-                <i class="fas fa-save"></i>
-                Save Rental
+        <!-- ================================================= -->
+        <!-- RENTAL PERIOD -->
+        <!-- ================================================= -->
 
-            </button>
+        <div class="card shadow-sm mb-4">
 
-            <a href="{% url 'rental_list' %}"
-               class="btn btn-secondary">
+            <div class="card-header bg-info text-white">
 
-                <i class="fas fa-times"></i>
-                Cancel
+                <h5 class="mb-0">
 
-            </a>
+                    <i class="fas fa-calendar-alt"></i>
 
-        </form>
+                    Rental Period
 
-    </div>
+                </h5>
+
+            </div>
+
+
+            <div class="card-body">
+
+
+                <!-- RENTAL TYPE + DAYS -->
+
+                <div class="row">
+
+                    <div class="col-md-4 mb-3">
+
+                        <label class="font-weight-bold">
+
+                            Rental Type
+
+                        </label>
+
+                        {{ form.rental_type }}
+
+                    </div>
+
+
+                    <div class="col-md-4 mb-3">
+
+                        <label class="font-weight-bold">
+
+                            Rental Days
+
+                        </label>
+
+                        {{ form.rental_days }}
+
+                        <small class="text-muted d-block mt-1">
+
+                            Enter days manually:
+                            2, 5, 10, 30 etc.
+
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <hr>
+
+
+                <!-- ================================================= -->
+                <!-- OUT DATE -->
+                <!-- ================================================= -->
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+
+                        <div class="date-box out-box">
+
+                            <div class="date-title">
+
+                                <span class="badge badge-danger">
+                                    OUT
+                                </span>
+
+                                <span class="ml-2 font-weight-bold">
+                                    Bike Given to Customer
+                                </span>
+
+                            </div>
+
+
+                            <label class="mt-3 font-weight-bold">
+
+                                OUT Date & Time
+
+                            </label>
+
+
+                            {{ form.rent_date }}
+
+
+                            <small class="text-muted d-block mt-2">
+
+                                <i class="fas fa-info-circle"></i>
+
+                                Customer ला bike ज्या
+                                date आणि time ला दिली.
+
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ================================================= -->
+                    <!-- EXPECTED IN -->
+                    <!-- ================================================= -->
+
+                    <div class="col-md-6 mb-3">
+
+                        <div class="date-box in-box">
+
+                            <div class="date-title">
+
+                                <span class="badge badge-success">
+                                    IN
+                                </span>
+
+                                <span class="ml-2 font-weight-bold">
+                                    Expected Bike Return
+                                </span>
+
+                            </div>
+
+
+                            <label class="mt-3 font-weight-bold">
+
+                                Expected IN Date & Time
+
+                            </label>
+
+
+                            {{ form.expected_return_date }}
+
+
+                            <small class="text-success d-block mt-2">
+
+                                <i class="fas fa-calendar-check"></i>
+
+                                Rental Days नुसार automatic
+                                calculate होईल.
+
+                            </small>
+
+
+                            <small class="text-warning d-block">
+
+                                <i class="fas fa-edit"></i>
+
+                                गरज असल्यास manually change करू शकता.
+
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- INFO -->
+
+                <div class="alert alert-light border mt-3">
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+
+                            <strong>
+                                <i class="fas fa-sign-out-alt text-danger"></i>
+                                OUT
+                            </strong>
+
+                            <br>
+
+                            Bike customer ला दिल्याची
+                            exact date & time.
+
+                        </div>
+
+
+                        <div class="col-md-6">
+
+                            <strong>
+                                <i class="fas fa-sign-in-alt text-success"></i>
+                                IN
+                            </strong>
+
+                            <br>
+
+                            Bike customer कडून परत
+                            अपेक्षित असलेली date & time.
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- PAYMENT DETAILS -->
+        <!-- ================================================= -->
+
+        <div class="card shadow-sm mb-4">
+
+            <div class="card-header bg-success text-white">
+
+                <h5 class="mb-0">
+
+                    <i class="fas fa-rupee-sign"></i>
+
+                    Rent & Payment Details
+
+                </h5>
+
+            </div>
+
+
+            <div class="card-body">
+
+                <div class="row">
+
+                    <!-- RENT -->
+
+                    <div class="col-md-4 mb-3">
+
+                        <label class="font-weight-bold">
+
+                            Rent Amount (₹)
+
+                        </label>
+
+                        {{ form.daily_rent }}
+
+                        <small class="text-muted">
+
+                            Daily / Monthly amount manually enter करा.
+
+                        </small>
+
+                    </div>
+
+
+                    <!-- DEPOSIT -->
+
+                    <div class="col-md-4 mb-3">
+
+                        <label class="font-weight-bold">
+
+                            Security Deposit (₹)
+
+                        </label>
+
+                        {{ form.security_deposit }}
+
+                    </div>
+
+
+                    <!-- ADVANCE -->
+
+                    <div class="col-md-4 mb-3">
+
+                        <label class="font-weight-bold">
+
+                            Advance Payment (₹)
+
+                        </label>
+
+                        {{ form.advance_payment }}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- SUMMARY -->
+        <!-- ================================================= -->
+
+        <div class="card shadow-sm mb-4 border-primary">
+
+            <div class="card-body">
+
+                <div class="row text-center">
+
+                    <div class="col-md-4">
+
+                        <div class="summary-item">
+
+                            <i class="fas fa-motorcycle fa-2x text-primary"></i>
+
+                            <h6 class="mt-2">
+                                Bike Status
+                            </h6>
+
+                            <span class="badge badge-warning">
+                                Will be Rented
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-md-4">
+
+                        <div class="summary-item">
+
+                            <i class="fas fa-calendar-day fa-2x text-info"></i>
+
+                            <h6 class="mt-2">
+                                Rental Days
+                            </h6>
+
+                            <span id="days_preview"
+                                  class="badge badge-info">
+                                1 Day
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-md-4">
+
+                        <div class="summary-item">
+
+                            <i class="fas fa-clock fa-2x text-success"></i>
+
+                            <h6 class="mt-2">
+                                Return
+                            </h6>
+
+                            <span id="return_preview"
+                                  class="badge badge-success">
+                                Select OUT Date
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- BUTTONS -->
+        <!-- ================================================= -->
+
+        <div class="card shadow-sm mb-4">
+
+            <div class="card-body text-right">
+
+                <a href="{% url 'rental_list' %}"
+                   class="btn btn-secondary mr-2">
+
+                    <i class="fas fa-times"></i>
+
+                    Cancel
+
+                </a>
+
+
+                <button type="submit"
+                        class="btn btn-success btn-lg">
+
+                    <i class="fas fa-check-circle"></i>
+
+                    Give Bike on Rent
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+    </form>
 
 </div>
+
+
+<!-- ================================================= -->
+<!-- PAGE STYLE -->
+<!-- ================================================= -->
+
+<style>
+
+.date-box {
+
+    border: 1px solid #dee2e6;
+
+    border-radius: 10px;
+
+    padding: 18px;
+
+    background: #fff;
+
+    height: 100%;
+
+    transition: 0.2s;
+
+}
+
+.date-box:hover {
+
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+
+}
+
+.out-box {
+
+    border-left: 5px solid #dc3545;
+
+}
+
+.in-box {
+
+    border-left: 5px solid #28a745;
+
+}
+
+.date-title {
+
+    display: flex;
+
+    align-items: center;
+
+    font-size: 15px;
+
+}
+
+.summary-item {
+
+    padding: 10px;
+
+}
+
+.form-control {
+
+    border-radius: 6px;
+
+}
+
+</style>
+
+
+<!-- ================================================= -->
+<!-- JAVASCRIPT -->
+<!-- ================================================= -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+
+    const outDate =
+        document.getElementById("id_rent_date");
+
+
+    const rentalDays =
+        document.getElementById("id_rental_days");
+
+
+    const expectedIn =
+        document.getElementById(
+            "id_expected_return_date"
+        );
+
+
+    const daysPreview =
+        document.getElementById(
+            "days_preview"
+        );
+
+
+    const returnPreview =
+        document.getElementById(
+            "return_preview"
+        );
+
+
+    // =================================================
+    // UPDATE OUT DATE + RENTAL DAYS
+    // =================================================
+
+    function updateExpectedIn() {
+
+
+        if (!outDate || !rentalDays || !expectedIn) {
+            return;
+        }
+
+
+        if (!outDate.value) {
+
+            returnPreview.innerText =
+                "Select OUT Date";
+
+            return;
+
+        }
+
+
+        let days =
+            parseInt(rentalDays.value);
+
+
+        if (isNaN(days) || days < 1) {
+
+            days = 1;
+
+        }
+
+
+        daysPreview.innerText =
+            days +
+            (days === 1 ? " Day" : " Days");
+
+
+        const start =
+            new Date(outDate.value);
+
+
+        if (isNaN(start.getTime())) {
+
+            return;
+
+        }
+
+
+        // Add manually entered rental days
+
+        const end =
+            new Date(start);
+
+
+        end.setDate(
+            end.getDate() + days
+        );
+
+
+        // =================================================
+        // DATETIME LOCAL FORMAT
+        // =================================================
+
+        const year =
+            end.getFullYear();
+
+
+        const month =
+            String(
+                end.getMonth() + 1
+            ).padStart(2, "0");
+
+
+        const day =
+            String(
+                end.getDate()
+            ).padStart(2, "0");
+
+
+        const hours =
+            String(
+                end.getHours()
+            ).padStart(2, "0");
+
+
+        const minutes =
+            String(
+                end.getMinutes()
+            ).padStart(2, "0");
+
+
+        expectedIn.value =
+            year +
+            "-" +
+            month +
+            "-" +
+            day +
+            "T" +
+            hours +
+            ":" +
+            minutes;
+
+
+        // =================================================
+        // PREVIEW
+        // =================================================
+
+        const displayDate =
+            String(end.getDate()).padStart(2, "0")
+            + "-"
+            + String(
+                end.getMonth() + 1
+            ).padStart(2, "0")
+            + "-"
+            + end.getFullYear();
+
+
+        let displayHours =
+            end.getHours();
+
+
+        const displayMinutes =
+            String(
+                end.getMinutes()
+            ).padStart(2, "0");
+
+
+        const ampm =
+            displayHours >= 12
+                ? "PM"
+                : "AM";
+
+
+        displayHours =
+            displayHours % 12 || 12;
+
+
+        returnPreview.innerText =
+            displayDate
+            + " "
+            + String(displayHours).padStart(2, "0")
+            + ":"
+            + displayMinutes
+            + " "
+            + ampm;
+
+    }
+
+
+    // =================================================
+    // EVENTS
+    // =================================================
+
+    if (outDate) {
+
+        outDate.addEventListener(
+            "change",
+            updateExpectedIn
+        );
+
+        outDate.addEventListener(
+            "input",
+            updateExpectedIn
+        );
+
+    }
+
+
+    if (rentalDays) {
+
+        rentalDays.addEventListener(
+            "change",
+            updateExpectedIn
+        );
+
+        rentalDays.addEventListener(
+            "input",
+            updateExpectedIn
+        );
+
+    }
+
+
+    // =================================================
+    // INITIAL
+    // =================================================
+
+    updateExpectedIn();
+
+});
+
+</script>
 
 {% endblock %}

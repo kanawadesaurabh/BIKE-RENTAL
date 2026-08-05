@@ -2,62 +2,395 @@
 
 {% block content %}
 
-<div class="card">
+<div class="container-fluid">
 
-    <div class="card-header bg-success text-white">
+    <!-- Page Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
 
-        <h3>Add Payment</h3>
+        <div>
+            <h2 class="mb-1">
+                <i class="fas fa-money-bill-wave text-success"></i>
+                Add Payment
+            </h2>
+
+            <p class="text-muted mb-0">
+                Record payment for this rental
+            </p>
+        </div>
+
+        <a href="{% url 'payment_list' %}" class="btn btn-outline-secondary">
+            <i class="fas fa-arrow-left"></i>
+            Payment List
+        </a>
 
     </div>
 
-    <div class="card-body">
 
-        <h5>
+    <div class="row">
 
-            Customer :
-            {{ rental.customer.customer_name }}
+        <!-- LEFT SIDE -->
+        <div class="col-lg-5 mb-4">
 
-        </h5>
+            <!-- Rental Information -->
+            <div class="card shadow-sm border-0 payment-info-card">
 
-        <h5>
+                <div class="card-header bg-dark text-white">
 
-            Bike :
-            {{ rental.bike.bike_name }}
+                    <h5 class="mb-0">
+                        <i class="fas fa-file-invoice"></i>
+                        Rental Information
+                    </h5>
 
-        </h5>
+                </div>
 
-        <h5 class="text-danger">
+                <div class="card-body">
 
-            Balance :
-            ₹ {{ rental.remaining_amount }}
+                    <div class="info-item">
 
-        </h5>
+                        <small class="text-muted">
+                            Customer
+                        </small>
 
-        <hr>
+                        <h5 class="mb-0">
+                            <i class="fas fa-user text-primary"></i>
+                            {{ rental.customer.customer_name }}
+                        </h5>
 
-        <form method="POST">
+                    </div>
 
-            {% csrf_token %}
+                    <hr>
 
-            {{ form.as_p }}
+                    <div class="info-item">
 
-            <button class="btn btn-success">
+                        <small class="text-muted">
+                            Bike
+                        </small>
 
-                Save Payment
+                        <h5 class="mb-0">
 
-            </button>
+                            <i class="fas fa-motorcycle text-success"></i>
 
-            <a href="{% url 'payment_list' %}"
-               class="btn btn-secondary">
+                            {{ rental.bike.bike_name }}
 
-                Cancel
+                        </h5>
 
-            </a>
+                    </div>
 
-        </form>
+                    <hr>
+
+                    <div class="info-item">
+
+                        <small class="text-muted">
+                            Registration Number
+                        </small>
+
+                        <h5 class="mb-0">
+
+                            <i class="fas fa-id-card text-info"></i>
+
+                            {{ rental.bike.registration_number }}
+
+                        </h5>
+
+                    </div>
+
+                    <hr>
+
+                    <div class="info-item">
+
+                        <small class="text-muted">
+                            Rental Date
+                        </small>
+
+                        <h5 class="mb-0">
+
+                            <i class="fas fa-calendar-alt text-warning"></i>
+
+                            {{ rental.rent_date }}
+
+                        </h5>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- RIGHT SIDE -->
+        <div class="col-lg-7">
+
+            <!-- Balance Card -->
+            <div class="card shadow border-0 balance-card mb-4">
+
+                <div class="card-body">
+
+                    <div class="row align-items-center">
+
+                        <div class="col-7">
+
+                            <p class="mb-1 text-muted">
+                                Remaining Amount
+                            </p>
+
+                            <h1 class="mb-0 text-danger">
+
+                                ₹ {{ remaining_amount }}
+
+                            </h1>
+
+                        </div>
+
+                        <div class="col-5 text-end">
+
+                            <div class="balance-icon">
+
+                                <i class="fas fa-wallet"></i>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Payment Form -->
+            <div class="card shadow-sm border-0">
+
+                <div class="card-header bg-success text-white">
+
+                    <h5 class="mb-0">
+
+                        <i class="fas fa-credit-card"></i>
+
+                        Payment Details
+
+                    </h5>
+
+                </div>
+
+
+                <div class="card-body">
+
+                    {% if form.errors %}
+
+                    <div class="alert alert-danger">
+
+                        <i class="fas fa-exclamation-circle"></i>
+
+                        Please correct the errors below.
+
+                    </div>
+
+                    {% endif %}
+
+
+                    <form method="POST">
+
+                        {% csrf_token %}
+
+
+                        <!-- Amount -->
+                        <div class="mb-4">
+
+                            <label class="form-label fw-bold">
+
+                                <i class="fas fa-rupee-sign text-success"></i>
+
+                                Payment Amount
+
+                            </label>
+
+                            {{ form.amount }}
+
+                            {% if form.amount.errors %}
+
+                            <div class="text-danger small mt-1">
+
+                                {{ form.amount.errors }}
+
+                            </div>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <!-- Payment Mode -->
+                        <div class="mb-4">
+
+                            <label class="form-label fw-bold">
+
+                                <i class="fas fa-credit-card text-primary"></i>
+
+                                Payment Mode
+
+                            </label>
+
+                            {{ form.payment_mode }}
+
+                            {% if form.payment_mode.errors %}
+
+                            <div class="text-danger small mt-1">
+
+                                {{ form.payment_mode.errors }}
+
+                            </div>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <!-- Remarks -->
+                        <div class="mb-4">
+
+                            <label class="form-label fw-bold">
+
+                                <i class="fas fa-comment-alt text-info"></i>
+
+                                Remarks
+
+                            </label>
+
+                            {{ form.remarks }}
+
+                            {% if form.remarks.errors %}
+
+                            <div class="text-danger small mt-1">
+
+                                {{ form.remarks.errors }}
+
+                            </div>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <hr>
+
+
+                        <!-- Buttons -->
+                        <div class="d-flex justify-content-between">
+
+                            <a href="{% url 'rental_detail' rental.id %}"
+                               class="btn btn-secondary">
+
+                                <i class="fas fa-times"></i>
+
+                                Cancel
+
+                            </a>
+
+
+                            <button type="submit"
+                                    class="btn btn-success px-4">
+
+                                <i class="fas fa-check-circle"></i>
+
+                                Save Payment
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
 
     </div>
 
 </div>
+
+
+<style>
+
+.payment-info-card,
+.balance-card {
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.payment-info-card {
+    transition: all 0.3s ease;
+}
+
+.payment-info-card:hover {
+    transform: translateY(-3px);
+}
+
+.balance-card {
+    background: linear-gradient(
+        135deg,
+        #ffffff,
+        #f8f9fa
+    );
+}
+
+.balance-icon {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(220, 53, 69, 0.1);
+
+    color: #dc3545;
+
+    font-size: 32px;
+
+    animation: walletFloat 2s ease-in-out infinite;
+}
+
+.info-item h5 {
+    margin-top: 5px;
+}
+
+.form-control,
+.form-select {
+    border-radius: 8px;
+    min-height: 45px;
+}
+
+.form-control:focus,
+.form-select:focus {
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.15);
+}
+
+.btn {
+    border-radius: 8px;
+}
+
+@keyframes walletFloat {
+
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-6px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+
+}
+
+</style>
 
 {% endblock %}

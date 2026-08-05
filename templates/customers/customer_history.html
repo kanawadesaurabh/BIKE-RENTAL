@@ -1,0 +1,441 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <!-- ========================= -->
+    <!-- CUSTOMER DETAILS -->
+    <!-- ========================= -->
+
+    <div class="card shadow mb-4">
+
+        <div class="card-header bg-primary text-white">
+
+            <h3 class="mb-0">
+
+                <i class="fas fa-user"></i>
+
+                Customer History
+
+            </h3>
+
+        </div>
+
+
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-md-4 mb-3">
+
+                    <strong>
+                        Customer Name
+                    </strong>
+
+                    <br>
+
+                    {{ customer.customer_name }}
+
+                </div>
+
+
+                <div class="col-md-4 mb-3">
+
+                    <strong>
+                        Mobile
+                    </strong>
+
+                    <br>
+
+                    {{ customer.mobile }}
+
+                </div>
+
+
+                <div class="col-md-4 mb-3">
+
+                    <strong>
+                        Aadhaar
+                    </strong>
+
+                    <br>
+
+                    {{ customer.aadhaar_number }}
+
+                </div>
+
+
+                <div class="col-md-4 mb-3">
+
+                    <strong>
+                        Driving License
+                    </strong>
+
+                    <br>
+
+                    {{ customer.driving_license }}
+
+                </div>
+
+
+                <div class="col-md-8 mb-3">
+
+                    <strong>
+                        Address
+                    </strong>
+
+                    <br>
+
+                    {{ customer.address }}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- RENTAL HISTORY -->
+    <!-- ========================= -->
+
+    <div class="card shadow">
+
+        <div class="card-header bg-dark text-white">
+
+            <h4 class="mb-0">
+
+                <i class="fas fa-motorcycle"></i>
+
+                Rental History
+
+            </h4>
+
+        </div>
+
+
+        <div class="card-body">
+
+            <div class="table-responsive">
+
+                <table id="historyTable"
+                       class="table table-bordered table-striped table-hover">
+
+                    <thead class="table-dark">
+
+                        <tr>
+
+                            <th>ID</th>
+
+                            <th>Bike</th>
+
+                            <th>Registration No.</th>
+
+                            <th>Rent Date</th>
+
+                            <th>Expected Return</th>
+
+                            <th>Actual Return</th>
+
+                            <th>Total Days</th>
+
+                            <th>Total Amount</th>
+
+                            <th>Remaining</th>
+
+                            <th>Status</th>
+
+                            <th>Action</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for rental in rentals %}
+
+                        <tr>
+
+                            <td>
+                                {{ rental.id }}
+                            </td>
+
+
+                            <td>
+
+                                <strong>
+                                    {{ rental.bike.bike_name }}
+                                </strong>
+
+                            </td>
+
+
+                            <td>
+
+                                {{ rental.bike.registration_number }}
+
+                            </td>
+
+
+                            <td>
+
+                                {{ rental.rent_date|date:"d-m-Y" }}
+
+                                <br>
+
+                                <small class="text-primary">
+
+                                    <i class="fas fa-clock"></i>
+
+                                    {{ rental.rent_date|date:"h:i A" }}
+
+                                </small>
+
+                            </td>
+
+
+                            <td>
+
+                                {% if rental.expected_return_date %}
+
+                                    {{ rental.expected_return_date|date:"d-m-Y" }}
+
+                                    <br>
+
+                                    <small class="text-warning">
+
+                                        <i class="fas fa-clock"></i>
+
+                                        {{ rental.expected_return_date|date:"h:i A" }}
+
+                                    </small>
+
+                                {% else %}
+
+                                    -
+
+                                {% endif %}
+
+                            </td>
+
+
+                            <td>
+
+                                {% if rental.actual_return_date %}
+
+                                    {{ rental.actual_return_date|date:"d-m-Y" }}
+
+                                    <br>
+
+                                    <small class="text-success">
+
+                                        <i class="fas fa-clock"></i>
+
+                                        {{ rental.actual_return_date|date:"h:i A" }}
+
+                                    </small>
+
+                                {% else %}
+
+                                    <span class="text-muted">
+
+                                        Not Returned
+
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+
+                            <td class="text-center">
+
+                                {% if rental.total_days > 0 %}
+
+                                    <span class="badge bg-info">
+
+                                        {{ rental.total_days }}
+
+                                        Day{% if rental.total_days != 1 %}s{% endif %}
+
+                                    </span>
+
+                                {% else %}
+
+                                    -
+
+                                {% endif %}
+
+                            </td>
+
+
+                            <td>
+
+                                <strong class="text-success">
+
+                                    ₹ {{ rental.total_amount|floatformat:2 }}
+
+                                </strong>
+
+                            </td>
+
+
+                            <td>
+
+                                {% if rental.remaining_amount > 0 %}
+
+                                    <strong class="text-danger">
+
+                                        ₹ {{ rental.remaining_amount|floatformat:2 }}
+
+                                    </strong>
+
+                                {% else %}
+
+                                    <span class="text-success">
+
+                                        <i class="fas fa-check-circle"></i>
+
+                                        Paid
+
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+
+                            <td>
+
+                                {% if rental.status == "Active" %}
+
+                                    <span class="badge bg-warning text-dark">
+
+                                        <i class="fas fa-clock"></i>
+
+                                        Active
+
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="badge bg-success">
+
+                                        <i class="fas fa-check"></i>
+
+                                        Completed
+
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+
+                            <td>
+
+                                <a href="{% url 'rental_detail' rental.id %}"
+                                   class="btn btn-info btn-sm"
+                                   title="View Rental">
+
+                                    <i class="fas fa-eye"></i>
+
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+
+                        {% empty %}
+
+                        <tr>
+
+                            <td colspan="11"
+                                class="text-center py-4">
+
+                                <i class="fas fa-history fa-2x text-muted"></i>
+
+                                <br><br>
+
+                                <strong>
+                                    No Rental History Found
+                                </strong>
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- BACK BUTTON -->
+    <!-- ========================= -->
+
+    <div class="mt-3">
+
+        <a href="{% url 'customer_list' %}"
+           class="btn btn-secondary">
+
+            <i class="fas fa-arrow-left"></i>
+
+            Back to Customers
+
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+
+{% block scripts %}
+
+<script>
+
+$(document).ready(function(){
+
+    $('#historyTable').DataTable({
+
+        responsive: true,
+
+        pageLength: 10,
+
+        ordering: true,
+
+        order: [[0, 'desc']],
+
+        language: {
+
+            search: "Search History:",
+
+            emptyTable: "No Rental History Found",
+
+            zeroRecords: "No Matching Rental Found"
+
+        }
+
+    });
+
+});
+
+</script>
+
+{% endblock %}

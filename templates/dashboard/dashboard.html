@@ -2,264 +2,772 @@
 
 {% block content %}
 
-<div class="content-header">
+<div class="container-fluid">
 
-    <h2 class="mb-4">
-        <i class="fas fa-tachometer-alt"></i>
-        Dashboard
-    </h2>
+    <!-- ========================= -->
+    <!-- HEADER -->
+    <!-- ========================= -->
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+            <h2 class="fw-bold mb-1">
+                <i class="fas fa-tachometer-alt text-primary"></i>
+                Dashboard
+            </h2>
+
+            <p class="text-muted mb-0">
+                Bike Rental Management Overview
+            </p>
+        </div>
+
+        <div class="text-end">
+
+            <div class="text-muted small">
+                Today
+            </div>
+
+            <strong>
+                {{ today|date:"d M Y" }}
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- SMART ALERTS -->
+    <!-- ========================= -->
+
+<!-- ========================= -->
+<!-- SMART ALERTS -->
+<!-- ========================= -->
+
+<div class="row g-3 mb-4">
+
+    <!-- ========================= -->
+    <!-- OVERDUE -->
+    <!-- ========================= -->
+
+    <div class="col-xl-3 col-md-6">
+
+        <div class="card border-0 shadow-sm h-100 alert-card overdue-card">
+
+            <div class="card-body">
+
+                <div class="d-flex justify-content-between align-items-start">
+
+                    <div>
+
+                        <span class="badge bg-danger mb-2">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            OVERDUE
+                        </span>
+
+                        <h3 class="fw-bold mb-1">
+                            {{ overdue_rentals|length }}
+                        </h3>
+
+                        <p class="text-muted mb-0">
+                            Bikes overdue
+                        </p>
+
+                    </div>
+
+                    <div class="alert-icon bg-danger">
+
+                        <i class="fas fa-clock"></i>
+
+                    </div>
+
+                </div>
+
+
+                {% if overdue_rentals %}
+
+                <hr>
+
+                {% for rental in overdue_rentals|slice:":3" %}
+
+                <div class="mb-3">
+
+                    <div class="d-flex justify-content-between">
+
+                        <strong>
+                            {{ rental.bike.registration_number }}
+                        </strong>
+
+                        <span class="badge bg-danger">
+                            Overdue
+                        </span>
+
+                    </div>
+
+                    <small class="text-muted">
+
+                        {{ rental.customer.customer_name }}
+
+                    </small>
+
+                    <br>
+
+                    <small class="text-danger">
+
+                        IN:
+                        {{ rental.expected_return_date|date:"d-m-Y h:i A" }}
+
+                    </small>
+
+                </div>
+
+                {% endfor %}
+
+                {% else %}
+
+                <div class="mt-3 text-success">
+
+                    <i class="fas fa-check-circle"></i>
+
+                    No overdue bikes
+
+                </div>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- TODAY'S RETURNS -->
+    <!-- ========================= -->
+
+    <div class="col-xl-3 col-md-6">
+
+        <div class="card border-0 shadow-sm h-100 alert-card today-card">
+
+            <div class="card-body">
+
+                <div class="d-flex justify-content-between align-items-start">
+
+                    <div>
+
+                        <span class="badge bg-info mb-2">
+
+                            <i class="fas fa-calendar-day"></i>
+
+                            TODAY'S RETURN
+
+                        </span>
+
+                        <h3 class="fw-bold mb-1">
+
+                            {{ return_today|length }}
+
+                        </h3>
+
+                        <p class="text-muted mb-0">
+
+                            Bikes due today
+
+                        </p>
+
+                    </div>
+
+                    <div class="alert-icon bg-info">
+
+                        <i class="fas fa-calendar-check"></i>
+
+                    </div>
+
+                </div>
+
+
+                {% if return_today %}
+
+                <hr>
+
+                {% for rental in return_today|slice:":3" %}
+
+                <div class="mb-3">
+
+                    <div class="d-flex justify-content-between">
+
+                        <strong>
+
+                            {{ rental.bike.registration_number }}
+
+                        </strong>
+
+                        <span class="badge bg-info">
+
+                            TODAY
+
+                        </span>
+
+                    </div>
+
+                    <small class="text-muted">
+
+                        {{ rental.customer.customer_name }}
+
+                    </small>
+
+                    <br>
+
+                    <small class="text-info">
+
+                        IN:
+                        {{ rental.expected_return_date|date:"d-m-Y h:i A" }}
+
+                    </small>
+
+                    <br>
+
+                    <small class="text-muted">
+
+                        OUT:
+                        {{ rental.rent_date|date:"d-m-Y h:i A" }}
+
+                    </small>
+
+                </div>
+
+                {% endfor %}
+
+                {% else %}
+
+                <div class="mt-3 text-success">
+
+                    <i class="fas fa-check-circle"></i>
+
+                    No returns today
+
+                </div>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- UPCOMING RETURNS -->
+    <!-- ========================= -->
+
+    <div class="col-xl-3 col-md-6">
+
+        <div class="card border-0 shadow-sm h-100 alert-card upcoming-card">
+
+            <div class="card-body">
+
+                <div class="d-flex justify-content-between align-items-start">
+
+                    <div>
+
+                        <span class="badge bg-primary mb-2">
+
+                            <i class="fas fa-calendar-alt"></i>
+
+                            UPCOMING
+
+                        </span>
+
+                        <h3 class="fw-bold mb-1">
+
+                            {{ upcoming_returns|length }}
+
+                        </h3>
+
+                        <p class="text-muted mb-0">
+
+                            Returns tomorrow
+
+                        </p>
+
+                    </div>
+
+                    <div class="alert-icon bg-primary">
+
+                        <i class="fas fa-calendar-plus"></i>
+
+                    </div>
+
+                </div>
+
+
+                {% if upcoming_returns %}
+
+                <hr>
+
+                {% for rental in upcoming_returns|slice:":3" %}
+
+                <div class="mb-3">
+
+                    <div class="d-flex justify-content-between">
+
+                        <strong>
+
+                            {{ rental.bike.registration_number }}
+
+                        </strong>
+
+                        <span class="badge bg-primary">
+
+                            TOMORROW
+
+                        </span>
+
+                    </div>
+
+                    <small class="text-muted">
+
+                        {{ rental.customer.customer_name }}
+
+                    </small>
+
+                    <br>
+
+                    <small class="text-primary">
+
+                        IN:
+                        {{ rental.expected_return_date|date:"d-m-Y h:i A" }}
+
+                    </small>
+
+                </div>
+
+                {% endfor %}
+
+                {% else %}
+
+                <div class="mt-3 text-muted">
+
+                    <i class="fas fa-info-circle"></i>
+
+                    No upcoming returns
+
+                </div>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- PENDING PAYMENT -->
+    <!-- ========================= -->
+
+    <div class="col-xl-3 col-md-6">
+
+        <div class="card border-0 shadow-sm h-100 alert-card payment-card">
+
+            <div class="card-body">
+
+                <div class="d-flex justify-content-between align-items-start">
+
+                    <div>
+
+                        <span class="badge bg-warning text-dark mb-2">
+
+                            <i class="fas fa-money-bill-wave"></i>
+
+                            PAYMENT PENDING
+
+                        </span>
+
+                        <h3 class="fw-bold mb-1">
+
+                            {{ pending_rentals|length }}
+
+                        </h3>
+
+                        <p class="text-muted mb-0">
+
+                            Rentals have balance
+
+                        </p>
+
+                    </div>
+
+                    <div class="alert-icon bg-warning">
+
+                        <i class="fas fa-rupee-sign"></i>
+
+                    </div>
+
+                </div>
+
+
+                {% if pending_rentals %}
+
+                <hr>
+
+                {% for rental in pending_rentals|slice:":3" %}
+
+                <div class="mb-3">
+
+                    <div class="d-flex justify-content-between">
+
+                        <strong>
+
+                            {{ rental.customer.customer_name }}
+
+                        </strong>
+
+                        <span class="badge bg-warning text-dark">
+
+                            ₹ {{ rental.remaining_amount }}
+
+                        </span>
+
+                    </div>
+
+                    <small class="text-muted">
+
+                        {{ rental.bike.registration_number }}
+
+                    </small>
+
+                </div>
+
+                {% endfor %}
+
+                {% else %}
+
+                <div class="mt-3 text-success">
+
+                    <i class="fas fa-check-circle"></i>
+
+                    No pending payments
+
+                </div>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
 
 </div>
 
-<div class="row">
 
-    <!-- Total Bikes -->
-    <div class="col-lg-3 col-md-6">
-        <div class="small-box bg-primary">
-            <div class="inner">
-                <h3>{{ total_bikes }}</h3>
-                <p>Total Bikes</p>
-            </div>
-            <div class="icon">
-                <i class="fas fa-motorcycle"></i>
-            </div>
-        </div>
-    </div>
+    <!-- ========================= -->
+    <!-- SUMMARY CARDS -->
+    <!-- ========================= -->
 
-    <!-- Available Bikes -->
-    <div class="col-lg-3 col-md-6">
-        <div class="small-box bg-success">
-            <div class="inner">
-                <h3>{{ available_bikes }}</h3>
-                <p>Available Bikes</p>
-            </div>
-            <div class="icon">
-                <i class="fas fa-check-circle"></i>
-            </div>
-        </div>
-    </div>
+    <div class="row g-3 mb-4">
 
-    <!-- Rented Bikes -->
-    <div class="col-lg-3 col-md-6">
-        <div class="small-box bg-danger">
-            <div class="inner">
-                <h3>{{ rented_bikes }}</h3>
-                <p>Rented Bikes</p>
-            </div>
-            <div class="icon">
-                <i class="fas fa-key"></i>
-            </div>
-        </div>
-    </div>
 
-    <!-- Customers -->
-    <div class="col-lg-3 col-md-6">
-        <div class="small-box bg-info">
-            <div class="inner">
-                <h3>{{ total_customers }}</h3>
-                <p>Total Customers</p>
-            </div>
-            <div class="icon">
-                <i class="fas fa-users"></i>
-            </div>
-        </div>
-    </div>
+        <!-- TOTAL BIKES -->
 
-    <!-- Active Rentals -->
-    <div class="col-lg-3 col-md-6">
-        <div class="small-box bg-warning">
-            <div class="inner">
-                <h3>{{ active_rentals }}</h3>
-                <p>Active Rentals</p>
-            </div>
-            <div class="icon">
-                <i class="fas fa-file-contract"></i>
-            </div>
-        </div>
-    </div>
+        <div class="col-xl-3 col-md-6">
 
-    <!-- Today's Income -->
-    <div class="col-lg-3 col-md-6">
-        <div class="small-box bg-secondary">
-            <div class="inner">
-                <h3>₹ {{ today_income }}</h3>
-                <p>Today's Income</p>
-            </div>
-            <div class="icon">
-                <i class="fas fa-rupee-sign"></i>
-            </div>
-        </div>
-    </div>
+            <div class="card dashboard-card border-0 shadow-sm">
 
-    <!-- Monthly Income -->
-    <div class="col-lg-3 col-md-6">
-        <div class="small-box bg-indigo">
-            <div class="inner">
-                <h3>₹ {{ monthly_income }}</h3>
-                <p>Monthly Income</p>
-            </div>
-            <div class="icon">
-                <i class="fas fa-chart-line"></i>
-            </div>
-        </div>
-    </div>
+                <div class="card-body">
 
-    <!-- Pending Payments -->
-    <div class="col-lg-3 col-md-6">
-        <div class="small-box bg-maroon">
-            <div class="inner">
-                <h3>{{ pending_payments }}</h3>
-                <p>Pending Payments</p>
-            </div>
-            <div class="icon">
-                <i class="fas fa-exclamation-circle"></i>
-            </div>
-        </div>
-    </div>
+                    <div class="d-flex justify-content-between">
 
-    <!-- Total Income -->
-    <div class="col-lg-3 col-md-6">
-        <div class="small-box bg-success">
-            <div class="inner">
-                <h3>₹ {{ total_income }}</h3>
-                <p>Total Income</p>
-            </div>
-            <div class="icon">
-                <i class="fas fa-wallet"></i>
-            </div>
-        </div>
-    </div>
+                        <div>
 
-    <!-- Total Expense -->
-    <div class="col-lg-3 col-md-6">
-        <div class="small-box bg-danger">
-            <div class="inner">
-                <h3>₹ {{ total_expense }}</h3>
-                <p>Total Expense</p>
-            </div>
-            <div class="icon">
-                <i class="fas fa-money-bill-wave"></i>
-            </div>
-        </div>
-    </div>
+                            <p class="text-muted mb-1">
+                                Total Bikes
+                            </p>
 
-    <!-- Total Profit -->
-    <div class="col-lg-3 col-md-6">
-        <div class="small-box bg-primary">
-            <div class="inner">
-                <h3>₹ {{ total_profit }}</h3>
-                <p>Total Profit</p>
-            </div>
-            <div class="icon">
-                <i class="fas fa-chart-line"></i>
-            </div>
-        </div>
-    </div>
+                            <h3 class="fw-bold">
+                                {{ total_bikes }}
+                            </h3>
 
-    <!-- Today's Expense -->
-    <div class="col-lg-3 col-md-6">
-        <div class="small-box bg-warning">
-            <div class="inner">
-                <h3>₹ {{ today_expense }}</h3>
-                <p>Today's Expense</p>
-            </div>
-            <div class="icon">
-                <i class="fas fa-coins"></i>
-            </div>
-        </div>
-    </div>
+                        </div>
 
-</div>
+                        <div class="dashboard-icon bg-primary">
 
-<hr>
+                            <i class="fas fa-motorcycle"></i>
 
-<div class="row">
+                        </div>
 
-    <div class="col-lg-8">
+                    </div>
 
-        <div class="card shadow">
-
-            <div class="card-header bg-primary text-white">
-
-                <h5 class="mb-0">
-
-                    <i class="fas fa-chart-bar"></i>
-
-                    Income vs Expense
-
-                </h5>
-
-            </div>
-
-            <div class="card-body">
-
-                <canvas id="incomeChart" style="height:320px;"></canvas>
+                </div>
 
             </div>
 
         </div>
 
-    </div>
 
-    <div class="col-lg-4">
+        <!-- AVAILABLE -->
 
-        <div class="card shadow">
+        <div class="col-xl-3 col-md-6">
 
-            <div class="card-header bg-success text-white">
+            <div class="card dashboard-card border-0 shadow-sm">
 
-                <h5 class="mb-0">
+                <div class="card-body">
 
-                    Recent Payments
+                    <div class="d-flex justify-content-between">
 
-                </h5>
+                        <div>
+
+                            <p class="text-muted mb-1">
+                                Available Bikes
+                            </p>
+
+                            <h3 class="fw-bold text-success">
+                                {{ available_bikes }}
+                            </h3>
+
+                        </div>
+
+                        <div class="dashboard-icon bg-success">
+
+                            <i class="fas fa-check-circle"></i>
+
+                        </div>
+
+                    </div>
+
+                </div>
 
             </div>
 
-            <div class="card-body">
+        </div>
 
-                <table class="table table-sm table-hover">
 
-                    <thead>
+        <!-- RENTED -->
 
-                        <tr>
+        <div class="col-xl-3 col-md-6">
 
-                            <th>Customer</th>
+            <div class="card dashboard-card border-0 shadow-sm">
 
-                            <th>Amount</th>
+                <div class="card-body">
 
-                        </tr>
+                    <div class="d-flex justify-content-between">
 
-                    </thead>
+                        <div>
 
-                    <tbody>
+                            <p class="text-muted mb-1">
+                                Rented Bikes
+                            </p>
 
-                        {% for payment in recent_payments %}
+                            <h3 class="fw-bold text-danger">
+                                {{ rented_bikes }}
+                            </h3>
 
-                        <tr>
+                        </div>
 
-                            <td>{{ payment.rental.customer.customer_name }}</td>
+                        <div class="dashboard-icon bg-danger">
 
-                            <td>₹ {{ payment.amount }}</td>
+                            <i class="fas fa-key"></i>
 
-                        </tr>
+                        </div>
 
-                        {% empty %}
+                    </div>
 
-                        <tr>
+                </div>
 
-                            <td colspan="2">
+            </div>
 
-                                No Payment Found
+        </div>
 
-                            </td>
 
-                        </tr>
+        <!-- CUSTOMERS -->
 
-                        {% endfor %}
+        <div class="col-xl-3 col-md-6">
 
-                    </tbody>
+            <div class="card dashboard-card border-0 shadow-sm">
 
-                </table>
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between">
+
+                        <div>
+
+                            <p class="text-muted mb-1">
+                                Total Customers
+                            </p>
+
+                            <h3 class="fw-bold text-info">
+                                {{ total_customers }}
+                            </h3>
+
+                        </div>
+
+                        <div class="dashboard-icon bg-info">
+
+                            <i class="fas fa-users"></i>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ACTIVE RENTALS -->
+
+        <div class="col-xl-3 col-md-6">
+
+            <div class="card dashboard-card border-0 shadow-sm">
+
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between">
+
+                        <div>
+
+                            <p class="text-muted mb-1">
+                                Active Rentals
+                            </p>
+
+                            <h3 class="fw-bold">
+                                {{ active_rentals }}
+                            </h3>
+
+                        </div>
+
+                        <div class="dashboard-icon bg-secondary">
+
+                            <i class="fas fa-file-contract"></i>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- TODAY INCOME -->
+
+        <div class="col-xl-3 col-md-6">
+
+            <div class="card dashboard-card border-0 shadow-sm">
+
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between">
+
+                        <div>
+
+                            <p class="text-muted mb-1">
+                                Today's Income
+                            </p>
+
+                            <h3 class="fw-bold text-success">
+
+                                ₹ {{ today_income }}
+
+                            </h3>
+
+                        </div>
+
+                        <div class="dashboard-icon bg-success">
+
+                            <i class="fas fa-rupee-sign"></i>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- PROFIT -->
+
+        <div class="col-xl-3 col-md-6">
+
+            <div class="card dashboard-card border-0 shadow-sm">
+
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between">
+
+                        <div>
+
+                            <p class="text-muted mb-1">
+                                Total Profit
+                            </p>
+
+                            <h3 class="fw-bold text-primary">
+
+                                ₹ {{ total_profit }}
+
+                            </h3>
+
+                        </div>
+
+                        <div class="dashboard-icon bg-primary">
+
+                            <i class="fas fa-chart-line"></i>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- EXPENSE -->
+
+        <div class="col-xl-3 col-md-6">
+
+            <div class="card dashboard-card border-0 shadow-sm">
+
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between">
+
+                        <div>
+
+                            <p class="text-muted mb-1">
+                                Total Expense
+                            </p>
+
+                            <h3 class="fw-bold text-danger">
+
+                                ₹ {{ total_expense }}
+
+                            </h3>
+
+                        </div>
+
+                        <div class="dashboard-icon bg-danger">
+
+                            <i class="fas fa-wallet"></i>
+
+                        </div>
+
+                    </div>
+
+                </div>
 
             </div>
 
@@ -267,45 +775,56 @@
 
     </div>
 
-</div>
 
-<div class="row mt-3">
+    <!-- ========================= -->
+    <!-- QUICK ACTIONS -->
+    <!-- ========================= -->
 
-    <div class="col-md-6">
+    <div class="card border-0 shadow-sm mb-4">
 
-        <div class="card">
+        <div class="card-body">
 
-            <div class="card-header bg-info text-white">
+            <div class="d-flex flex-wrap gap-2">
 
-                Recent Rentals
+                <a href="{% url 'add_rental' %}"
+                   class="btn btn-primary">
 
-            </div>
+                    <i class="fas fa-motorcycle"></i>
+                    New Rental
 
-            <div class="card-body">
+                </a>
 
-                <table class="table table-sm">
+                <a href="{% url 'add_customer' %}"
+                   class="btn btn-success">
 
-                    {% for rental in recent_rentals %}
+                    <i class="fas fa-user-plus"></i>
+                    Add Customer
 
-                    <tr>
+                </a>
 
-                        <td>{{ rental.customer.customer_name }}</td>
+                <a href="{% url 'add_bike' %}"
+                   class="btn btn-info text-white">
 
-                        <td>{{ rental.bike.bike_name }}</td>
+                    <i class="fas fa-plus"></i>
+                    Add Bike
 
-                    </tr>
+                </a>
 
-                    {% empty %}
+                <a href="{% url 'payment_list' %}"
+                   class="btn btn-warning">
 
-                    <tr>
+                    <i class="fas fa-money-bill"></i>
+                    Payments
 
-                        <td>No Rental Found</td>
+                </a>
 
-                    </tr>
+                <a href="{% url 'expense_list' %}"
+                   class="btn btn-secondary">
 
-                    {% endfor %}
+                    <i class="fas fa-wallet"></i>
+                    Expenses
 
-                </table>
+                </a>
 
             </div>
 
@@ -313,41 +832,316 @@
 
     </div>
 
-    <div class="col-md-6">
 
-        <div class="card">
+    <!-- ========================= -->
+    <!-- CHART + PAYMENT -->
+    <!-- ========================= -->
 
-            <div class="card-header bg-danger text-white">
+    <div class="row g-3 mb-4">
 
-                Recent Expenses
+
+        <!-- CHART -->
+
+        <div class="col-lg-8">
+
+            <div class="card border-0 shadow-sm h-100">
+
+                <div class="card-header bg-primary text-white">
+
+                    <h5 class="mb-0">
+
+                        <i class="fas fa-chart-bar"></i>
+
+                        Business Summary
+
+                    </h5>
+
+                </div>
+
+                <div class="card-body">
+
+                    <div style="height:320px;">
+
+                        <canvas id="incomeChart"></canvas>
+
+                    </div>
+
+                </div>
 
             </div>
 
-            <div class="card-body">
+        </div>
 
-                <table class="table table-sm">
 
-                    {% for expense in recent_expenses %}
+        <!-- RECENT PAYMENTS -->
 
-                    <tr>
+        <div class="col-lg-4">
 
-                        <td>{{ expense.category }}</td>
+            <div class="card border-0 shadow-sm h-100">
 
-                        <td>₹ {{ expense.amount }}</td>
+                <div class="card-header bg-success text-white">
 
-                    </tr>
+                    <h5 class="mb-0">
 
-                    {% empty %}
+                        <i class="fas fa-money-bill-wave"></i>
 
-                    <tr>
+                        Recent Payments
 
-                        <td>No Expense Found</td>
+                    </h5>
 
-                    </tr>
+                </div>
 
-                    {% endfor %}
+                <div class="card-body p-0">
 
-                </table>
+                    <div class="table-responsive">
+
+                        <table class="table table-hover mb-0">
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>Customer</th>
+
+                                    <th>Amount</th>
+
+                                </tr>
+
+                            </thead>
+
+                            <tbody>
+
+                                {% for payment in recent_payments %}
+
+                                <tr>
+
+                                    <td>
+
+                                        {{ payment.rental.customer.customer_name }}
+
+                                    </td>
+
+                                    <td class="text-success fw-bold">
+
+                                        ₹ {{ payment.amount }}
+
+                                    </td>
+
+                                </tr>
+
+                                {% empty %}
+
+                                <tr>
+
+                                    <td colspan="2"
+                                        class="text-center text-muted">
+
+                                        No payments found
+
+                                    </td>
+
+                                </tr>
+
+                                {% endfor %}
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- RECENT ACTIVITY -->
+    <!-- ========================= -->
+
+    <div class="row g-3">
+
+
+        <!-- RECENT RENTALS -->
+
+        <div class="col-lg-6">
+
+            <div class="card border-0 shadow-sm">
+
+                <div class="card-header bg-info text-white">
+
+                    <h5 class="mb-0">
+
+                        <i class="fas fa-history"></i>
+
+                        Recent Rentals
+
+                    </h5>
+
+                </div>
+
+                <div class="card-body p-0">
+
+                    <div class="table-responsive">
+
+                        <table class="table table-hover mb-0">
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>Customer</th>
+
+                                    <th>Bike</th>
+
+                                    <th>Status</th>
+
+                                </tr>
+
+                            </thead>
+
+                            <tbody>
+
+                                {% for rental in recent_rentals %}
+
+                                <tr>
+
+                                    <td>
+                                        {{ rental.customer.customer_name }}
+                                    </td>
+
+                                    <td>
+                                        {{ rental.bike.bike_name }}
+                                    </td>
+
+                                    <td>
+
+                                        {% if rental.status == "Active" %}
+
+                                        <span class="badge bg-success">
+                                            Active
+                                        </span>
+
+                                        {% else %}
+
+                                        <span class="badge bg-secondary">
+                                            {{ rental.status }}
+                                        </span>
+
+                                        {% endif %}
+
+                                    </td>
+
+                                </tr>
+
+                                {% empty %}
+
+                                <tr>
+
+                                    <td colspan="3"
+                                        class="text-center text-muted">
+
+                                        No rentals found
+
+                                    </td>
+
+                                </tr>
+
+                                {% endfor %}
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- RECENT EXPENSES -->
+
+        <div class="col-lg-6">
+
+            <div class="card border-0 shadow-sm">
+
+                <div class="card-header bg-danger text-white">
+
+                    <h5 class="mb-0">
+
+                        <i class="fas fa-wallet"></i>
+
+                        Recent Expenses
+
+                    </h5>
+
+                </div>
+
+                <div class="card-body p-0">
+
+                    <div class="table-responsive">
+
+                        <table class="table table-hover mb-0">
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>Category</th>
+
+                                    <th>Amount</th>
+
+                                </tr>
+
+                            </thead>
+
+                            <tbody>
+
+                                {% for expense in recent_expenses %}
+
+                                <tr>
+
+                                    <td>
+                                        {{ expense.category }}
+                                    </td>
+
+                                    <td class="text-danger fw-bold">
+
+                                        ₹ {{ expense.amount }}
+
+                                    </td>
+
+                                </tr>
+
+                                {% empty %}
+
+                                <tr>
+
+                                    <td colspan="2"
+                                        class="text-center text-muted">
+
+                                        No expenses found
+
+                                    </td>
+
+                                </tr>
+
+                                {% endfor %}
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
 
             </div>
 
@@ -358,6 +1152,8 @@
 </div>
 
 {% endblock %}
+
+
 {% block scripts %}
 
 <script>
@@ -366,66 +1162,123 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const canvas = document.getElementById("incomeChart");
 
-    if (canvas) {
+    if (!canvas) {
+        return;
+    }
 
-        new Chart(canvas, {
+    new Chart(canvas, {
 
-            type: "bar",
+        type: "bar",
 
-            data: {
+        data: {
 
-                labels: [
+            labels: [
+                "Income",
+                "Expense",
+                "Profit"
+            ],
 
-                    "Income",
+            datasets: [{
 
-                    "Expense",
+                label: "Business Summary",
 
-                    "Profit"
+                data: [
+
+                    {{ total_income|default:0 }},
+                    {{ total_expense|default:0 }},
+                    {{ total_profit|default:0 }}
 
                 ],
 
-                datasets: [{
+                backgroundColor: [
+                    "#28a745",
+                    "#dc3545",
+                    "#007bff"
+                ],
 
-                    label: "Business Summary",
+                borderRadius: 8
 
-                    data: [
+            }]
 
-                        {{ total_income }},
+        },
 
-                        {{ total_expense }},
+        options: {
 
-                        {{ total_profit }}
+            responsive: true,
 
-                    ],
+            maintainAspectRatio: false,
 
-                    backgroundColor: [
+            plugins: {
 
-                        "#28a745",
-
-                        "#dc3545",
-
-                        "#007bff"
-
-                    ]
-
-                }]
+                legend: {
+                    display: false
+                }
 
             },
 
-            options: {
+            scales: {
 
-                responsive: true,
+                y: {
 
-                maintainAspectRatio: false
+                    beginAtZero: true
+
+                }
 
             }
 
-        });
+        }
 
-    }
+    });
 
 });
 
 </script>
+
+<style>
+
+.alert-card {
+    transition: all 0.25s ease;
+    overflow: hidden;
+    position: relative;
+}
+
+.alert-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.12) !important;
+}
+
+.overdue-card {
+    border-left: 5px solid #dc3545 !important;
+}
+
+.today-card {
+    border-left: 5px solid #17a2b8 !important;
+}
+
+.payment-card {
+    border-left: 5px solid #ffc107 !important;
+}
+
+.alert-icon,
+.dashboard-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 20px;
+}
+
+.dashboard-card {
+    transition: all 0.25s ease;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-4px);
+}
+
+</style>
 
 {% endblock %}

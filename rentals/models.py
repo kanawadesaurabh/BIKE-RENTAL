@@ -1,61 +1,96 @@
 from django.db import models
 
-from bikes.models import Bike
 from customers.models import Customer
+from bikes.models import Bike
 
 
 class Rental(models.Model):
 
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    STATUS_CHOICES = [
+        ("Active", "Active"),
+        ("Completed", "Completed"),
+    ]
 
-    bike = models.ForeignKey(Bike, on_delete=models.CASCADE)
+    RENTAL_TYPE_CHOICES = [
+        ("Daily", "Daily"),
+        ("Monthly", "Monthly"),
+    ]
 
-    rent_date = models.DateField()
+    # ==========================
+    # CUSTOMER & BIKE
+    # ==========================
 
-    return_date = models.DateField(
+    customer = models.ForeignKey(
+        Customer,
+        on_delete=models.CASCADE
+    )
+
+    bike = models.ForeignKey(
+        Bike,
+        on_delete=models.CASCADE
+    )
+
+    # ==========================
+    # RENTAL TYPE
+    # ==========================
+
+    rental_type = models.CharField(
+        max_length=20,
+        choices=RENTAL_TYPE_CHOICES,
+        default="Daily"
+    )
+
+    # Customer किती दिवसांसाठी bike घेत आहे
+    # हे manually enter करता येईल
+    rental_days = models.PositiveIntegerField(
+        default=1
+    )
+
+    # ==========================
+    # RENT DATE & TIME
+    # ==========================
+
+    # Bike customer ला नेमकी कधी दिली
+    rent_date = models.DateTimeField()
+
+    # Expected return date & time
+    expected_return_date = models.DateTimeField(
         null=True,
         blank=True
     )
 
+    # Bike प्रत्यक्षात कधी परत आली
+    actual_return_date = models.DateTimeField(
+        null=True,
+        blank=True
+    )
+
+    # ==========================
+    # RENT DETAILS
+    # ==========================
+
+    # Daily / Monthly rent manually enter करता येईल
     daily_rent = models.DecimalField(
-        max_digits=10,
+        max_digits=8,
         decimal_places=2
     )
 
     security_deposit = models.DecimalField(
-        max_digits=10,
+        max_digits=8,
         decimal_places=2
     )
 
     advance_payment = models.DecimalField(
-        max_digits=10,
-        decimal_places=2
-    )
-
-    late_fine = models.DecimalField(
-        max_digits=10,
+        max_digits=8,
         decimal_places=2,
         default=0
     )
 
-    damage_charge = models.DecimalField(
-        max_digits=10,
-        decimal_places=2,
-        default=0
-    )
+    # ==========================
+    # RETURN / BILL DETAILS
+    # ==========================
 
-    deposit_refund = models.DecimalField(
-        max_digits=10,
-        decimal_places=2,
-        default=0
-    )
-
-    remarks = models.TextField(
-        blank=True,
-        null=True
-    )
-
-    total_days = models.IntegerField(
+    total_days = models.PositiveIntegerField(
         default=0
     )
 
@@ -65,16 +100,75 @@ class Rental(models.Model):
         default=0
     )
 
+    # ==========================
+    # EXTRA / LATE CHARGES
+    # ==========================
+
+    # 24 hours / expected time नंतर
+    # प्रति तास ₹100
+    late_fine = models.DecimalField(
+        max_digits=8,
+        decimal_places=2,
+        default=0
+    )
+
+    # Damage charge
+    damage_charge = models.DecimalField(
+        max_digits=8,
+        decimal_places=2,
+        default=0
+    )
+
+    # Manual extra charge
+    manual_extra_charge = models.DecimalField(
+        max_digits=8,
+        decimal_places=2,
+        default=0
+    )
+
+    # Security deposit refund
+    deposit_refund = models.DecimalField(
+        max_digits=8,
+        decimal_places=2,
+        default=0
+    )
+
+    # ==========================
+    # PAYMENT
+    # ==========================
+
     remaining_amount = models.DecimalField(
         max_digits=10,
         decimal_places=2,
         default=0
     )
 
+    # ==========================
+    # REMARKS
+    # ==========================
+
+    remarks = models.TextField(
+        blank=True,
+        null=True
+    )
+
+    # ==========================
+    # STATUS
+    # ==========================
+
     status = models.CharField(
         max_length=20,
+        choices=STATUS_CHOICES,
         default="Active"
     )
 
+    # ==========================
+    # STRING
+    # ==========================
+
     def __str__(self):
-        return f"{self.customer} - {self.bike}"
+
+        return (
+            f"{self.customer.customer_name} - "
+            f"{self.bike.registration_number}"
+        )

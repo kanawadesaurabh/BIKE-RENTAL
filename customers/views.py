@@ -99,3 +99,58 @@ def delete_customer(request, id):
     customer.delete()
 
     return redirect("customer_list")
+
+# ==========================
+# Customer History
+# ==========================
+def customer_history(request, id):
+
+    customer = get_object_or_404(
+        Customer,
+        id=id
+    )
+
+    rentals = customer.rental_set.select_related(
+        "bike"
+    ).order_by(
+        "-rent_date"
+    )
+
+    return render(
+        request,
+        "customers/customer_history.html",
+        {
+            "customer": customer,
+            "rentals": rentals,
+        }
+    )
+
+
+    # ==========================
+# Customer Rental History
+# ==========================
+def customer_history(request, id):
+
+    customer = get_object_or_404(
+        Customer,
+        id=id
+    )
+
+    from rentals.models import Rental
+
+    rentals = Rental.objects.filter(
+        customer=customer
+    ).select_related(
+        "bike"
+    ).order_by(
+        "-rent_date"
+    )
+
+    return render(
+        request,
+        "customers/customer_history.html",
+        {
+            "customer": customer,
+            "rentals": rentals,
+        }
+    )

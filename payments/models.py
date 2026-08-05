@@ -13,10 +13,13 @@ class Payment(models.Model):
 
     rental = models.ForeignKey(
         Rental,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        related_name="payments"
     )
 
-    payment_date = models.DateField(auto_now_add=True)
+    payment_date = models.DateField(
+        auto_now_add=True
+    )
 
     amount = models.DecimalField(
         max_digits=10,

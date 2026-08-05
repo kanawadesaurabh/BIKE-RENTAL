@@ -2,126 +2,54 @@
 
 {% block content %}
 
-<div class="card shadow">
+<div class="container-fluid">
 
-    <div class="card-header bg-danger text-white">
+    <div class="card shadow">
 
-        <h3 class="mb-0">
-            <i class="fas fa-undo"></i>
-            Return Bike
-        </h3>
+        <div class="card-header bg-danger text-white">
 
-    </div>
-
-    <div class="card-body">
-
-        <div class="row mb-3">
-
-            <div class="col-md-6">
-
-                <strong>Customer :</strong><br>
-
-                {{ rental.customer.customer_name }}
-
-            </div>
-
-            <div class="col-md-6">
-
-                <strong>Bike :</strong><br>
-
-                {{ rental.bike.bike_name }}
-
-            </div>
+            <h3 class="mb-0">
+                <i class="fas fa-undo"></i>
+                Return Bike
+            </h3>
 
         </div>
 
-        <div class="row mb-4">
+        <div class="card-body">
 
-            <div class="col-md-6">
+            <!-- ========================= -->
+            <!-- CUSTOMER & BIKE DETAILS -->
+            <!-- ========================= -->
 
-                <strong>Registration No :</strong><br>
+            <div class="row mb-3">
 
-                {{ rental.bike.registration_number }}
+                <div class="col-md-4">
 
-            </div>
+                    <strong>Customer:</strong>
 
-            <div class="col-md-6">
+                    <br>
 
-                <strong>Rent Date :</strong><br>
-
-                {{ rental.rent_date }}
-
-            </div>
-
-        </div>
-
-        <hr>
-
-        <form method="POST">
-
-            {% csrf_token %}
-
-            {% if form.errors %}
-
-            <div class="alert alert-danger">
-
-                Please correct the errors below.
-
-            </div>
-
-            {% endif %}
-
-            <div class="row">
-
-                <div class="col-md-6 mb-3">
-
-                    <label class="form-label">
-
-                        Late Fine (₹)
-
-                    </label>
-
-                    {{ form.late_fine }}
+                    {{ rental.customer.customer_name }}
 
                 </div>
 
-                <div class="col-md-6 mb-3">
+                <div class="col-md-4">
 
-                    <label class="form-label">
+                    <strong>Bike:</strong>
 
-                        Damage Charge (₹)
+                    <br>
 
-                    </label>
-
-                    {{ form.damage_charge }}
+                    {{ rental.bike.bike_name }}
 
                 </div>
 
-            </div>
+                <div class="col-md-4">
 
-            <div class="row">
+                    <strong>Registration No:</strong>
 
-                <div class="col-md-6 mb-3">
+                    <br>
 
-                    <label class="form-label">
-
-                        Deposit Refund (₹)
-
-                    </label>
-
-                    {{ form.deposit_refund }}
-
-                </div>
-
-                <div class="col-md-6 mb-3">
-
-                    <label class="form-label">
-
-                        Remarks
-
-                    </label>
-
-                    {{ form.remarks }}
+                    {{ rental.bike.registration_number }}
 
                 </div>
 
@@ -129,25 +57,253 @@
 
             <hr>
 
-            <button type="submit" class="btn btn-success">
 
-                <i class="fas fa-check-circle"></i>
+            <!-- ========================= -->
+            <!-- RENT TIME DETAILS -->
+            <!-- ========================= -->
 
-                Complete Return
+            <h5 class="text-primary">
 
-            </button>
+                <i class="fas fa-clock"></i>
 
-            <a href="{% url 'rental_list' %}"
+                Rental Time Details
 
-               class="btn btn-secondary">
+            </h5>
 
-                <i class="fas fa-times"></i>
+            <div class="row mb-3">
 
-                Cancel
+                <div class="col-md-4">
 
-            </a>
+                    <strong>Rent Date & Time:</strong>
 
-        </form>
+                    <br>
+
+                    {{ rental.rent_date|date:"d-m-Y h:i A" }}
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <strong>Expected Return:</strong>
+
+                    <br>
+
+                    {{ rental.expected_return_date|date:"d-m-Y h:i A" }}
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <strong>Daily Rent:</strong>
+
+                    <br>
+
+                    <span class="text-success">
+
+                        ₹ {{ rental.daily_rent }}
+
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="alert alert-info">
+
+                <i class="fas fa-info-circle"></i>
+
+                <strong>24 Hour Rule:</strong>
+
+                प्रत्येक 24 तास = 1 Day.
+
+                24 तासांनंतर प्रत्येक अतिरिक्त तासासाठी
+
+                <strong>₹100 Extra Charge</strong> लागू होईल.
+
+            </div>
+
+            <hr>
+
+
+            <!-- ========================= -->
+            <!-- RETURN FORM -->
+            <!-- ========================= -->
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                {% if form.errors %}
+
+                <div class="alert alert-danger">
+
+                    <strong>Please correct the errors below.</strong>
+
+                    {{ form.errors }}
+
+                </div>
+
+                {% endif %}
+
+
+                <h5 class="text-danger mb-3">
+
+                    <i class="fas fa-money-bill-wave"></i>
+
+                    Additional Charges
+
+                </h5>
+
+
+                <div class="row">
+
+                    <!-- Late Fine -->
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+
+                            <strong>Late Fine (₹)</strong>
+
+                        </label>
+
+                        {{ form.late_fine }}
+
+                    </div>
+
+
+                    <!-- Damage Charge -->
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+
+                            <strong>Damage Charge (₹)</strong>
+
+                        </label>
+
+                        {{ form.damage_charge }}
+
+                    </div>
+
+                </div>
+
+
+                <div class="row">
+
+                    <!-- Manual Extra Charge -->
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+
+                            <strong>Manual Extra Charge (₹)</strong>
+
+                        </label>
+
+                        {{ form.manual_extra_charge }}
+
+                        <small class="text-muted">
+
+                            इतर कोणताही extra charge असल्यास येथे amount टाका.
+
+                        </small>
+
+                    </div>
+
+
+                    <!-- Deposit Refund -->
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+
+                            <strong>Deposit Refund (₹)</strong>
+
+                        </label>
+
+                        {{ form.deposit_refund }}
+
+                    </div>
+
+                </div>
+
+
+                <!-- Remarks -->
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+
+                        <strong>Remarks</strong>
+
+                    </label>
+
+                    {{ form.remarks }}
+
+                </div>
+
+
+                <hr>
+
+
+                <!-- ========================= -->
+                <!-- IMPORTANT INFORMATION -->
+                <!-- ========================= -->
+
+                <div class="alert alert-warning">
+
+                    <i class="fas fa-calculator"></i>
+
+                    <strong>Calculation:</strong>
+
+                    <br>
+
+                    System automatically calculate करेल:
+
+                    <br><br>
+
+                    <strong>
+                        Total Rent = (Total Days × Daily Rent)
+                        + (Extra Hours × ₹100)
+                        + Manual Extra Charge
+                    </strong>
+
+                    <br><br>
+
+                    त्यानंतर Late Fine आणि Damage Charge जोडले जातील
+                    आणि Advance Payment वजा केला जाईल.
+
+                </div>
+
+
+                <!-- ========================= -->
+                <!-- BUTTONS -->
+                <!-- ========================= -->
+
+                <button type="submit"
+                        class="btn btn-success">
+
+                    <i class="fas fa-check-circle"></i>
+
+                    Complete Return
+
+                </button>
+
+
+                <a href="{% url 'rental_list' %}"
+                   class="btn btn-secondary">
+
+                    <i class="fas fa-times"></i>
+
+                    Cancel
+
+                </a>
+
+            </form>
+
+        </div>
 
     </div>
 

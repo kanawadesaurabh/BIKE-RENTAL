@@ -2,144 +2,753 @@
 
 {% block content %}
 
-<div class="card shadow">
+<div class="container-fluid">
 
-    <div class="card-header bg-primary text-white">
+    <!-- PAGE HEADER -->
 
-        <h3 class="mb-0">
-            <i class="fas fa-search"></i>
-            Bike Search
-        </h3>
+    <div class="mb-4">
+
+        <h2 class="fw-bold">
+
+            <i class="fas fa-search text-primary"></i>
+
+            Bike Tracking
+
+        </h2>
+
+        <p class="text-muted">
+            Registration number टाकून bike कोणाकडे आहे ते शोधा.
+        </p>
 
     </div>
 
-    <div class="card-body">
 
-        <form method="GET" class="row mb-4">
+    <!-- SEARCH CARD -->
 
-            <div class="col-md-10">
+    <div class="card border-0 shadow-sm mb-4">
 
-                <input
-                    type="text"
-                    name="bike_number"
-                    class="form-control"
-                    placeholder="Enter Bike Registration Number"
-                    value="{{ search }}">
+        <div class="card-header bg-primary text-white">
 
-            </div>
+            <h5 class="mb-0">
 
-            <div class="col-md-2">
+                <i class="fas fa-motorcycle"></i>
 
-                <button class="btn btn-primary w-100">
+                Search Bike
 
-                    <i class="fas fa-search"></i>
-
-                    Search
-
-                </button>
-
-            </div>
-
-        </form>
-
-        {% if rental %}
-
-        <table class="table table-bordered">
-
-            <tr>
-                <th width="30%">Bike Name</th>
-                <td>{{ rental.bike.bike_name }}</td>
-            </tr>
-
-            <tr>
-                <th>Registration No</th>
-                <td>{{ rental.bike.registration_number }}</td>
-            </tr>
-
-            <tr>
-                <th>Status</th>
-
-                <td>
-
-                    <span class="badge bg-danger">
-
-                        {{ rental.bike.status }}
-
-                    </span>
-
-                </td>
-
-            </tr>
-
-            <tr>
-                <th>Customer</th>
-                <td>{{ rental.customer.customer_name }}</td>
-            </tr>
-
-            <tr>
-                <th>Mobile</th>
-                <td>{{ rental.customer.mobile }}</td>
-            </tr>
-
-            <tr>
-                <th>Rent Date</th>
-                <td>{{ rental.rent_date }}</td>
-            </tr>
-
-            <tr>
-                <th>Return Date</th>
-                <td>{{ rental.return_date|default:"Not Returned" }}</td>
-            </tr>
-
-            <tr>
-                <th>Remaining Amount</th>
-
-                <td class="text-danger">
-
-                    <strong>
-
-                        ₹ {{ rental.remaining_amount }}
-
-                    </strong>
-
-                </td>
-
-            </tr>
-
-        </table>
-
-        <a href="{% url 'add_payment' rental.id %}"
-           class="btn btn-success">
-
-            <i class="fas fa-money-bill-wave"></i>
-
-            Add Payment
-
-        </a>
-
-        <a href="{% url 'return_bike' rental.id %}"
-           class="btn btn-warning">
-
-            <i class="fas fa-undo"></i>
-
-            Return Bike
-
-        </a>
-
-        {% elif search %}
-
-        <div class="alert alert-danger">
-
-            <i class="fas fa-times-circle"></i>
-
-            No Active Rental Found for this Bike Number.
+            </h5>
 
         </div>
 
-        {% endif %}
+
+        <div class="card-body">
+
+            <form method="GET">
+
+                <div class="row align-items-end">
+
+                    <div class="col-md-8">
+
+                        <label class="form-label fw-bold">
+
+                            Bike Registration Number
+
+                        </label>
+
+                        <div class="input-group">
+
+                            <span class="input-group-text">
+
+                                <i class="fas fa-id-card"></i>
+
+                            </span>
+
+                            <input
+                                type="text"
+                                name="registration_number"
+                                class="form-control form-control-lg"
+                                placeholder="उदा. MH 15 AB 1234"
+                                value="{{ registration_number|default:'' }}"
+                                autocomplete="off"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-md-2 mt-3 mt-md-0">
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary btn-lg w-100">
+
+                            <i class="fas fa-search"></i>
+
+                            Search
+
+                        </button>
+
+                    </div>
+
+
+                    <div class="col-md-2 mt-3 mt-md-0">
+
+                        <a
+                            href="{% url 'bike_search' %}"
+                            class="btn btn-secondary btn-lg w-100">
+
+                            <i class="fas fa-redo"></i>
+
+                            Reset
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
 
     </div>
 
+
+    {% if registration_number %}
+
+
+        {% if bike %}
+
+            <!-- BIKE INFORMATION -->
+
+            <div class="card border-0 shadow-sm mb-4">
+
+                <div class="card-header bg-dark text-white">
+
+                    <h5 class="mb-0">
+
+                        <i class="fas fa-motorcycle"></i>
+
+                        Bike Information
+
+                    </h5>
+
+                </div>
+
+
+                <div class="card-body">
+
+                    <div class="row g-3">
+
+
+                        <!-- BIKE NAME -->
+
+                        <div class="col-md-4">
+
+                            <div class="info-box">
+
+                                <small class="text-muted">
+                                    Bike Name
+                                </small>
+
+                                <h5 class="fw-bold mb-0">
+
+                                    {{ bike.bike_name }}
+
+                                </h5>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- BRAND -->
+
+                        <div class="col-md-4">
+
+                            <div class="info-box">
+
+                                <small class="text-muted">
+                                    Brand
+                                </small>
+
+                                <h5 class="fw-bold mb-0">
+
+                                    {{ bike.brand }}
+
+                                </h5>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- MODEL -->
+
+                        <div class="col-md-4">
+
+                            <div class="info-box">
+
+                                <small class="text-muted">
+                                    Model
+                                </small>
+
+                                <h5 class="fw-bold mb-0">
+
+                                    {{ bike.model }}
+
+                                </h5>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- REGISTRATION -->
+
+                        <div class="col-md-4">
+
+                            <div class="info-box">
+
+                                <small class="text-muted">
+                                    Registration Number
+                                </small>
+
+                                <h5 class="fw-bold text-primary mb-0">
+
+                                    {{ bike.registration_number }}
+
+                                </h5>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- COLOR -->
+
+                        <div class="col-md-4">
+
+                            <div class="info-box">
+
+                                <small class="text-muted">
+                                    Color
+                                </small>
+
+                                <h5 class="fw-bold mb-0">
+
+                                    {{ bike.color }}
+
+                                </h5>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- RENT -->
+
+                        <div class="col-md-4">
+
+                            <div class="info-box">
+
+                                <small class="text-muted">
+                                    Daily Rent
+                                </small>
+
+                                <h5 class="fw-bold text-success mb-0">
+
+                                    ₹ {{ bike.daily_rent }}
+
+                                </h5>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            {% if rental %}
+
+                <!-- RENTAL INFORMATION -->
+
+                <div class="card border-0 shadow-sm">
+
+                    <div class="card-header bg-danger text-white">
+
+                        <h5 class="mb-0">
+
+                            <i class="fas fa-user-clock"></i>
+
+                            Currently Rented
+
+                        </h5>
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <div class="row g-3">
+
+
+                            <!-- CUSTOMER -->
+
+                            <div class="col-md-6">
+
+                                <div class="tracking-box">
+
+                                    <div class="tracking-icon bg-primary">
+
+                                        <i class="fas fa-user"></i>
+
+                                    </div>
+
+                                    <div>
+
+                                        <small class="text-muted">
+                                            Customer
+                                        </small>
+
+                                        <h5 class="fw-bold mb-0">
+
+                                            {{ rental.customer.customer_name }}
+
+                                        </h5>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- MOBILE -->
+
+                            <div class="col-md-6">
+
+                                <div class="tracking-box">
+
+                                    <div class="tracking-icon bg-success">
+
+                                        <i class="fas fa-phone"></i>
+
+                                    </div>
+
+                                    <div>
+
+                                        <small class="text-muted">
+                                            Mobile Number
+                                        </small>
+
+                                        <h5 class="fw-bold mb-0">
+
+                                            {{ rental.customer.mobile }}
+
+                                        </h5>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- RENT DATE -->
+
+                            <div class="col-md-4">
+
+                                <div class="info-box">
+
+                                    <small class="text-muted">
+                                        Rent Date
+                                    </small>
+
+                                    <h5 class="fw-bold">
+
+                                        {{ rental.rent_date }}
+
+                                    </h5>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- RETURN DATE -->
+
+                            <div class="col-md-4">
+
+                                <div class="info-box">
+
+                                    <small class="text-muted">
+                                        Return Date
+                                    </small>
+
+                                    <h5 class="fw-bold">
+
+                                        {{ rental.return_date }}
+
+                                    </h5>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- STATUS -->
+
+                            <div class="col-md-4">
+
+                                <div class="info-box">
+
+                                    <small class="text-muted">
+                                        Status
+                                    </small>
+
+                                    {% if rental.return_date < today %}
+
+                                        <span class="badge bg-danger fs-6">
+
+                                            <i class="fas fa-exclamation-triangle"></i>
+
+                                            OVERDUE
+
+                                        </span>
+
+                                    {% else %}
+
+                                        <span class="badge bg-success fs-6">
+
+                                            <i class="fas fa-check-circle"></i>
+
+                                            ACTIVE
+
+                                        </span>
+
+                                    {% endif %}
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- DAILY RENT -->
+
+                            <div class="col-md-4">
+
+                                <div class="money-box">
+
+                                    <small>
+                                        Daily Rent
+                                    </small>
+
+                                    <h4>
+                                        ₹ {{ rental.daily_rent }}
+                                    </h4>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- TOTAL -->
+
+                            <div class="col-md-4">
+
+                                <div class="money-box">
+
+                                    <small>
+                                        Total Amount
+                                    </small>
+
+                                    <h4>
+                                        ₹ {{ rental.total_amount }}
+                                    </h4>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- REMAINING -->
+
+                            <div class="col-md-4">
+
+                                <div class="money-box pending-money">
+
+                                    <small>
+                                        Remaining Amount
+                                    </small>
+
+                                    <h4>
+                                        ₹ {{ rental.remaining_amount }}
+                                    </h4>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            {% else %}
+
+                <!-- AVAILABLE -->
+
+                <div class="card border-0 shadow-sm">
+
+                    <div class="card-body text-center py-5">
+
+                        <div class="success-circle">
+
+                            <i class="fas fa-check"></i>
+
+                        </div>
+
+                        <h3 class="fw-bold text-success mt-3">
+
+                            Bike Available
+
+                        </h3>
+
+                        <p class="text-muted">
+
+                            ही bike सध्या कोणत्याही customer कडे rented नाही.
+
+                        </p>
+
+                        <a
+                            href="{% url 'add_rental' %}"
+                            class="btn btn-success">
+
+                            <i class="fas fa-motorcycle"></i>
+
+                            Rent This Bike
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            {% endif %}
+
+
+        {% else %}
+
+            <!-- BIKE NOT FOUND -->
+
+            <div class="card border-0 shadow-sm">
+
+                <div class="card-body text-center py-5">
+
+                    <div class="danger-circle">
+
+                        <i class="fas fa-search"></i>
+
+                    </div>
+
+                    <h3 class="fw-bold text-danger mt-3">
+
+                        Bike Not Found
+
+                    </h3>
+
+                    <p class="text-muted">
+
+                        "{{ registration_number }}"
+                        या registration number ची bike सापडली नाही.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        {% endif %}
+
+    {% endif %}
+
 </div>
+
+
+<style>
+
+.info-box {
+
+    background: #f8f9fa;
+
+    border-radius: 12px;
+
+    padding: 18px;
+
+    border: 1px solid #e9ecef;
+
+    height: 100%;
+
+    transition: all 0.25s ease;
+
+}
+
+.info-box:hover {
+
+    transform: translateY(-3px);
+
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+
+}
+
+
+.tracking-box {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    background: #f8f9fa;
+
+    padding: 18px;
+
+    border-radius: 12px;
+
+    border: 1px solid #e9ecef;
+
+}
+
+
+.tracking-icon {
+
+    width: 50px;
+
+    height: 50px;
+
+    border-radius: 12px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: white;
+
+    font-size: 20px;
+
+}
+
+
+.money-box {
+
+    padding: 20px;
+
+    border-radius: 12px;
+
+    background: #f0fff4;
+
+    border: 1px solid #d4edda;
+
+}
+
+
+.money-box small {
+
+    color: #6c757d;
+
+}
+
+
+.money-box h4 {
+
+    font-weight: 700;
+
+    color: #198754;
+
+    margin-top: 5px;
+
+}
+
+
+.pending-money {
+
+    background: #fff8e1;
+
+    border-color: #ffe082;
+
+}
+
+
+.pending-money h4 {
+
+    color: #d39e00;
+
+}
+
+
+.success-circle,
+.danger-circle {
+
+    width: 80px;
+
+    height: 80px;
+
+    margin: auto;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 35px;
+
+    color: white;
+
+}
+
+
+.success-circle {
+
+    background: #198754;
+
+}
+
+
+.danger-circle {
+
+    background: #dc3545;
+
+}
+
+
+.card {
+
+    border-radius: 14px;
+
+}
+
+
+.btn {
+
+    border-radius: 8px;
+
+}
+
+</style>
 
 {% endblock %}
