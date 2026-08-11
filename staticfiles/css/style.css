@@ -1,0 +1,288 @@
+/* =====================================================
+   Bike Rental Management System
+   Premium UI Theme
+===================================================== */
+
+/* Google Font */
+body{
+    font-family: 'Poppins', sans-serif;
+    background:#f4f7fc;
+}
+
+
+/* Navbar */
+
+.main-header{
+
+    background:linear-gradient(90deg,#2563eb,#1d4ed8);
+
+    border:none;
+
+    box-shadow:0 3px 15px rgba(0,0,0,.12);
+
+}
+
+.main-header .navbar-brand{
+
+    color:white !important;
+
+    font-size:22px;
+
+    font-weight:700;
+
+}
+
+.main-header .nav-link{
+
+    color:white !important;
+
+}
+
+
+/* Sidebar */
+
+.main-sidebar{
+
+    background:linear-gradient(180deg,#0f172a,#1e3a8a);
+
+}
+
+.brand-link{
+
+    background:#1e40af;
+
+    color:white !important;
+
+    text-align:center;
+
+    font-size:20px;
+
+    font-weight:700;
+
+    letter-spacing:.5px;
+
+}
+
+
+/* Sidebar Menu */
+
+.nav-sidebar .nav-link{
+
+    color:#dbeafe;
+
+    border-radius:10px;
+
+    margin:6px 10px;
+
+    transition:.35s;
+
+}
+
+.nav-sidebar .nav-link i{
+
+    width:25px;
+
+}
+
+.nav-sidebar .nav-link:hover{
+
+    background:#3b82f6;
+
+    color:white;
+
+    transform:translateX(6px);
+
+}
+
+.nav-sidebar .nav-link.active{
+
+    background:white;
+
+    color:#2563eb;
+
+}
+
+
+/* Content */
+
+.content-wrapper{
+
+    background:#f5f7fb;
+
+}
+
+
+/* Card */
+
+.card{
+
+    border:none;
+
+    border-radius:18px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+    animation:fadeIn .5s;
+
+}
+
+.card-header{
+
+    border-radius:18px 18px 0 0 !important;
+
+    font-weight:600;
+
+}
+
+
+/* Buttons */
+
+.btn{
+
+    border-radius:10px;
+
+    transition:.3s;
+
+    font-weight:500;
+
+}
+
+.btn:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:0 10px 20px rgba(0,0,0,.15);
+
+}
+
+
+/* Form */
+
+.form-control,
+.form-select{
+
+    border-radius:10px;
+
+    height:45px;
+
+    border:1px solid #d1d5db;
+
+}
+
+.form-control:focus,
+.form-select:focus{
+
+    box-shadow:0 0 10px rgba(37,99,235,.3);
+
+    border-color:#2563eb;
+
+}
+
+
+/* Table */
+
+.table{
+
+    border-radius:15px;
+
+    overflow:hidden;
+
+}
+
+.table thead{
+
+    background:#2563eb;
+
+    color:white;
+
+}
+
+.table tbody tr:hover{
+
+    background:#eff6ff;
+
+}
+
+
+/* Badges */
+
+.badge{
+
+    padding:8px 14px;
+
+    border-radius:30px;
+
+}
+
+
+/* Footer */
+
+.main-footer{
+
+    background:white;
+
+    border-top:none;
+
+    text-align:center;
+
+    font-weight:600;
+
+}
+
+
+/* Scrollbar */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#e5e7eb;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#2563eb;
+
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#1d4ed8;
+
+}
+
+
+/* Animation */
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+
+.upcoming-card {
+    border-left: 5px solid #007bff !important;
+}
