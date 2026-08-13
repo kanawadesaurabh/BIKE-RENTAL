@@ -3,18 +3,240 @@ from django.utils import timezone
 from django.db.models import Sum
 from decimal import Decimal
 from datetime import timedelta
-
+from django.utils import timezone
 from bikes.models import Bike
 from customers.models import Customer
 from rentals.models import Rental
 from payments.models import Payment
 from expenses.models import Expense
 
+from django.http import HttpResponse
+from openpyxl import Workbook
+
 
 # =====================================================
 # DASHBOARD
 # =====================================================
 
+
+def excel_datetime(value):
+
+    if value is not None and timezone.is_aware(value):
+        return timezone.make_naive(value)
+
+    return value
+
+
+
+def export_excel(request):
+
+    wb = Workbook()
+
+    # ==================================================
+    # 1. BIKES SHEET
+    # ==================================================
+
+    ws = wb.active
+    ws.title = "Bikes"
+
+    ws.append([
+        "ID",
+        "Bike Name",
+        "Brand",
+        "Model",
+        "Registration Number",
+        "Color",
+        "Year",
+        "Daily Rent",
+        "Security Deposit",
+        "Status"
+    ])
+
+    for bike in Bike.objects.all():
+
+        ws.append([
+            bike.id,
+            bike.bike_name,
+            bike.brand,
+            bike.model,
+            bike.registration_number,
+            bike.color,
+            bike.year,
+            bike.daily_rent,
+            bike.security_deposit,
+            bike.status
+        ])
+
+    # ==================================================
+    # 2. CUSTOMERS SHEET
+    # ==================================================
+
+    ws = wb.create_sheet("Customers")
+
+    ws.append([
+        "ID",
+        "Customer Name",
+        "Mobile",
+        "Aadhaar Number",
+        "Driving License",
+        "Address"
+    ])
+
+    for customer in Customer.objects.all():
+
+        ws.append([
+            customer.id,
+            customer.customer_name,
+            customer.mobile,
+            customer.aadhaar_number,
+            customer.driving_license,
+            customer.address
+        ])
+
+    # ==================================================
+    # 3. RENTALS SHEET
+    # ==================================================
+
+    ws = wb.create_sheet("Rentals")
+
+    ws.append([
+        "ID",
+        "Customer",
+        "Mobile",
+        "Bike",
+        "Registration No",
+        "Rental Type",
+        "Rental Days",
+        "Rent Date",
+        "Expected Return",
+        "Actual Return",
+        "Daily Rent",
+        "Security Deposit",
+        "Advance Payment",
+        "Total Days",
+        "Total Amount",
+        "Late Fine",
+        "Damage Charge",
+        "Manual Extra Charge",
+        "Deposit Refund",
+        "Remaining Amount",
+        "Remarks",
+        "Status"
+    ])
+
+    rentals = Rental.objects.select_related(
+        "customer",
+        "bike"
+    ).all()
+
+    for rental in rentals:
+
+        ws.append([
+            rental.id,
+            rental.customer.customer_name,
+            rental.customer.mobile,
+            rental.bike.bike_name,
+            rental.bike.registration_number,
+            rental.rental_type,
+            rental.rental_days,
+excel_datetime(rental.rent_date),
+excel_datetime(rental.expected_return_date),
+excel_datetime(rental.actual_return_date),
+            rental.daily_rent,
+            rental.security_deposit,
+            rental.advance_payment,
+            rental.total_days,
+            rental.total_amount,
+            rental.late_fine,
+            rental.damage_charge,
+            rental.manual_extra_charge,
+            rental.deposit_refund,
+            rental.remaining_amount,
+            rental.remarks,
+            rental.status
+        ])
+
+    # ==================================================
+    # 4. PAYMENTS SHEET
+    # ==================================================
+
+    ws = wb.create_sheet("Payments")
+
+    ws.append([
+        "ID",
+        "Customer",
+        "Bike",
+        "Registration No",
+        "Payment Date",
+        "Amount",
+        "Payment Mode",
+        "Remarks"
+    ])
+
+    payments = Payment.objects.select_related(
+        "rental__customer",
+        "rental__bike"
+    ).all()
+
+    for payment in payments:
+
+        ws.append([
+            payment.id,
+            payment.rental.customer.customer_name,
+            payment.rental.bike.bike_name,
+            payment.rental.bike.registration_number,
+            payment.payment_date,
+            payment.amount,
+            payment.payment_mode,
+            payment.remarks
+        ])
+
+    # ==================================================
+    # AUTO COLUMN WIDTH
+    # ==================================================
+
+    for ws in wb.worksheets:
+
+        for column in ws.columns:
+
+            max_length = 0
+            column_letter = column[0].column_letter
+
+            for cell in column:
+
+                if cell.value is not None:
+
+                    cell_length = len(str(cell.value))
+
+                    if cell_length > max_length:
+                        max_length = cell_length
+
+            ws.column_dimensions[column_letter].width = min(
+                max_length + 2,
+                40
+            )
+
+        # Freeze first row
+        ws.freeze_panes = "A2"
+
+    # ==================================================
+    # DOWNLOAD EXCEL FILE
+    # ==================================================
+
+    response = HttpResponse(
+        content_type=(
+            "application/vnd.openxmlformats-officedocument."
+            "spreadsheetml.sheet"
+        )
+    )
+
+    response["Content-Disposition"] = (
+        'attachment; filename="BikeRental_Report.xlsx"'
+    )
+
+    wb.save(response)
+
+    return response
 def dashboard(request):
 
     # =========================

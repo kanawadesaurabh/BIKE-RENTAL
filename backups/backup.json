@@ -1,0 +1,1086 @@
+[
+{
+  "model": "admin.logentry",
+  "pk": 1,
+  "fields": {
+    "action_time": "2026-07-26T10:43:03.403Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "1",
+    "object_repr": "FZ (MH12SG2020)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 2,
+  "fields": {
+    "action_time": "2026-07-29T14:40:55.121Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "1",
+    "object_repr": "MT (MH12SG2020)",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 3,
+  "fields": {
+    "action_time": "2026-07-31T13:02:52.107Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "6",
+    "object_repr": "MH05AS0989 - R15",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 4,
+  "fields": {
+    "action_time": "2026-07-31T13:03:05.236Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "3",
+    "object_repr": "MH12 - activa",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 5,
+  "fields": {
+    "action_time": "2026-07-31T13:03:16.389Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "8",
+    "object_repr": "MH32AA1111 - CLASSIC 350",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 6,
+  "fields": {
+    "action_time": "2026-07-31T13:03:23.361Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "5",
+    "object_repr": "MH23 - HF",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 7,
+  "fields": {
+    "action_time": "2026-07-31T13:03:30.669Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "7",
+    "object_repr": "MH22AS7843 - GIXXER",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 8,
+  "fields": {
+    "action_time": "2026-07-31T13:03:36.858Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "9",
+    "object_repr": "MH14XX6161 - bullet",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 9,
+  "fields": {
+    "action_time": "2026-07-31T13:03:42.276Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "4",
+    "object_repr": "MH14 - DIO",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 10,
+  "fields": {
+    "action_time": "2026-07-31T13:03:49.024Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "1",
+    "object_repr": "MH12SG2020 - MT",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 11,
+  "fields": {
+    "action_time": "2026-07-31T13:04:00.647Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "1",
+    "object_repr": "Saurabh Kanawade",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 12,
+  "fields": {
+    "action_time": "2026-07-31T13:04:06.338Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "3",
+    "object_repr": "SANKET",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 13,
+  "fields": {
+    "action_time": "2026-07-31T13:04:12.435Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "4",
+    "object_repr": "omkar",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 14,
+  "fields": {
+    "action_time": "2026-07-31T13:04:18.766Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "2",
+    "object_repr": "amol",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 15,
+  "fields": {
+    "action_time": "2026-07-31T13:04:34.979Z",
+    "user": 1,
+    "content_type": 12,
+    "object_id": "2",
+    "object_repr": "Fuel - ₹500.00",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 1,
+  "fields": {
+    "name": "Can add log entry",
+    "content_type": 1,
+    "codename": "add_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 2,
+  "fields": {
+    "name": "Can change log entry",
+    "content_type": 1,
+    "codename": "change_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 3,
+  "fields": {
+    "name": "Can delete log entry",
+    "content_type": 1,
+    "codename": "delete_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 4,
+  "fields": {
+    "name": "Can view log entry",
+    "content_type": 1,
+    "codename": "view_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 5,
+  "fields": {
+    "name": "Can add permission",
+    "content_type": 3,
+    "codename": "add_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 6,
+  "fields": {
+    "name": "Can change permission",
+    "content_type": 3,
+    "codename": "change_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 7,
+  "fields": {
+    "name": "Can delete permission",
+    "content_type": 3,
+    "codename": "delete_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 8,
+  "fields": {
+    "name": "Can view permission",
+    "content_type": 3,
+    "codename": "view_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 9,
+  "fields": {
+    "name": "Can add group",
+    "content_type": 2,
+    "codename": "add_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 10,
+  "fields": {
+    "name": "Can change group",
+    "content_type": 2,
+    "codename": "change_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 11,
+  "fields": {
+    "name": "Can delete group",
+    "content_type": 2,
+    "codename": "delete_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 12,
+  "fields": {
+    "name": "Can view group",
+    "content_type": 2,
+    "codename": "view_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 13,
+  "fields": {
+    "name": "Can add user",
+    "content_type": 4,
+    "codename": "add_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 14,
+  "fields": {
+    "name": "Can change user",
+    "content_type": 4,
+    "codename": "change_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 15,
+  "fields": {
+    "name": "Can delete user",
+    "content_type": 4,
+    "codename": "delete_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 16,
+  "fields": {
+    "name": "Can view user",
+    "content_type": 4,
+    "codename": "view_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 17,
+  "fields": {
+    "name": "Can add content type",
+    "content_type": 5,
+    "codename": "add_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 18,
+  "fields": {
+    "name": "Can change content type",
+    "content_type": 5,
+    "codename": "change_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 19,
+  "fields": {
+    "name": "Can delete content type",
+    "content_type": 5,
+    "codename": "delete_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 20,
+  "fields": {
+    "name": "Can view content type",
+    "content_type": 5,
+    "codename": "view_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 21,
+  "fields": {
+    "name": "Can add session",
+    "content_type": 6,
+    "codename": "add_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 22,
+  "fields": {
+    "name": "Can change session",
+    "content_type": 6,
+    "codename": "change_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 23,
+  "fields": {
+    "name": "Can delete session",
+    "content_type": 6,
+    "codename": "delete_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 24,
+  "fields": {
+    "name": "Can view session",
+    "content_type": 6,
+    "codename": "view_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 25,
+  "fields": {
+    "name": "Can add bike",
+    "content_type": 7,
+    "codename": "add_bike"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 26,
+  "fields": {
+    "name": "Can change bike",
+    "content_type": 7,
+    "codename": "change_bike"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 27,
+  "fields": {
+    "name": "Can delete bike",
+    "content_type": 7,
+    "codename": "delete_bike"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 28,
+  "fields": {
+    "name": "Can view bike",
+    "content_type": 7,
+    "codename": "view_bike"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 29,
+  "fields": {
+    "name": "Can add customer",
+    "content_type": 8,
+    "codename": "add_customer"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 30,
+  "fields": {
+    "name": "Can change customer",
+    "content_type": 8,
+    "codename": "change_customer"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 31,
+  "fields": {
+    "name": "Can delete customer",
+    "content_type": 8,
+    "codename": "delete_customer"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 32,
+  "fields": {
+    "name": "Can view customer",
+    "content_type": 8,
+    "codename": "view_customer"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 33,
+  "fields": {
+    "name": "Can add rental",
+    "content_type": 9,
+    "codename": "add_rental"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 34,
+  "fields": {
+    "name": "Can change rental",
+    "content_type": 9,
+    "codename": "change_rental"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 35,
+  "fields": {
+    "name": "Can delete rental",
+    "content_type": 9,
+    "codename": "delete_rental"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 36,
+  "fields": {
+    "name": "Can view rental",
+    "content_type": 9,
+    "codename": "view_rental"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 37,
+  "fields": {
+    "name": "Can add payment",
+    "content_type": 10,
+    "codename": "add_payment"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 38,
+  "fields": {
+    "name": "Can change payment",
+    "content_type": 10,
+    "codename": "change_payment"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 39,
+  "fields": {
+    "name": "Can delete payment",
+    "content_type": 10,
+    "codename": "delete_payment"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 40,
+  "fields": {
+    "name": "Can view payment",
+    "content_type": 10,
+    "codename": "view_payment"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 41,
+  "fields": {
+    "name": "Can add expense",
+    "content_type": 11,
+    "codename": "add_expense"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 42,
+  "fields": {
+    "name": "Can change expense",
+    "content_type": 11,
+    "codename": "change_expense"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 43,
+  "fields": {
+    "name": "Can delete expense",
+    "content_type": 11,
+    "codename": "delete_expense"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 44,
+  "fields": {
+    "name": "Can view expense",
+    "content_type": 11,
+    "codename": "view_expense"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 45,
+  "fields": {
+    "name": "Can add expense",
+    "content_type": 12,
+    "codename": "add_expense"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 46,
+  "fields": {
+    "name": "Can change expense",
+    "content_type": 12,
+    "codename": "change_expense"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 47,
+  "fields": {
+    "name": "Can delete expense",
+    "content_type": 12,
+    "codename": "delete_expense"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 48,
+  "fields": {
+    "name": "Can view expense",
+    "content_type": 12,
+    "codename": "view_expense"
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$616B7pIJKZTrdPiPgew6WQ$UboGAe6qvGcNIhCIemW5z1AQcXfsVquelzCVOLF2h0I=",
+    "last_login": "2026-07-26T10:43:35.773Z",
+    "is_superuser": true,
+    "username": "saurabh",
+    "first_name": "",
+    "last_name": "",
+    "email": "saurabh@gmail.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-07-26T10:36:05.455Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 1,
+  "fields": {
+    "app_label": "admin",
+    "model": "logentry"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 2,
+  "fields": {
+    "app_label": "auth",
+    "model": "group"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 3,
+  "fields": {
+    "app_label": "auth",
+    "model": "permission"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 4,
+  "fields": {
+    "app_label": "auth",
+    "model": "user"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 5,
+  "fields": {
+    "app_label": "contenttypes",
+    "model": "contenttype"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 6,
+  "fields": {
+    "app_label": "sessions",
+    "model": "session"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 7,
+  "fields": {
+    "app_label": "bikes",
+    "model": "bike"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 8,
+  "fields": {
+    "app_label": "customers",
+    "model": "customer"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 9,
+  "fields": {
+    "app_label": "rentals",
+    "model": "rental"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 10,
+  "fields": {
+    "app_label": "payments",
+    "model": "payment"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 11,
+  "fields": {
+    "app_label": "reports",
+    "model": "expense"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 12,
+  "fields": {
+    "app_label": "expenses",
+    "model": "expense"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "3v2hb2fcwtkxs1wtd40ms2lmzvb94qae",
+  "fields": {
+    "session_data": ".eJxVjEsKwjAUAO_y1hKSNE2TLt17hvJ-MVVpoZ-VeHcpdKHbmWHeMOC-1WFfdRlGgR4cXH4ZIT91OoQ8cLrPhudpW0YyR2JOu5rbLPq6nu3foOJaoQfy1kZKnoogSYfEXLDhHNm1JWpKqbQeqWgOiFbYNciYOm00aMjOwucLJVU5cQ:1wnwKV:qjysOM_ei0LoASHkA7iO6DW0aq7snvzmlQESj1fv1Q8",
+    "expire_date": "2026-08-09T10:43:35.782Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "5e7wzg0t1i61gckevi7sg7ttnioiuuga",
+  "fields": {
+    "session_data": ".eJxVjEsKwjAUAO_y1hKSNE2TLt17hvJ-MVVpoZ-VeHcpdKHbmWHeMOC-1WFfdRlGgR4cXH4ZIT91OoQ8cLrPhudpW0YyR2JOu5rbLPq6nu3foOJaoQfy1kZKnoogSYfEXLDhHNm1JWpKqbQeqWgOiFbYNciYOm00aMjOwucLJVU5cQ:1wnwE9:-M8uQiDcdjAHjsNsmFcqfwfDkG14K-gwIbidjkidXQ4",
+    "expire_date": "2026-08-09T10:37:01.987Z"
+  }
+},
+{
+  "model": "bikes.bike",
+  "pk": 10,
+  "fields": {
+    "bike_name": "GIXXER",
+    "brand": "SUZUKI",
+    "model": "2024",
+    "registration_number": "MH34CL9191",
+    "color": "BLACK",
+    "year": 2024,
+    "daily_rent": "1300.00",
+    "security_deposit": "0.00",
+    "status": "Available"
+  }
+},
+{
+  "model": "bikes.bike",
+  "pk": 11,
+  "fields": {
+    "bike_name": "RONIN",
+    "brand": "TVS",
+    "model": "2024",
+    "registration_number": "MH17CZ2198",
+    "color": "BLACK",
+    "year": 2024,
+    "daily_rent": "1500.00",
+    "security_deposit": "0.00",
+    "status": "Rented"
+  }
+},
+{
+  "model": "bikes.bike",
+  "pk": 12,
+  "fields": {
+    "bike_name": "JUPITER",
+    "brand": "TVS",
+    "model": "2024",
+    "registration_number": "MH12VM9327",
+    "color": "BLACK",
+    "year": 2024,
+    "daily_rent": "500.00",
+    "security_deposit": "0.00",
+    "status": "Service"
+  }
+},
+{
+  "model": "bikes.bike",
+  "pk": 13,
+  "fields": {
+    "bike_name": "DEO",
+    "brand": "HONDA",
+    "model": "2023",
+    "registration_number": "MH14KP7421",
+    "color": "RED",
+    "year": 2023,
+    "daily_rent": "500.00",
+    "security_deposit": "0.00",
+    "status": "Rented"
+  }
+},
+{
+  "model": "bikes.bike",
+  "pk": 14,
+  "fields": {
+    "bike_name": "R15",
+    "brand": "YAMAHA",
+    "model": "2024",
+    "registration_number": "MH12XX6161",
+    "color": "BLACK",
+    "year": 2024,
+    "daily_rent": "1500.00",
+    "security_deposit": "0.00",
+    "status": "Rented"
+  }
+},
+{
+  "model": "customers.customer",
+  "pk": 5,
+  "fields": {
+    "customer_name": "Saurabh Kanawade",
+    "mobile": "9588431214",
+    "aadhaar_number": "911943618969",
+    "driving_license": "yes",
+    "address": "PUNE"
+  }
+},
+{
+  "model": "customers.customer",
+  "pk": 6,
+  "fields": {
+    "customer_name": "SANKET",
+    "mobile": "9420618121",
+    "aadhaar_number": "123456789",
+    "driving_license": "YES",
+    "address": "TEMP"
+  }
+},
+{
+  "model": "customers.customer",
+  "pk": 7,
+  "fields": {
+    "customer_name": "Arvind",
+    "mobile": "9111091212",
+    "aadhaar_number": "212121121212112",
+    "driving_license": "yes",
+    "address": "nanded"
+  }
+},
+{
+  "model": "customers.customer",
+  "pk": 8,
+  "fields": {
+    "customer_name": "mayur",
+    "mobile": "7432097423",
+    "aadhaar_number": "93929485",
+    "driving_license": "yes",
+    "address": "pune"
+  }
+},
+{
+  "model": "rentals.rental",
+  "pk": 9,
+  "fields": {
+    "customer": 5,
+    "bike": 10,
+    "rental_type": "Daily",
+    "rental_days": 1,
+    "rent_date": "2026-07-31T00:00:00Z",
+    "expected_return_date": "2026-08-04T00:00:00Z",
+    "actual_return_date": "2026-08-01T13:47:54.579Z",
+    "daily_rent": "1300.00",
+    "security_deposit": "0.00",
+    "advance_payment": "500.00",
+    "total_days": 2,
+    "total_amount": "2600.00",
+    "late_fine": "0.00",
+    "damage_charge": "0.00",
+    "manual_extra_charge": "0.00",
+    "deposit_refund": "0.00",
+    "remaining_amount": "0.00",
+    "remarks": "",
+    "status": "Completed"
+  }
+},
+{
+  "model": "rentals.rental",
+  "pk": 10,
+  "fields": {
+    "customer": 6,
+    "bike": 13,
+    "rental_type": "Daily",
+    "rental_days": 1,
+    "rent_date": "2026-07-31T22:00:00Z",
+    "expected_return_date": "2026-08-01T22:00:00Z",
+    "actual_return_date": "2026-08-01T14:11:23.019Z",
+    "daily_rent": "500.00",
+    "security_deposit": "0.00",
+    "advance_payment": "500.00",
+    "total_days": 1,
+    "total_amount": "500.00",
+    "late_fine": "100.00",
+    "damage_charge": "0.00",
+    "manual_extra_charge": "0.00",
+    "deposit_refund": "0.00",
+    "remaining_amount": "0.02",
+    "remarks": "",
+    "status": "Completed"
+  }
+},
+{
+  "model": "rentals.rental",
+  "pk": 11,
+  "fields": {
+    "customer": 6,
+    "bike": 10,
+    "rental_type": "Daily",
+    "rental_days": 1,
+    "rent_date": "2026-08-01T19:57:00Z",
+    "expected_return_date": "2026-08-02T19:57:00Z",
+    "actual_return_date": "2026-08-01T14:28:51.845Z",
+    "daily_rent": "1300.00",
+    "security_deposit": "0.00",
+    "advance_payment": "500.00",
+    "total_days": 1,
+    "total_amount": "1300.00",
+    "late_fine": "0.00",
+    "damage_charge": "0.00",
+    "manual_extra_charge": "0.00",
+    "deposit_refund": "0.00",
+    "remaining_amount": "0.02",
+    "remarks": "",
+    "status": "Completed"
+  }
+},
+{
+  "model": "rentals.rental",
+  "pk": 12,
+  "fields": {
+    "customer": 6,
+    "bike": 11,
+    "rental_type": "Daily",
+    "rental_days": 1,
+    "rent_date": "2026-08-03T20:56:00Z",
+    "expected_return_date": "2026-08-04T20:56:00Z",
+    "actual_return_date": null,
+    "daily_rent": "1000.00",
+    "security_deposit": "0.00",
+    "advance_payment": "0.00",
+    "total_days": 1,
+    "total_amount": "1000.00",
+    "late_fine": "0.00",
+    "damage_charge": "0.00",
+    "manual_extra_charge": "0.00",
+    "deposit_refund": "0.00",
+    "remaining_amount": "1000.00",
+    "remarks": null,
+    "status": "Active"
+  }
+},
+{
+  "model": "rentals.rental",
+  "pk": 13,
+  "fields": {
+    "customer": 5,
+    "bike": 13,
+    "rental_type": "Daily",
+    "rental_days": 1,
+    "rent_date": "2026-08-03T21:30:00Z",
+    "expected_return_date": "2026-08-04T21:30:00Z",
+    "actual_return_date": null,
+    "daily_rent": "1200.00",
+    "security_deposit": "0.00",
+    "advance_payment": "0.00",
+    "total_days": 1,
+    "total_amount": "1200.00",
+    "late_fine": "0.00",
+    "damage_charge": "0.00",
+    "manual_extra_charge": "0.00",
+    "deposit_refund": "0.00",
+    "remaining_amount": "1200.00",
+    "remarks": null,
+    "status": "Active"
+  }
+},
+{
+  "model": "rentals.rental",
+  "pk": 14,
+  "fields": {
+    "customer": 5,
+    "bike": 10,
+    "rental_type": "Monthly",
+    "rental_days": 25,
+    "rent_date": "2026-08-03T21:32:00Z",
+    "expected_return_date": "2026-08-28T21:32:00Z",
+    "actual_return_date": "2026-08-03T16:08:25.692Z",
+    "daily_rent": "4500.00",
+    "security_deposit": "0.00",
+    "advance_payment": "0.00",
+    "total_days": 1,
+    "total_amount": "4500.00",
+    "late_fine": "0.00",
+    "damage_charge": "0.00",
+    "manual_extra_charge": "0.00",
+    "deposit_refund": "0.00",
+    "remaining_amount": "4500.00",
+    "remarks": "",
+    "status": "Completed"
+  }
+},
+{
+  "model": "rentals.rental",
+  "pk": 15,
+  "fields": {
+    "customer": 7,
+    "bike": 14,
+    "rental_type": "Daily",
+    "rental_days": 2,
+    "rent_date": "2026-08-05T13:20:00Z",
+    "expected_return_date": "2026-08-07T13:20:00Z",
+    "actual_return_date": null,
+    "daily_rent": "1500.00",
+    "security_deposit": "0.00",
+    "advance_payment": "0.00",
+    "total_days": 2,
+    "total_amount": "3000.00",
+    "late_fine": "0.00",
+    "damage_charge": "0.00",
+    "manual_extra_charge": "0.00",
+    "deposit_refund": "0.00",
+    "remaining_amount": "3000.00",
+    "remarks": null,
+    "status": "Active"
+  }
+},
+{
+  "model": "payments.payment",
+  "pk": 4,
+  "fields": {
+    "rental": 9,
+    "payment_date": "2026-08-01",
+    "amount": "2100.00",
+    "payment_mode": "Cash",
+    "remarks": ""
+  }
+},
+{
+  "model": "payments.payment",
+  "pk": 5,
+  "fields": {
+    "rental": 10,
+    "payment_date": "2026-08-01",
+    "amount": "99.98",
+    "payment_mode": "Cash",
+    "remarks": ""
+  }
+},
+{
+  "model": "payments.payment",
+  "pk": 6,
+  "fields": {
+    "rental": 11,
+    "payment_date": "2026-08-01",
+    "amount": "799.98",
+    "payment_mode": "Cash",
+    "remarks": ""
+  }
+}
+]

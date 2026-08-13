@@ -2,30 +2,30 @@
 
 {% block content %}
 
-<div class="container-fluid dashboard-page">
+<div class="dashboard-container">
 
     <!-- ================================================= -->
-    <!-- HEADER -->
+    <!-- DASHBOARD HEADER -->
     <!-- ================================================= -->
 
-    <div class="dashboard-header d-flex justify-content-between align-items-center mb-4">
+    <div class="dashboard-header">
 
-        <div>
-            <h2 class="fw-bold mb-1">
+        <div class="dashboard-title">
+
+            <h2>
                 <i class="fas fa-tachometer-alt text-primary"></i>
                 Dashboard
             </h2>
 
-            <p class="text-muted mb-0">
+            <p>
                 Bike Rental Management Overview
             </p>
+
         </div>
 
-        <div class="text-end dashboard-date">
+        <div class="dashboard-date">
 
-            <div class="text-muted small">
-                Today
-            </div>
+            <span>Today</span>
 
             <strong>
                 {{ today|date:"d M Y" }}
@@ -40,35 +40,30 @@
     <!-- SUMMARY CARDS -->
     <!-- ================================================= -->
 
-    <div class="row g-3 mb-4">
+    <div class="summary-grid">
+
 
         <!-- TOTAL BIKES -->
 
-        <div class="col-xl-3 col-md-6 col-6">
+        <div class="dashboard-card">
 
-            <div class="dashboard-card border-0 shadow-sm">
+            <div class="card-content">
 
-                <div class="card-body">
+                <div>
 
-                    <div class="dashboard-card-content">
+                    <p class="card-label">
+                        Total Bikes
+                    </p>
 
-                        <div>
+                    <h3>
+                        {{ total_bikes }}
+                    </h3>
 
-                            <p class="card-label">
-                                Total Bikes
-                            </p>
+                </div>
 
-                            <h3>
-                                {{ total_bikes }}
-                            </h3>
+                <div class="dashboard-icon bg-primary">
 
-                        </div>
-
-                        <div class="dashboard-icon bg-primary">
-                            <i class="fas fa-motorcycle"></i>
-                        </div>
-
-                    </div>
+                    <i class="fas fa-motorcycle"></i>
 
                 </div>
 
@@ -79,31 +74,25 @@
 
         <!-- AVAILABLE -->
 
-        <div class="col-xl-3 col-md-6 col-6">
+        <div class="dashboard-card">
 
-            <div class="dashboard-card border-0 shadow-sm">
+            <div class="card-content">
 
-                <div class="card-body">
+                <div>
 
-                    <div class="dashboard-card-content">
+                    <p class="card-label">
+                        Available
+                    </p>
 
-                        <div>
+                    <h3 class="text-success">
+                        {{ available_bikes }}
+                    </h3>
 
-                            <p class="card-label">
-                                Available
-                            </p>
+                </div>
 
-                            <h3 class="text-success">
-                                {{ available_bikes }}
-                            </h3>
+                <div class="dashboard-icon bg-success">
 
-                        </div>
-
-                        <div class="dashboard-icon bg-success">
-                            <i class="fas fa-check-circle"></i>
-                        </div>
-
-                    </div>
+                    <i class="fas fa-check-circle"></i>
 
                 </div>
 
@@ -114,31 +103,25 @@
 
         <!-- RENTED -->
 
-        <div class="col-xl-3 col-md-6 col-6">
+        <div class="dashboard-card">
 
-            <div class="dashboard-card border-0 shadow-sm">
+            <div class="card-content">
 
-                <div class="card-body">
+                <div>
 
-                    <div class="dashboard-card-content">
+                    <p class="card-label">
+                        Rented
+                    </p>
 
-                        <div>
+                    <h3 class="text-danger">
+                        {{ rented_bikes }}
+                    </h3>
 
-                            <p class="card-label">
-                                Rented
-                            </p>
+                </div>
 
-                            <h3 class="text-danger">
-                                {{ rented_bikes }}
-                            </h3>
+                <div class="dashboard-icon bg-danger">
 
-                        </div>
-
-                        <div class="dashboard-icon bg-danger">
-                            <i class="fas fa-key"></i>
-                        </div>
-
-                    </div>
+                    <i class="fas fa-key"></i>
 
                 </div>
 
@@ -149,31 +132,25 @@
 
         <!-- CUSTOMERS -->
 
-        <div class="col-xl-3 col-md-6 col-6">
+        <div class="dashboard-card">
 
-            <div class="dashboard-card border-0 shadow-sm">
+            <div class="card-content">
 
-                <div class="card-body">
+                <div>
 
-                    <div class="dashboard-card-content">
+                    <p class="card-label">
+                        Customers
+                    </p>
 
-                        <div>
+                    <h3 class="text-info">
+                        {{ total_customers }}
+                    </h3>
 
-                            <p class="card-label">
-                                Customers
-                            </p>
+                </div>
 
-                            <h3 class="text-info">
-                                {{ total_customers }}
-                            </h3>
+                <div class="dashboard-icon bg-info">
 
-                        </div>
-
-                        <div class="dashboard-icon bg-info">
-                            <i class="fas fa-users"></i>
-                        </div>
-
-                    </div>
+                    <i class="fas fa-users"></i>
 
                 </div>
 
@@ -184,31 +161,25 @@
 
         <!-- ACTIVE RENTALS -->
 
-        <div class="col-xl-3 col-md-6 col-6">
+        <div class="dashboard-card">
 
-            <div class="dashboard-card border-0 shadow-sm">
+            <div class="card-content">
 
-                <div class="card-body">
+                <div>
 
-                    <div class="dashboard-card-content">
+                    <p class="card-label">
+                        Active Rentals
+                    </p>
 
-                        <div>
+                    <h3>
+                        {{ active_rentals }}
+                    </h3>
 
-                            <p class="card-label">
-                                Active Rentals
-                            </p>
+                </div>
 
-                            <h3>
-                                {{ active_rentals }}
-                            </h3>
+                <div class="dashboard-icon bg-secondary">
 
-                        </div>
-
-                        <div class="dashboard-icon bg-secondary">
-                            <i class="fas fa-file-contract"></i>
-                        </div>
-
-                    </div>
+                    <i class="fas fa-file-contract"></i>
 
                 </div>
 
@@ -219,31 +190,25 @@
 
         <!-- TODAY INCOME -->
 
-        <div class="col-xl-3 col-md-6 col-6">
+        <div class="dashboard-card">
 
-            <div class="dashboard-card border-0 shadow-sm">
+            <div class="card-content">
 
-                <div class="card-body">
+                <div>
 
-                    <div class="dashboard-card-content">
+                    <p class="card-label">
+                        Today's Income
+                    </p>
 
-                        <div>
+                    <h3 class="text-success">
+                        ₹ {{ today_income }}
+                    </h3>
 
-                            <p class="card-label">
-                                Today's Income
-                            </p>
+                </div>
 
-                            <h3 class="text-success">
-                                ₹ {{ today_income }}
-                            </h3>
+                <div class="dashboard-icon bg-success">
 
-                        </div>
-
-                        <div class="dashboard-icon bg-success">
-                            <i class="fas fa-rupee-sign"></i>
-                        </div>
-
-                    </div>
+                    <i class="fas fa-rupee-sign"></i>
 
                 </div>
 
@@ -252,33 +217,27 @@
         </div>
 
 
-        <!-- PROFIT -->
+        <!-- TOTAL PROFIT -->
 
-        <div class="col-xl-3 col-md-6 col-6">
+        <div class="dashboard-card">
 
-            <div class="dashboard-card border-0 shadow-sm">
+            <div class="card-content">
 
-                <div class="card-body">
+                <div>
 
-                    <div class="dashboard-card-content">
+                    <p class="card-label">
+                        Total Profit
+                    </p>
 
-                        <div>
+                    <h3 class="text-primary">
+                        ₹ {{ total_profit }}
+                    </h3>
 
-                            <p class="card-label">
-                                Total Profit
-                            </p>
+                </div>
 
-                            <h3 class="text-primary">
-                                ₹ {{ total_profit }}
-                            </h3>
+                <div class="dashboard-icon bg-primary">
 
-                        </div>
-
-                        <div class="dashboard-icon bg-primary">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-
-                    </div>
+                    <i class="fas fa-chart-line"></i>
 
                 </div>
 
@@ -287,33 +246,27 @@
         </div>
 
 
-        <!-- EXPENSE -->
+        <!-- TOTAL EXPENSE -->
 
-        <div class="col-xl-3 col-md-6 col-6">
+        <div class="dashboard-card">
 
-            <div class="dashboard-card border-0 shadow-sm">
+            <div class="card-content">
 
-                <div class="card-body">
+                <div>
 
-                    <div class="dashboard-card-content">
+                    <p class="card-label">
+                        Total Expense
+                    </p>
 
-                        <div>
+                    <h3 class="text-danger">
+                        ₹ {{ total_expense }}
+                    </h3>
 
-                            <p class="card-label">
-                                Total Expense
-                            </p>
+                </div>
 
-                            <h3 class="text-danger">
-                                ₹ {{ total_expense }}
-                            </h3>
+                <div class="dashboard-icon bg-danger">
 
-                        </div>
-
-                        <div class="dashboard-icon bg-danger">
-                            <i class="fas fa-wallet"></i>
-                        </div>
-
-                    </div>
+                    <i class="fas fa-wallet"></i>
 
                 </div>
 
@@ -328,62 +281,77 @@
     <!-- QUICK ACTIONS -->
     <!-- ================================================= -->
 
-    <div class="card border-0 shadow-sm mb-4 quick-actions-card">
+    <div class="dashboard-section quick-actions-card">
 
-        <div class="card-body">
+        <div class="section-title">
 
-            <h6 class="fw-bold mb-3">
+            <h5>
+
                 <i class="fas fa-bolt text-warning"></i>
+
                 Quick Actions
-            </h6>
 
-            <div class="quick-actions">
+            </h5>
 
-                <a href="{% url 'add_rental' %}"
-                   class="quick-btn btn-primary">
-
-                    <i class="fas fa-motorcycle"></i>
-                    <span>New Rental</span>
-
-                </a>
+        </div>
 
 
-                <a href="{% url 'add_customer' %}"
-                   class="quick-btn btn-success">
-
-                    <i class="fas fa-user-plus"></i>
-                    <span>Add Customer</span>
-
-                </a>
+        <div class="quick-actions">
 
 
-                <a href="{% url 'add_bike' %}"
-                   class="quick-btn btn-info">
+            <a href="{% url 'add_rental' %}"
+               class="quick-btn btn-primary">
 
-                    <i class="fas fa-plus"></i>
-                    <span>Add Bike</span>
+                <i class="fas fa-motorcycle"></i>
 
-                </a>
+                <span>New Rental</span>
 
-
-                <a href="{% url 'payment_list' %}"
-                   class="quick-btn btn-warning">
-
-                    <i class="fas fa-money-bill-wave"></i>
-                    <span>Payments</span>
-
-                </a>
+            </a>
 
 
-                <a href="{% url 'expense_list' %}"
-                   class="quick-btn btn-secondary">
+            <a href="{% url 'add_customer' %}"
+               class="quick-btn btn-success">
 
-                    <i class="fas fa-wallet"></i>
-                    <span>Expenses</span>
+                <i class="fas fa-user-plus"></i>
 
-                </a>
+                <span>Add Customer</span>
 
-            </div>
+            </a>
+
+
+            <a href="{% url 'add_bike' %}"
+               class="quick-btn btn-info">
+
+                <i class="fas fa-plus"></i>
+
+                <span>Add Bike</span>
+
+            </a>
+
+
+            <a href="{% url 'payment_list' %}"
+               class="quick-btn btn-warning">
+
+                <i class="fas fa-money-bill-wave"></i>
+
+                <span>Payments</span>
+
+            </a>
+
+
+            <a href="{% url 'expense_list' %}"
+               class="quick-btn btn-secondary">
+
+                <i class="fas fa-wallet"></i>
+
+                <span>Expenses</span>
+
+            </a>
+
+            <a href="{% url 'export_excel' %}" class="btn btn-success">
+            <i class="fas fa-file-excel"></i>
+            Export Excel
+            </a>
 
         </div>
 
@@ -391,33 +359,34 @@
 
 
     <!-- ================================================= -->
-    <!-- CHART + PAYMENTS -->
+    <!-- BUSINESS SUMMARY + RECENT PAYMENTS -->
     <!-- ================================================= -->
 
-    <div class="row g-3 mb-4">
+    <div class="content-grid">
+
 
         <!-- BUSINESS SUMMARY -->
 
-        <div class="col-lg-8">
+        <div class="dashboard-section chart-card">
 
-            <div class="card border-0 shadow-sm h-100">
+            <div class="section-header chart-header">
 
-                <div class="card-header chart-header">
+                <h5>
 
-                    <h5 class="mb-0">
-                        <i class="fas fa-chart-bar"></i>
-                        Business Summary
-                    </h5>
+                    <i class="fas fa-chart-bar"></i>
 
-                </div>
+                    Business Summary
 
-                <div class="card-body">
+                </h5>
 
-                    <div class="chart-container">
+            </div>
 
-                        <canvas id="incomeChart"></canvas>
 
-                    </div>
+            <div class="section-body">
+
+                <div class="chart-container">
+
+                    <canvas id="incomeChart"></canvas>
 
                 </div>
 
@@ -428,70 +397,80 @@
 
         <!-- RECENT PAYMENTS -->
 
-        <div class="col-lg-4">
+        <div class="dashboard-section">
 
-            <div class="card border-0 shadow-sm h-100">
+            <div class="section-header payment-header">
 
-                <div class="card-header payment-header">
+                <h5>
 
-                    <h5 class="mb-0">
-                        <i class="fas fa-money-bill-wave"></i>
-                        Recent Payments
-                    </h5>
+                    <i class="fas fa-money-bill-wave"></i>
 
-                </div>
+                    Recent Payments
 
-                <div class="card-body p-0">
+                </h5>
 
-                    <div class="table-responsive">
+            </div>
 
-                        <table class="table table-hover mb-0">
 
-                            <thead>
+            <div class="section-body table-body">
 
-                                <tr>
-                                    <th>Customer</th>
-                                    <th>Amount</th>
-                                </tr>
+                <div class="table-responsive">
 
-                            </thead>
+                    <table class="table table-hover">
 
-                            <tbody>
+                        <thead>
 
-                                {% for payment in recent_payments %}
+                            <tr>
 
-                                <tr>
+                                <th>
+                                    Customer
+                                </th>
 
-                                    <td>
-                                        {{ payment.rental.customer.customer_name }}
-                                    </td>
+                                <th>
+                                    Amount
+                                </th>
 
-                                    <td class="text-success fw-bold">
-                                        ₹ {{ payment.amount }}
-                                    </td>
+                            </tr>
 
-                                </tr>
+                        </thead>
 
-                                {% empty %}
 
-                                <tr>
+                        <tbody>
 
-                                    <td colspan="2"
-                                        class="text-center text-muted py-4">
+                            {% for payment in recent_payments %}
 
-                                        No payments found
+                            <tr>
 
-                                    </td>
+                                <td>
+                                    {{ payment.rental.customer.customer_name }}
+                                </td>
 
-                                </tr>
+                                <td class="text-success fw-bold">
 
-                                {% endfor %}
+                                    ₹ {{ payment.amount }}
 
-                            </tbody>
+                                </td>
 
-                        </table>
+                            </tr>
 
-                    </div>
+                            {% empty %}
+
+                            <tr>
+
+                                <td colspan="2"
+                                    class="text-center text-muted py-4">
+
+                                    No payments found
+
+                                </td>
+
+                            </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
 
                 </div>
 
@@ -506,95 +485,105 @@
     <!-- RECENT ACTIVITY -->
     <!-- ================================================= -->
 
-    <div class="row g-3 mb-4">
+    <div class="activity-grid">
+
 
         <!-- RECENT RENTALS -->
 
-        <div class="col-lg-6">
+        <div class="dashboard-section">
 
-            <div class="card border-0 shadow-sm">
+            <div class="section-header rental-header">
 
-                <div class="card-header recent-rental-header">
+                <h5>
 
-                    <h5 class="mb-0">
-                        <i class="fas fa-history"></i>
-                        Recent Rentals
-                    </h5>
+                    <i class="fas fa-history"></i>
 
-                </div>
+                    Recent Rentals
 
-                <div class="card-body p-0">
+                </h5>
 
-                    <div class="table-responsive">
+            </div>
 
-                        <table class="table table-hover mb-0">
 
-                            <thead>
+            <div class="section-body table-body">
 
-                                <tr>
+                <div class="table-responsive">
 
-                                    <th>Customer</th>
-                                    <th>Bike</th>
-                                    <th>Status</th>
+                    <table class="table table-hover">
 
-                                </tr>
+                        <thead>
 
-                            </thead>
+                            <tr>
 
-                            <tbody>
+                                <th>
+                                    Customer
+                                </th>
 
-                                {% for rental in recent_rentals %}
+                                <th>
+                                    Bike
+                                </th>
 
-                                <tr>
+                                <th>
+                                    Status
+                                </th>
 
-                                    <td>
-                                        {{ rental.customer.customer_name }}
-                                    </td>
+                            </tr>
 
-                                    <td>
-                                        {{ rental.bike.bike_name }}
-                                    </td>
+                        </thead>
 
-                                    <td>
 
-                                        {% if rental.status == "Active" %}
+                        <tbody>
 
-                                        <span class="badge bg-success">
-                                            Active
-                                        </span>
+                            {% for rental in recent_rentals %}
 
-                                        {% else %}
+                            <tr>
 
-                                        <span class="badge bg-secondary">
-                                            {{ rental.status }}
-                                        </span>
+                                <td>
+                                    {{ rental.customer.customer_name }}
+                                </td>
 
-                                        {% endif %}
+                                <td>
+                                    {{ rental.bike.bike_name }}
+                                </td>
 
-                                    </td>
+                                <td>
 
-                                </tr>
+                                    {% if rental.status == "Active" %}
 
-                                {% empty %}
+                                    <span class="badge bg-success">
+                                        Active
+                                    </span>
 
-                                <tr>
+                                    {% else %}
 
-                                    <td colspan="3"
-                                        class="text-center text-muted py-4">
+                                    <span class="badge bg-secondary">
+                                        {{ rental.status }}
+                                    </span>
 
-                                        No rentals found
+                                    {% endif %}
 
-                                    </td>
+                                </td>
 
-                                </tr>
+                            </tr>
 
-                                {% endfor %}
+                            {% empty %}
 
-                            </tbody>
+                            <tr>
 
-                        </table>
+                                <td colspan="3"
+                                    class="text-center text-muted py-4">
 
-                    </div>
+                                    No rentals found
+
+                                </td>
+
+                            </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
 
                 </div>
 
@@ -605,74 +594,80 @@
 
         <!-- RECENT EXPENSES -->
 
-        <div class="col-lg-6">
+        <div class="dashboard-section">
 
-            <div class="card border-0 shadow-sm">
+            <div class="section-header expense-header">
 
-                <div class="card-header expense-header">
+                <h5>
 
-                    <h5 class="mb-0">
+                    <i class="fas fa-wallet"></i>
 
-                        <i class="fas fa-wallet"></i>
-                        Recent Expenses
+                    Recent Expenses
 
-                    </h5>
+                </h5>
 
-                </div>
+            </div>
 
-                <div class="card-body p-0">
 
-                    <div class="table-responsive">
+            <div class="section-body table-body">
 
-                        <table class="table table-hover mb-0">
+                <div class="table-responsive">
 
-                            <thead>
+                    <table class="table table-hover">
 
-                                <tr>
+                        <thead>
 
-                                    <th>Category</th>
-                                    <th>Amount</th>
+                            <tr>
 
-                                </tr>
+                                <th>
+                                    Category
+                                </th>
 
-                            </thead>
+                                <th>
+                                    Amount
+                                </th>
 
-                            <tbody>
+                            </tr>
 
-                                {% for expense in recent_expenses %}
+                        </thead>
 
-                                <tr>
 
-                                    <td>
-                                        {{ expense.category }}
-                                    </td>
+                        <tbody>
 
-                                    <td class="text-danger fw-bold">
-                                        ₹ {{ expense.amount }}
-                                    </td>
+                            {% for expense in recent_expenses %}
 
-                                </tr>
+                            <tr>
 
-                                {% empty %}
+                                <td>
+                                    {{ expense.category }}
+                                </td>
 
-                                <tr>
+                                <td class="text-danger fw-bold">
 
-                                    <td colspan="2"
-                                        class="text-center text-muted py-4">
+                                    ₹ {{ expense.amount }}
 
-                                        No expenses found
+                                </td>
 
-                                    </td>
+                            </tr>
 
-                                </tr>
+                            {% empty %}
 
-                                {% endfor %}
+                            <tr>
 
-                            </tbody>
+                                <td colspan="2"
+                                    class="text-center text-muted py-4">
 
-                        </table>
+                                    No expenses found
 
-                    </div>
+                                </td>
+
+                            </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
 
                 </div>
 
@@ -686,31 +681,25 @@
     <!-- ================================================= -->
     <!-- SMART ALERTS -->
     <!-- ================================================= -->
-    <!--
-        IMPORTANT:
-        This section is placed LAST.
-
-        Desktop:
-        Alerts will appear after the main dashboard content.
-
-        Mobile:
-        Alerts will also remain at the bottom.
-    -->
 
     <div class="alerts-section">
 
-        <div class="alerts-title mb-3">
+
+        <!-- ALERT HEADER -->
+
+        <div class="alerts-title">
 
             <div>
 
-                <h4 class="fw-bold mb-1">
+                <h4>
 
                     <i class="fas fa-bell text-warning"></i>
+
                     Smart Alerts
 
                 </h4>
 
-                <p class="text-muted mb-0">
+                <p>
                     Important rental and payment notifications
                 </p>
 
@@ -719,106 +708,112 @@
         </div>
 
 
-        <div class="row g-3">
+        <!-- ALERT CARDS -->
+
+        <div class="alerts-grid">
 
 
             <!-- ================================================= -->
             <!-- OVERDUE -->
             <!-- ================================================= -->
 
-            <div class="col-xl-3 col-md-6">
+            <div class="alert-card overdue-card">
 
-                <div class="card border-0 shadow-sm h-100 alert-card overdue-card">
-
-                    <div class="card-body">
-
-                        <div class="d-flex justify-content-between align-items-start">
-
-                            <div>
-
-                                <span class="badge bg-danger mb-2">
-
-                                    <i class="fas fa-exclamation-triangle"></i>
-                                    OVERDUE
-
-                                </span>
-
-                                <h3 class="fw-bold mb-1">
-
-                                    {{ overdue_rentals|length }}
-
-                                </h3>
-
-                                <p class="text-muted mb-0">
-
-                                    Bikes overdue
-
-                                </p>
-
-                            </div>
+                <div class="alert-card-body">
 
 
-                            <div class="alert-icon bg-danger">
+                    <div class="alert-top">
 
-                                <i class="fas fa-clock"></i>
+                        <div>
 
-                            </div>
+                            <span class="badge bg-danger">
+
+                                <i class="fas fa-exclamation-triangle"></i>
+
+                                OVERDUE
+
+                            </span>
+
+
+                            <h3>
+
+                                {{ overdue_rentals|length }}
+
+                            </h3>
+
+
+                            <p>
+                                Bikes overdue
+                            </p>
 
                         </div>
 
 
-                        {% if overdue_rentals %}
+                        <div class="alert-icon bg-danger">
 
-                        <hr>
-
-                        {% for rental in overdue_rentals|slice:":3" %}
-
-                        <div class="alert-item mb-3">
-
-                            <div class="d-flex justify-content-between">
-
-                                <strong>
-                                    {{ rental.bike.registration_number }}
-                                </strong>
-
-                                <span class="badge bg-danger">
-                                    Overdue
-                                </span>
-
-                            </div>
-
-                            <small class="text-muted">
-
-                                {{ rental.customer.customer_name }}
-
-                            </small>
-
-                            <br>
-
-                            <small class="text-danger">
-
-                                IN:
-                                {{ rental.expected_return_date|date:"d-m-Y h:i A" }}
-
-                            </small>
+                            <i class="fas fa-clock"></i>
 
                         </div>
-
-                        {% endfor %}
-
-                        {% else %}
-
-                        <div class="mt-3 text-success">
-
-                            <i class="fas fa-check-circle"></i>
-
-                            No overdue bikes
-
-                        </div>
-
-                        {% endif %}
 
                     </div>
+
+
+                    {% if overdue_rentals %}
+
+                    <hr>
+
+
+                    {% for rental in overdue_rentals|slice:":3" %}
+
+                    <div class="alert-item">
+
+
+                        <div class="alert-item-top">
+
+                            <strong>
+                                {{ rental.bike.registration_number }}
+                            </strong>
+
+                            <span class="badge bg-danger">
+                                Overdue
+                            </span>
+
+                        </div>
+
+
+                        <small class="text-muted">
+
+                            {{ rental.customer.customer_name }}
+
+                        </small>
+
+
+                        <br>
+
+
+                        <small class="text-danger">
+
+                            IN:
+                            {{ rental.expected_return_date|date:"d-m-Y h:i A" }}
+
+                        </small>
+
+                    </div>
+
+                    {% endfor %}
+
+
+                    {% else %}
+
+                    <div class="empty-alert text-success">
+
+                        <i class="fas fa-check-circle"></i>
+
+                        No overdue bikes
+
+                    </div>
+
+                    {% endif %}
 
                 </div>
 
@@ -829,108 +824,114 @@
             <!-- TODAY RETURN -->
             <!-- ================================================= -->
 
-            <div class="col-xl-3 col-md-6">
+            <div class="alert-card today-card">
 
-                <div class="card border-0 shadow-sm h-100 alert-card today-card">
-
-                    <div class="card-body">
-
-                        <div class="d-flex justify-content-between align-items-start">
-
-                            <div>
-
-                                <span class="badge bg-info mb-2">
-
-                                    <i class="fas fa-calendar-day"></i>
-                                    TODAY'S RETURN
-
-                                </span>
-
-                                <h3 class="fw-bold mb-1">
-
-                                    {{ return_today|length }}
-
-                                </h3>
-
-                                <p class="text-muted mb-0">
-
-                                    Bikes due today
-
-                                </p>
-
-                            </div>
+                <div class="alert-card-body">
 
 
-                            <div class="alert-icon bg-info">
+                    <div class="alert-top">
 
-                                <i class="fas fa-calendar-check"></i>
+                        <div>
 
-                            </div>
+                            <span class="badge bg-info">
+
+                                <i class="fas fa-calendar-day"></i>
+
+                                TODAY'S RETURN
+
+                            </span>
+
+
+                            <h3>
+
+                                {{ return_today|length }}
+
+                            </h3>
+
+
+                            <p>
+                                Bikes due today
+                            </p>
 
                         </div>
 
 
-                        {% if return_today %}
+                        <div class="alert-icon bg-info">
 
-                        <hr>
-
-                        {% for rental in return_today|slice:":3" %}
-
-                        <div class="alert-item mb-3">
-
-                            <div class="d-flex justify-content-between">
-
-                                <strong>
-                                    {{ rental.bike.registration_number }}
-                                </strong>
-
-                                <span class="badge bg-info">
-                                    TODAY
-                                </span>
-
-                            </div>
-
-                            <small class="text-muted">
-
-                                {{ rental.customer.customer_name }}
-
-                            </small>
-
-                            <br>
-
-                            <small class="text-info">
-
-                                IN:
-                                {{ rental.expected_return_date|date:"d-m-Y h:i A" }}
-
-                            </small>
-
-                            <br>
-
-                            <small class="text-muted">
-
-                                OUT:
-                                {{ rental.rent_date|date:"d-m-Y h:i A" }}
-
-                            </small>
+                            <i class="fas fa-calendar-check"></i>
 
                         </div>
-
-                        {% endfor %}
-
-                        {% else %}
-
-                        <div class="mt-3 text-success">
-
-                            <i class="fas fa-check-circle"></i>
-
-                            No returns today
-
-                        </div>
-
-                        {% endif %}
 
                     </div>
+
+
+                    {% if return_today %}
+
+                    <hr>
+
+
+                    {% for rental in return_today|slice:":3" %}
+
+                    <div class="alert-item">
+
+
+                        <div class="alert-item-top">
+
+                            <strong>
+                                {{ rental.bike.registration_number }}
+                            </strong>
+
+                            <span class="badge bg-info">
+                                TODAY
+                            </span>
+
+                        </div>
+
+
+                        <small class="text-muted">
+
+                            {{ rental.customer.customer_name }}
+
+                        </small>
+
+
+                        <br>
+
+
+                        <small class="text-info">
+
+                            IN:
+                            {{ rental.expected_return_date|date:"d-m-Y h:i A" }}
+
+                        </small>
+
+
+                        <br>
+
+
+                        <small class="text-muted">
+
+                            OUT:
+                            {{ rental.rent_date|date:"d-m-Y h:i A" }}
+
+                        </small>
+
+                    </div>
+
+                    {% endfor %}
+
+
+                    {% else %}
+
+                    <div class="empty-alert text-success">
+
+                        <i class="fas fa-check-circle"></i>
+
+                        No returns today
+
+                    </div>
+
+                    {% endif %}
 
                 </div>
 
@@ -941,99 +942,103 @@
             <!-- UPCOMING -->
             <!-- ================================================= -->
 
-            <div class="col-xl-3 col-md-6">
+            <div class="alert-card upcoming-card">
 
-                <div class="card border-0 shadow-sm h-100 alert-card upcoming-card">
-
-                    <div class="card-body">
-
-                        <div class="d-flex justify-content-between align-items-start">
-
-                            <div>
-
-                                <span class="badge bg-primary mb-2">
-
-                                    <i class="fas fa-calendar-alt"></i>
-                                    UPCOMING
-
-                                </span>
-
-                                <h3 class="fw-bold mb-1">
-
-                                    {{ upcoming_returns|length }}
-
-                                </h3>
-
-                                <p class="text-muted mb-0">
-
-                                    Returns tomorrow
-
-                                </p>
-
-                            </div>
+                <div class="alert-card-body">
 
 
-                            <div class="alert-icon bg-primary">
+                    <div class="alert-top">
 
-                                <i class="fas fa-calendar-plus"></i>
+                        <div>
 
-                            </div>
+                            <span class="badge bg-primary">
+
+                                <i class="fas fa-calendar-alt"></i>
+
+                                UPCOMING
+
+                            </span>
+
+
+                            <h3>
+
+                                {{ upcoming_returns|length }}
+
+                            </h3>
+
+
+                            <p>
+                                Returns tomorrow
+                            </p>
 
                         </div>
 
 
-                        {% if upcoming_returns %}
+                        <div class="alert-icon bg-primary">
 
-                        <hr>
-
-                        {% for rental in upcoming_returns|slice:":3" %}
-
-                        <div class="alert-item mb-3">
-
-                            <div class="d-flex justify-content-between">
-
-                                <strong>
-                                    {{ rental.bike.registration_number }}
-                                </strong>
-
-                                <span class="badge bg-primary">
-                                    TOMORROW
-                                </span>
-
-                            </div>
-
-                            <small class="text-muted">
-
-                                {{ rental.customer.customer_name }}
-
-                            </small>
-
-                            <br>
-
-                            <small class="text-primary">
-
-                                IN:
-                                {{ rental.expected_return_date|date:"d-m-Y h:i A" }}
-
-                            </small>
+                            <i class="fas fa-calendar-plus"></i>
 
                         </div>
-
-                        {% endfor %}
-
-                        {% else %}
-
-                        <div class="mt-3 text-muted">
-
-                            <i class="fas fa-info-circle"></i>
-
-                            No upcoming returns
-
-                        </div>
-
-                        {% endif %}
 
                     </div>
+
+
+                    {% if upcoming_returns %}
+
+                    <hr>
+
+
+                    {% for rental in upcoming_returns|slice:":3" %}
+
+                    <div class="alert-item">
+
+
+                        <div class="alert-item-top">
+
+                            <strong>
+                                {{ rental.bike.registration_number }}
+                            </strong>
+
+                            <span class="badge bg-primary">
+                                TOMORROW
+                            </span>
+
+                        </div>
+
+
+                        <small class="text-muted">
+
+                            {{ rental.customer.customer_name }}
+
+                        </small>
+
+
+                        <br>
+
+
+                        <small class="text-primary">
+
+                            IN:
+                            {{ rental.expected_return_date|date:"d-m-Y h:i A" }}
+
+                        </small>
+
+                    </div>
+
+                    {% endfor %}
+
+
+                    {% else %}
+
+                    <div class="empty-alert text-muted">
+
+                        <i class="fas fa-info-circle"></i>
+
+                        No upcoming returns
+
+                    </div>
+
+                    {% endif %}
 
                 </div>
 
@@ -1044,98 +1049,102 @@
             <!-- PAYMENT PENDING -->
             <!-- ================================================= -->
 
-            <div class="col-xl-3 col-md-6">
+            <div class="alert-card payment-card">
 
-                <div class="card border-0 shadow-sm h-100 alert-card payment-card">
-
-                    <div class="card-body">
-
-                        <div class="d-flex justify-content-between align-items-start">
-
-                            <div>
-
-                                <span class="badge bg-warning text-dark mb-2">
-
-                                    <i class="fas fa-money-bill-wave"></i>
-                                    PAYMENT PENDING
-
-                                </span>
-
-                                <h3 class="fw-bold mb-1">
-
-                                    {{ pending_rentals|length }}
-
-                                </h3>
-
-                                <p class="text-muted mb-0">
-
-                                    Rentals have balance
-
-                                </p>
-
-                            </div>
+                <div class="alert-card-body">
 
 
-                            <div class="alert-icon bg-warning">
+                    <div class="alert-top">
 
-                                <i class="fas fa-rupee-sign"></i>
+                        <div>
 
-                            </div>
+                            <span class="badge bg-warning text-dark">
+
+                                <i class="fas fa-money-bill-wave"></i>
+
+                                PAYMENT PENDING
+
+                            </span>
+
+
+                            <h3>
+
+                                {{ pending_rentals|length }}
+
+                            </h3>
+
+
+                            <p>
+                                Rentals have balance
+                            </p>
 
                         </div>
 
 
-                        {% if pending_rentals %}
+                        <div class="alert-icon bg-warning">
 
-                        <hr>
-
-                        {% for rental in pending_rentals|slice:":3" %}
-
-                        <div class="alert-item mb-3">
-
-                            <div class="d-flex justify-content-between">
-
-                                <strong>
-
-                                    {{ rental.customer.customer_name }}
-
-                                </strong>
-
-                                <span class="badge bg-warning text-dark">
-
-                                    ₹ {{ rental.remaining_amount }}
-
-                                </span>
-
-                            </div>
-
-                            <small class="text-muted">
-
-                                {{ rental.bike.registration_number }}
-
-                            </small>
+                            <i class="fas fa-rupee-sign"></i>
 
                         </div>
-
-                        {% endfor %}
-
-                        {% else %}
-
-                        <div class="mt-3 text-success">
-
-                            <i class="fas fa-check-circle"></i>
-
-                            No pending payments
-
-                        </div>
-
-                        {% endif %}
 
                     </div>
+
+
+                    {% if pending_rentals %}
+
+                    <hr>
+
+
+                    {% for rental in pending_rentals|slice:":3" %}
+
+                    <div class="alert-item">
+
+
+                        <div class="alert-item-top">
+
+                            <strong>
+
+                                {{ rental.customer.customer_name }}
+
+                            </strong>
+
+
+                            <span class="badge bg-warning text-dark">
+
+                                ₹ {{ rental.remaining_amount }}
+
+                            </span>
+
+                        </div>
+
+
+                        <small class="text-muted">
+
+                            {{ rental.bike.registration_number }}
+
+                        </small>
+
+                    </div>
+
+                    {% endfor %}
+
+
+                    {% else %}
+
+                    <div class="empty-alert text-success">
+
+                        <i class="fas fa-check-circle"></i>
+
+                        No pending payments
+
+                    </div>
+
+                    {% endif %}
 
                 </div>
 
             </div>
+
 
         </div>
 
@@ -1157,6 +1166,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!canvas) {
         return;
     }
+
 
     new Chart(canvas, {
 
@@ -1183,9 +1193,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 ],
 
                 backgroundColor: [
+
                     "#28a745",
                     "#dc3545",
                     "#007bff"
+
                 ],
 
                 borderRadius: 8
@@ -1193,6 +1205,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }]
 
         },
+
 
         options: {
 
@@ -1203,15 +1216,20 @@ document.addEventListener("DOMContentLoaded", function () {
             plugins: {
 
                 legend: {
+
                     display: false
+
                 }
 
             },
 
+
             scales: {
 
                 y: {
+
                     beginAtZero: true
+
                 }
 
             }
@@ -1228,21 +1246,106 @@ document.addEventListener("DOMContentLoaded", function () {
 <style>
 
 /* =====================================================
-   GENERAL
+   MAIN DASHBOARD
 ===================================================== */
 
-.dashboard-page {
-    padding-bottom: 30px;
-}
+.dashboard-container {
 
-.dashboard-header {
-    min-height: 70px;
+    width: 100%;
+
+    max-width: 1600px;
+
+    margin: 0 auto;
+
+    padding: 22px 24px 45px;
+
 }
 
 
 /* =====================================================
-   DASHBOARD CARDS
+   HEADER
 ===================================================== */
+
+.dashboard-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 25px;
+
+}
+
+
+.dashboard-title h2 {
+
+    margin: 0 0 5px;
+
+    font-size: 32px;
+
+    font-weight: 700;
+
+}
+
+
+.dashboard-title p {
+
+    margin: 0;
+
+    color: #6c757d;
+
+    font-size: 16px;
+
+}
+
+
+.dashboard-date {
+
+    text-align: right;
+
+}
+
+
+.dashboard-date span {
+
+    display: block;
+
+    color: #6c757d;
+
+    font-size: 14px;
+
+}
+
+
+.dashboard-date strong {
+
+    display: block;
+
+    margin-top: 3px;
+
+    font-size: 18px;
+
+}
+
+
+/* =====================================================
+   SUMMARY GRID
+===================================================== */
+
+.summary-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 14px;
+
+    margin-bottom: 24px;
+
+}
+
 
 .dashboard-card {
 
@@ -1250,35 +1353,35 @@ document.addEventListener("DOMContentLoaded", function () {
 
     border-radius: 14px;
 
+    box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+
+    min-height: 115px;
+
     transition: all 0.25s ease;
 
-    height: 100%;
-
 }
+
 
 .dashboard-card:hover {
 
-    transform: translateY(-4px);
+    transform: translateY(-3px);
 
-    box-shadow: 0 10px 25px rgba(0,0,0,0.10) !important;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.11);
 
 }
 
 
-.dashboard-card .card-body {
+.card-content {
+
+    height: 100%;
 
     padding: 20px;
 
-}
-
-
-.dashboard-card-content {
-
     display: flex;
 
-    justify-content: space-between;
-
     align-items: center;
+
+    justify-content: space-between;
 
 }
 
@@ -1289,7 +1392,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     font-size: 14px;
 
-    margin-bottom: 5px;
+    margin: 0 0 5px;
 
 }
 
@@ -1309,7 +1412,444 @@ document.addEventListener("DOMContentLoaded", function () {
    ICONS
 ===================================================== */
 
-.dashboard-icon,
+.dashboard-icon {
+
+    width: 50px;
+
+    height: 50px;
+
+    min-width: 50px;
+
+    border-radius: 13px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: #ffffff;
+
+    font-size: 20px;
+
+}
+
+
+/* =====================================================
+   GENERAL SECTION
+===================================================== */
+
+.dashboard-section {
+
+    background: #ffffff;
+
+    border-radius: 16px;
+
+    overflow: hidden;
+
+    box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+
+}
+
+
+.section-title {
+
+    padding: 18px 22px;
+
+}
+
+
+.section-title h5 {
+
+    margin: 0;
+
+    font-size: 18px;
+
+    font-weight: 600;
+
+}
+
+
+.section-header {
+
+    padding: 15px 20px;
+
+    color: #ffffff;
+
+}
+
+
+.section-header h5 {
+
+    margin: 0;
+
+    font-size: 18px;
+
+    font-weight: 600;
+
+}
+
+
+.section-body {
+
+    padding: 20px;
+
+}
+
+
+.table-body {
+
+    padding: 0;
+
+}
+
+
+/* =====================================================
+   QUICK ACTIONS
+===================================================== */
+
+.quick-actions-card {
+
+    margin-bottom: 24px;
+
+}
+
+
+.quick-actions {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    padding: 0 22px 22px;
+
+}
+
+
+.quick-btn {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    min-height: 44px;
+
+    padding: 10px 17px;
+
+    border-radius: 9px;
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-weight: 600;
+
+    transition: all 0.2s ease;
+
+}
+
+
+.quick-btn:hover {
+
+    color: #ffffff;
+
+    transform: translateY(-2px);
+
+}
+
+
+.quick-btn.btn-primary {
+
+    background: #007bff;
+
+}
+
+
+.quick-btn.btn-success {
+
+    background: #28a745;
+
+}
+
+
+.quick-btn.btn-info {
+
+    background: #17a2b8;
+
+}
+
+
+.quick-btn.btn-warning {
+
+    background: #ffc107;
+
+    color: #212529;
+
+}
+
+
+.quick-btn.btn-warning:hover {
+
+    color: #212529;
+
+}
+
+
+.quick-btn.btn-secondary {
+
+    background: #6c757d;
+
+}
+
+
+/* =====================================================
+   CONTENT GRID
+===================================================== */
+
+.content-grid {
+
+    display: grid;
+
+    grid-template-columns: minmax(0, 2fr) minmax(300px, 1fr);
+
+    gap: 18px;
+
+    margin-bottom: 24px;
+
+}
+
+
+.chart-card {
+
+    min-width: 0;
+
+}
+
+
+.chart-container {
+
+    height: 320px;
+
+    position: relative;
+
+}
+
+
+.chart-header {
+
+    background: #007bff;
+
+}
+
+
+.payment-header {
+
+    background: #28a745;
+
+}
+
+
+/* =====================================================
+   ACTIVITY GRID
+===================================================== */
+
+.activity-grid {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 18px;
+
+    margin-bottom: 30px;
+
+}
+
+
+.rental-header {
+
+    background: #17a2b8;
+
+}
+
+
+.expense-header {
+
+    background: #dc3545;
+
+}
+
+
+/* =====================================================
+   TABLE
+===================================================== */
+
+.table {
+
+    margin: 0;
+
+}
+
+
+.table th {
+
+    font-size: 13px;
+
+    white-space: nowrap;
+
+    padding: 13px 16px;
+
+}
+
+
+.table td {
+
+    vertical-align: middle;
+
+    font-size: 14px;
+
+    padding: 13px 16px;
+
+}
+
+
+/* =====================================================
+   SMART ALERTS
+===================================================== */
+
+.alerts-section {
+
+    width: 100%;
+
+    margin-top: 35px;
+
+    padding-top: 5px;
+
+}
+
+
+.alerts-title {
+
+    margin-bottom: 18px;
+
+}
+
+
+.alerts-title h4 {
+
+    margin: 0 0 4px;
+
+    font-size: 22px;
+
+    font-weight: 700;
+
+}
+
+
+.alerts-title p {
+
+    margin: 0;
+
+    color: #6c757d;
+
+    font-size: 14px;
+
+}
+
+
+/* =====================================================
+   ALERT GRID
+===================================================== */
+
+.alerts-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 16px;
+
+}
+
+
+/* =====================================================
+   ALERT CARD
+===================================================== */
+
+.alert-card {
+
+    background: #ffffff;
+
+    border-radius: 15px;
+
+    overflow: hidden;
+
+    min-width: 0;
+
+    box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+
+    transition: all 0.25s ease;
+
+}
+
+
+.alert-card:hover {
+
+    transform: translateY(-4px);
+
+    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+
+}
+
+
+.alert-card-body {
+
+    padding: 20px;
+
+}
+
+
+.alert-top {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+}
+
+
+.alert-top h3 {
+
+    margin: 10px 0 3px;
+
+    font-size: 27px;
+
+    font-weight: 700;
+
+}
+
+
+.alert-top p {
+
+    margin: 0;
+
+    color: #6c757d;
+
+    font-size: 14px;
+
+}
+
+
 .alert-icon {
 
     width: 50px;
@@ -1326,147 +1866,59 @@ document.addEventListener("DOMContentLoaded", function () {
 
     justify-content: center;
 
-    color: white;
+    color: #ffffff;
 
     font-size: 20px;
 
 }
 
 
-/* =====================================================
-   QUICK ACTIONS
-===================================================== */
+.overdue-card {
 
-.quick-actions {
-
-    display: flex;
-
-    flex-wrap: wrap;
-
-    gap: 10px;
+    border-left: 5px solid #dc3545;
 
 }
 
 
-.quick-btn {
+.today-card {
 
-    display: inline-flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 8px;
-
-    border-radius: 8px;
-
-    padding: 10px 16px;
-
-    text-decoration: none;
-
-    color: white;
-
-    font-weight: 500;
-
-    transition: all 0.2s ease;
+    border-left: 5px solid #17a2b8;
 
 }
 
 
-.quick-btn:hover {
+.upcoming-card {
 
-    color: white;
-
-    transform: translateY(-2px);
+    border-left: 5px solid #007bff;
 
 }
 
 
-.quick-btn.btn-primary {
-    background: #007bff;
-}
+.payment-card {
 
-.quick-btn.btn-success {
-    background: #28a745;
-}
-
-.quick-btn.btn-info {
-    background: #17a2b8;
-}
-
-.quick-btn.btn-warning {
-    background: #ffc107;
-    color: #212529;
-}
-
-.quick-btn.btn-secondary {
-    background: #6c757d;
-}
-
-
-/* =====================================================
-   CHART
-===================================================== */
-
-.chart-container {
-
-    height: 320px;
-
-    position: relative;
-
-}
-
-
-.chart-header {
-
-    background: #007bff;
-
-    color: white;
-
-}
-
-
-.payment-header {
-
-    background: #28a745;
-
-    color: white;
-
-}
-
-
-.recent-rental-header {
-
-    background: #17a2b8;
-
-    color: white;
-
-}
-
-
-.expense-header {
-
-    background: #dc3545;
-
-    color: white;
+    border-left: 5px solid #ffc107;
 
 }
 
 
 /* =====================================================
-   ALERTS
+   ALERT ITEM
 ===================================================== */
 
-.alerts-section {
+.alert-item {
 
-    margin-top: 10px;
+    background: #f8f9fa;
 
-    margin-bottom: 30px;
+    border-radius: 9px;
+
+    padding: 10px;
+
+    margin-bottom: 10px;
 
 }
 
 
-.alerts-title {
+.alert-item-top {
 
     display: flex;
 
@@ -1474,95 +1926,32 @@ document.addEventListener("DOMContentLoaded", function () {
 
     justify-content: space-between;
 
-}
+    gap: 8px;
 
-
-.alert-card {
-
-    border-radius: 14px;
-
-    overflow: hidden;
-
-    position: relative;
-
-    transition: all 0.25s ease;
+    margin-bottom: 4px;
 
 }
 
 
-.alert-card:hover {
-
-    transform: translateY(-5px);
-
-    box-shadow: 0 10px 25px rgba(0,0,0,0.12) !important;
-
-}
-
-
-.overdue-card {
-
-    border-left: 5px solid #dc3545 !important;
-
-}
-
-
-.today-card {
-
-    border-left: 5px solid #17a2b8 !important;
-
-}
-
-
-.upcoming-card {
-
-    border-left: 5px solid #007bff !important;
-
-}
-
-
-.payment-card {
-
-    border-left: 5px solid #ffc107 !important;
-
-}
-
-
-.alert-item {
-
-    padding: 8px;
-
-    border-radius: 8px;
-
-    background: #f8f9fa;
-
-}
-
-
-/* =====================================================
-   TABLE
-===================================================== */
-
-.table {
-
-    margin-bottom: 0;
-
-}
-
-
-.table th {
-
-    font-size: 13px;
-
-    white-space: nowrap;
-
-}
-
-
-.table td {
-
-    vertical-align: middle;
+.alert-item strong {
 
     font-size: 14px;
+
+}
+
+
+.alert-item small {
+
+    font-size: 12px;
+
+}
+
+
+.empty-alert {
+
+    margin-top: 18px;
+
+    font-size: 13px;
 
 }
 
@@ -1571,34 +1960,65 @@ document.addEventListener("DOMContentLoaded", function () {
    MOBILE
 ===================================================== */
 
-@media (max-width: 767.98px) {
+@media (max-width: 991.98px) {
 
-    .dashboard-page {
+    .summary-grid {
 
-        padding-left: 4px;
-
-        padding-right: 4px;
+        grid-template-columns: repeat(2, 1fr);
 
     }
 
+
+    .content-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .alerts-grid {
+
+        grid-template-columns: repeat(2, 1fr);
+
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE PHONE
+===================================================== */
+
+@media (max-width: 767.98px) {
+
+    .dashboard-container {
+
+        width: 100%;
+
+        padding: 14px 10px 35px;
+
+    }
+
+
+    /* Header */
 
     .dashboard-header {
 
-        align-items: flex-start !important;
+        align-items: flex-start;
 
-        margin-bottom: 20px !important;
-
-    }
-
-
-    .dashboard-header h2 {
-
-        font-size: 21px;
+        margin-bottom: 18px;
 
     }
 
 
-    .dashboard-header p {
+    .dashboard-title h2 {
+
+        font-size: 22px;
+
+    }
+
+
+    .dashboard-title p {
 
         font-size: 12px;
 
@@ -1607,50 +2027,107 @@ document.addEventListener("DOMContentLoaded", function () {
 
     .dashboard-date {
 
-        font-size: 12px;
+        font-size: 11px;
+
+        padding-top: 3px;
 
     }
 
 
-    /* Summary cards */
+    .dashboard-date span {
 
-    .dashboard-card .card-body {
+        font-size: 11px;
 
-        padding: 14px;
+    }
+
+
+    .dashboard-date strong {
+
+        font-size: 13px;
+
+    }
+
+
+    /* Summary */
+
+    .summary-grid {
+
+        grid-template-columns: 1fr 1fr;
+
+        gap: 9px;
+
+        margin-bottom: 18px;
+
+    }
+
+
+    .dashboard-card {
+
+        min-height: 95px;
+
+        border-radius: 11px;
+
+    }
+
+
+    .card-content {
+
+        padding: 12px;
 
     }
 
 
     .card-label {
 
-        font-size: 12px;
+        font-size: 11px;
 
     }
 
 
     .dashboard-card h3 {
 
-        font-size: 20px;
+        font-size: 19px;
 
     }
 
 
     .dashboard-icon {
 
-        width: 38px;
+        width: 36px;
 
-        height: 38px;
+        height: 36px;
 
-        min-width: 38px;
+        min-width: 36px;
 
-        font-size: 16px;
+        border-radius: 9px;
 
-        border-radius: 10px;
+        font-size: 15px;
 
     }
 
 
-    /* Quick actions */
+    /* Quick Actions */
+
+    .quick-actions-card {
+
+        margin-bottom: 18px;
+
+    }
+
+
+    .section-title {
+
+        padding: 14px;
+
+    }
+
+
+    .section-title h5 {
+
+        font-size: 15px;
+
+    }
+
 
     .quick-actions {
 
@@ -1660,55 +2137,130 @@ document.addEventListener("DOMContentLoaded", function () {
 
         gap: 8px;
 
+        padding: 0 12px 14px;
+
     }
 
 
     .quick-btn {
 
-        padding: 10px 6px;
-
-        font-size: 12px;
-
         width: 100%;
+
+        min-height: 40px;
+
+        padding: 8px 5px;
+
+        font-size: 11px;
+
+        gap: 5px;
 
     }
 
 
     .quick-btn i {
 
-        font-size: 14px;
+        font-size: 13px;
 
     }
 
 
-    /* Chart */
+    /* Main content */
+
+    .content-grid {
+
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 14px;
+
+        margin-bottom: 18px;
+
+    }
+
+
+    .activity-grid {
+
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 14px;
+
+        margin-bottom: 20px;
+
+    }
+
+
+    .section-header {
+
+        padding: 13px 14px;
+
+    }
+
+
+    .section-header h5 {
+
+        font-size: 15px;
+
+    }
+
+
+    .section-body {
+
+        padding: 14px;
+
+    }
+
 
     .chart-container {
 
-        height: 250px;
+        height: 230px;
 
     }
 
 
-    /* Tables */
+    .table th {
 
-    .table th,
-    .table td {
-
-        font-size: 12px;
+        font-size: 11px;
 
         padding: 10px 8px;
 
     }
 
 
-    /* Alerts */
+    .table td {
+
+        font-size: 11px;
+
+        padding: 10px 8px;
+
+    }
+
+
+    /* =================================================
+       SMART ALERTS
+       ALWAYS LAST
+    ================================================= */
 
     .alerts-section {
 
-        margin-top: 20px;
+        display: block;
 
-        padding-top: 10px;
+        width: 100%;
+
+        margin-top: 30px;
+
+        padding-top: 15px;
+
+        clear: both;
+
+    }
+
+
+    .alerts-title {
+
+        margin-bottom: 14px;
 
     }
 
@@ -1722,14 +2274,54 @@ document.addEventListener("DOMContentLoaded", function () {
 
     .alerts-title p {
 
-        font-size: 12px;
+        font-size: 11px;
 
     }
 
 
-    .alert-card .card-body {
+    /* One alert per row */
 
-        padding: 16px;
+    .alerts-grid {
+
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 12px;
+
+        width: 100%;
+
+    }
+
+
+    .alert-card {
+
+        width: 100%;
+
+        min-width: 100%;
+
+        border-radius: 12px;
+
+    }
+
+
+    .alert-card-body {
+
+        padding: 15px;
+
+    }
+
+
+    .alert-top h3 {
+
+        font-size: 23px;
+
+    }
+
+
+    .alert-top p {
+
+        font-size: 12px;
 
     }
 
@@ -1742,17 +2334,32 @@ document.addEventListener("DOMContentLoaded", function () {
 
         min-width: 42px;
 
+        border-radius: 10px;
+
         font-size: 17px;
 
     }
 
 
-    .alert-card h3 {
+    .alert-item {
 
-        font-size: 24px;
+        padding: 9px;
 
     }
 
+
+    .alert-item strong {
+
+        font-size: 12px;
+
+    }
+
+
+    .alert-item small {
+
+        font-size: 11px;
+
+    }
 
 }
 
@@ -1763,36 +2370,80 @@ document.addEventListener("DOMContentLoaded", function () {
 
 @media (max-width: 400px) {
 
+    .dashboard-container {
+
+        padding-left: 7px;
+
+        padding-right: 7px;
+
+    }
+
+
+    .dashboard-title h2 {
+
+        font-size: 20px;
+
+    }
+
+
+    .summary-grid {
+
+        gap: 7px;
+
+    }
+
+
+    .dashboard-card {
+
+        min-height: 90px;
+
+    }
+
+
+    .card-content {
+
+        padding: 10px;
+
+    }
+
+
+    .card-label {
+
+        font-size: 10px;
+
+    }
+
+
     .dashboard-card h3 {
 
-        font-size: 18px;
+        font-size: 17px;
 
     }
 
 
     .dashboard-icon {
 
-        width: 34px;
+        width: 32px;
 
-        height: 34px;
+        height: 32px;
 
-        min-width: 34px;
+        min-width: 32px;
 
-        font-size: 14px;
+        font-size: 13px;
 
     }
 
 
     .quick-btn {
 
-        font-size: 11px;
+        font-size: 10px;
 
     }
 
 
-    .quick-btn i {
+    .alert-card-body {
 
-        font-size: 13px;
+        padding: 13px;
 
     }
 
