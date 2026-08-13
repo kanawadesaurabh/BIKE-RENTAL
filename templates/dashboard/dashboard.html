@@ -2,13 +2,13 @@
 
 {% block content %}
 
-<div class="container-fluid">
+<div class="container-fluid dashboard-page">
 
-    <!-- ========================= -->
+    <!-- ================================================= -->
     <!-- HEADER -->
-    <!-- ========================= -->
+    <!-- ================================================= -->
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="dashboard-header d-flex justify-content-between align-items-center mb-4">
 
         <div>
             <h2 class="fw-bold mb-1">
@@ -21,7 +21,7 @@
             </p>
         </div>
 
-        <div class="text-end">
+        <div class="text-end dashboard-date">
 
             <div class="text-muted small">
                 Today
@@ -36,468 +36,36 @@
     </div>
 
 
-    <!-- ========================= -->
-    <!-- SMART ALERTS -->
-    <!-- ========================= -->
-
-<!-- ========================= -->
-<!-- SMART ALERTS -->
-<!-- ========================= -->
-
-<div class="row g-3 mb-4">
-
-    <!-- ========================= -->
-    <!-- OVERDUE -->
-    <!-- ========================= -->
-
-    <div class="col-xl-3 col-md-6">
-
-        <div class="card border-0 shadow-sm h-100 alert-card overdue-card">
-
-            <div class="card-body">
-
-                <div class="d-flex justify-content-between align-items-start">
-
-                    <div>
-
-                        <span class="badge bg-danger mb-2">
-                            <i class="fas fa-exclamation-triangle"></i>
-                            OVERDUE
-                        </span>
-
-                        <h3 class="fw-bold mb-1">
-                            {{ overdue_rentals|length }}
-                        </h3>
-
-                        <p class="text-muted mb-0">
-                            Bikes overdue
-                        </p>
-
-                    </div>
-
-                    <div class="alert-icon bg-danger">
-
-                        <i class="fas fa-clock"></i>
-
-                    </div>
-
-                </div>
-
-
-                {% if overdue_rentals %}
-
-                <hr>
-
-                {% for rental in overdue_rentals|slice:":3" %}
-
-                <div class="mb-3">
-
-                    <div class="d-flex justify-content-between">
-
-                        <strong>
-                            {{ rental.bike.registration_number }}
-                        </strong>
-
-                        <span class="badge bg-danger">
-                            Overdue
-                        </span>
-
-                    </div>
-
-                    <small class="text-muted">
-
-                        {{ rental.customer.customer_name }}
-
-                    </small>
-
-                    <br>
-
-                    <small class="text-danger">
-
-                        IN:
-                        {{ rental.expected_return_date|date:"d-m-Y h:i A" }}
-
-                    </small>
-
-                </div>
-
-                {% endfor %}
-
-                {% else %}
-
-                <div class="mt-3 text-success">
-
-                    <i class="fas fa-check-circle"></i>
-
-                    No overdue bikes
-
-                </div>
-
-                {% endif %}
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- ========================= -->
-    <!-- TODAY'S RETURNS -->
-    <!-- ========================= -->
-
-    <div class="col-xl-3 col-md-6">
-
-        <div class="card border-0 shadow-sm h-100 alert-card today-card">
-
-            <div class="card-body">
-
-                <div class="d-flex justify-content-between align-items-start">
-
-                    <div>
-
-                        <span class="badge bg-info mb-2">
-
-                            <i class="fas fa-calendar-day"></i>
-
-                            TODAY'S RETURN
-
-                        </span>
-
-                        <h3 class="fw-bold mb-1">
-
-                            {{ return_today|length }}
-
-                        </h3>
-
-                        <p class="text-muted mb-0">
-
-                            Bikes due today
-
-                        </p>
-
-                    </div>
-
-                    <div class="alert-icon bg-info">
-
-                        <i class="fas fa-calendar-check"></i>
-
-                    </div>
-
-                </div>
-
-
-                {% if return_today %}
-
-                <hr>
-
-                {% for rental in return_today|slice:":3" %}
-
-                <div class="mb-3">
-
-                    <div class="d-flex justify-content-between">
-
-                        <strong>
-
-                            {{ rental.bike.registration_number }}
-
-                        </strong>
-
-                        <span class="badge bg-info">
-
-                            TODAY
-
-                        </span>
-
-                    </div>
-
-                    <small class="text-muted">
-
-                        {{ rental.customer.customer_name }}
-
-                    </small>
-
-                    <br>
-
-                    <small class="text-info">
-
-                        IN:
-                        {{ rental.expected_return_date|date:"d-m-Y h:i A" }}
-
-                    </small>
-
-                    <br>
-
-                    <small class="text-muted">
-
-                        OUT:
-                        {{ rental.rent_date|date:"d-m-Y h:i A" }}
-
-                    </small>
-
-                </div>
-
-                {% endfor %}
-
-                {% else %}
-
-                <div class="mt-3 text-success">
-
-                    <i class="fas fa-check-circle"></i>
-
-                    No returns today
-
-                </div>
-
-                {% endif %}
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- ========================= -->
-    <!-- UPCOMING RETURNS -->
-    <!-- ========================= -->
-
-    <div class="col-xl-3 col-md-6">
-
-        <div class="card border-0 shadow-sm h-100 alert-card upcoming-card">
-
-            <div class="card-body">
-
-                <div class="d-flex justify-content-between align-items-start">
-
-                    <div>
-
-                        <span class="badge bg-primary mb-2">
-
-                            <i class="fas fa-calendar-alt"></i>
-
-                            UPCOMING
-
-                        </span>
-
-                        <h3 class="fw-bold mb-1">
-
-                            {{ upcoming_returns|length }}
-
-                        </h3>
-
-                        <p class="text-muted mb-0">
-
-                            Returns tomorrow
-
-                        </p>
-
-                    </div>
-
-                    <div class="alert-icon bg-primary">
-
-                        <i class="fas fa-calendar-plus"></i>
-
-                    </div>
-
-                </div>
-
-
-                {% if upcoming_returns %}
-
-                <hr>
-
-                {% for rental in upcoming_returns|slice:":3" %}
-
-                <div class="mb-3">
-
-                    <div class="d-flex justify-content-between">
-
-                        <strong>
-
-                            {{ rental.bike.registration_number }}
-
-                        </strong>
-
-                        <span class="badge bg-primary">
-
-                            TOMORROW
-
-                        </span>
-
-                    </div>
-
-                    <small class="text-muted">
-
-                        {{ rental.customer.customer_name }}
-
-                    </small>
-
-                    <br>
-
-                    <small class="text-primary">
-
-                        IN:
-                        {{ rental.expected_return_date|date:"d-m-Y h:i A" }}
-
-                    </small>
-
-                </div>
-
-                {% endfor %}
-
-                {% else %}
-
-                <div class="mt-3 text-muted">
-
-                    <i class="fas fa-info-circle"></i>
-
-                    No upcoming returns
-
-                </div>
-
-                {% endif %}
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- ========================= -->
-    <!-- PENDING PAYMENT -->
-    <!-- ========================= -->
-
-    <div class="col-xl-3 col-md-6">
-
-        <div class="card border-0 shadow-sm h-100 alert-card payment-card">
-
-            <div class="card-body">
-
-                <div class="d-flex justify-content-between align-items-start">
-
-                    <div>
-
-                        <span class="badge bg-warning text-dark mb-2">
-
-                            <i class="fas fa-money-bill-wave"></i>
-
-                            PAYMENT PENDING
-
-                        </span>
-
-                        <h3 class="fw-bold mb-1">
-
-                            {{ pending_rentals|length }}
-
-                        </h3>
-
-                        <p class="text-muted mb-0">
-
-                            Rentals have balance
-
-                        </p>
-
-                    </div>
-
-                    <div class="alert-icon bg-warning">
-
-                        <i class="fas fa-rupee-sign"></i>
-
-                    </div>
-
-                </div>
-
-
-                {% if pending_rentals %}
-
-                <hr>
-
-                {% for rental in pending_rentals|slice:":3" %}
-
-                <div class="mb-3">
-
-                    <div class="d-flex justify-content-between">
-
-                        <strong>
-
-                            {{ rental.customer.customer_name }}
-
-                        </strong>
-
-                        <span class="badge bg-warning text-dark">
-
-                            ₹ {{ rental.remaining_amount }}
-
-                        </span>
-
-                    </div>
-
-                    <small class="text-muted">
-
-                        {{ rental.bike.registration_number }}
-
-                    </small>
-
-                </div>
-
-                {% endfor %}
-
-                {% else %}
-
-                <div class="mt-3 text-success">
-
-                    <i class="fas fa-check-circle"></i>
-
-                    No pending payments
-
-                </div>
-
-                {% endif %}
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-    <!-- ========================= -->
+    <!-- ================================================= -->
     <!-- SUMMARY CARDS -->
-    <!-- ========================= -->
+    <!-- ================================================= -->
 
     <div class="row g-3 mb-4">
 
-
         <!-- TOTAL BIKES -->
 
-        <div class="col-xl-3 col-md-6">
+        <div class="col-xl-3 col-md-6 col-6">
 
-            <div class="card dashboard-card border-0 shadow-sm">
+            <div class="dashboard-card border-0 shadow-sm">
 
                 <div class="card-body">
 
-                    <div class="d-flex justify-content-between">
+                    <div class="dashboard-card-content">
 
                         <div>
 
-                            <p class="text-muted mb-1">
+                            <p class="card-label">
                                 Total Bikes
                             </p>
 
-                            <h3 class="fw-bold">
+                            <h3>
                                 {{ total_bikes }}
                             </h3>
 
                         </div>
 
                         <div class="dashboard-icon bg-primary">
-
                             <i class="fas fa-motorcycle"></i>
-
                         </div>
 
                     </div>
@@ -511,30 +79,28 @@
 
         <!-- AVAILABLE -->
 
-        <div class="col-xl-3 col-md-6">
+        <div class="col-xl-3 col-md-6 col-6">
 
-            <div class="card dashboard-card border-0 shadow-sm">
+            <div class="dashboard-card border-0 shadow-sm">
 
                 <div class="card-body">
 
-                    <div class="d-flex justify-content-between">
+                    <div class="dashboard-card-content">
 
                         <div>
 
-                            <p class="text-muted mb-1">
-                                Available Bikes
+                            <p class="card-label">
+                                Available
                             </p>
 
-                            <h3 class="fw-bold text-success">
+                            <h3 class="text-success">
                                 {{ available_bikes }}
                             </h3>
 
                         </div>
 
                         <div class="dashboard-icon bg-success">
-
                             <i class="fas fa-check-circle"></i>
-
                         </div>
 
                     </div>
@@ -548,30 +114,28 @@
 
         <!-- RENTED -->
 
-        <div class="col-xl-3 col-md-6">
+        <div class="col-xl-3 col-md-6 col-6">
 
-            <div class="card dashboard-card border-0 shadow-sm">
+            <div class="dashboard-card border-0 shadow-sm">
 
                 <div class="card-body">
 
-                    <div class="d-flex justify-content-between">
+                    <div class="dashboard-card-content">
 
                         <div>
 
-                            <p class="text-muted mb-1">
-                                Rented Bikes
+                            <p class="card-label">
+                                Rented
                             </p>
 
-                            <h3 class="fw-bold text-danger">
+                            <h3 class="text-danger">
                                 {{ rented_bikes }}
                             </h3>
 
                         </div>
 
                         <div class="dashboard-icon bg-danger">
-
                             <i class="fas fa-key"></i>
-
                         </div>
 
                     </div>
@@ -585,30 +149,28 @@
 
         <!-- CUSTOMERS -->
 
-        <div class="col-xl-3 col-md-6">
+        <div class="col-xl-3 col-md-6 col-6">
 
-            <div class="card dashboard-card border-0 shadow-sm">
+            <div class="dashboard-card border-0 shadow-sm">
 
                 <div class="card-body">
 
-                    <div class="d-flex justify-content-between">
+                    <div class="dashboard-card-content">
 
                         <div>
 
-                            <p class="text-muted mb-1">
-                                Total Customers
+                            <p class="card-label">
+                                Customers
                             </p>
 
-                            <h3 class="fw-bold text-info">
+                            <h3 class="text-info">
                                 {{ total_customers }}
                             </h3>
 
                         </div>
 
                         <div class="dashboard-icon bg-info">
-
                             <i class="fas fa-users"></i>
-
                         </div>
 
                     </div>
@@ -622,30 +184,28 @@
 
         <!-- ACTIVE RENTALS -->
 
-        <div class="col-xl-3 col-md-6">
+        <div class="col-xl-3 col-md-6 col-6">
 
-            <div class="card dashboard-card border-0 shadow-sm">
+            <div class="dashboard-card border-0 shadow-sm">
 
                 <div class="card-body">
 
-                    <div class="d-flex justify-content-between">
+                    <div class="dashboard-card-content">
 
                         <div>
 
-                            <p class="text-muted mb-1">
+                            <p class="card-label">
                                 Active Rentals
                             </p>
 
-                            <h3 class="fw-bold">
+                            <h3>
                                 {{ active_rentals }}
                             </h3>
 
                         </div>
 
                         <div class="dashboard-icon bg-secondary">
-
                             <i class="fas fa-file-contract"></i>
-
                         </div>
 
                     </div>
@@ -659,32 +219,28 @@
 
         <!-- TODAY INCOME -->
 
-        <div class="col-xl-3 col-md-6">
+        <div class="col-xl-3 col-md-6 col-6">
 
-            <div class="card dashboard-card border-0 shadow-sm">
+            <div class="dashboard-card border-0 shadow-sm">
 
                 <div class="card-body">
 
-                    <div class="d-flex justify-content-between">
+                    <div class="dashboard-card-content">
 
                         <div>
 
-                            <p class="text-muted mb-1">
+                            <p class="card-label">
                                 Today's Income
                             </p>
 
-                            <h3 class="fw-bold text-success">
-
+                            <h3 class="text-success">
                                 ₹ {{ today_income }}
-
                             </h3>
 
                         </div>
 
                         <div class="dashboard-icon bg-success">
-
                             <i class="fas fa-rupee-sign"></i>
-
                         </div>
 
                     </div>
@@ -698,32 +254,28 @@
 
         <!-- PROFIT -->
 
-        <div class="col-xl-3 col-md-6">
+        <div class="col-xl-3 col-md-6 col-6">
 
-            <div class="card dashboard-card border-0 shadow-sm">
+            <div class="dashboard-card border-0 shadow-sm">
 
                 <div class="card-body">
 
-                    <div class="d-flex justify-content-between">
+                    <div class="dashboard-card-content">
 
                         <div>
 
-                            <p class="text-muted mb-1">
+                            <p class="card-label">
                                 Total Profit
                             </p>
 
-                            <h3 class="fw-bold text-primary">
-
+                            <h3 class="text-primary">
                                 ₹ {{ total_profit }}
-
                             </h3>
 
                         </div>
 
                         <div class="dashboard-icon bg-primary">
-
                             <i class="fas fa-chart-line"></i>
-
                         </div>
 
                     </div>
@@ -737,32 +289,28 @@
 
         <!-- EXPENSE -->
 
-        <div class="col-xl-3 col-md-6">
+        <div class="col-xl-3 col-md-6 col-6">
 
-            <div class="card dashboard-card border-0 shadow-sm">
+            <div class="dashboard-card border-0 shadow-sm">
 
                 <div class="card-body">
 
-                    <div class="d-flex justify-content-between">
+                    <div class="dashboard-card-content">
 
                         <div>
 
-                            <p class="text-muted mb-1">
+                            <p class="card-label">
                                 Total Expense
                             </p>
 
-                            <h3 class="fw-bold text-danger">
-
+                            <h3 class="text-danger">
                                 ₹ {{ total_expense }}
-
                             </h3>
 
                         </div>
 
                         <div class="dashboard-icon bg-danger">
-
                             <i class="fas fa-wallet"></i>
-
                         </div>
 
                     </div>
@@ -776,53 +324,62 @@
     </div>
 
 
-    <!-- ========================= -->
+    <!-- ================================================= -->
     <!-- QUICK ACTIONS -->
-    <!-- ========================= -->
+    <!-- ================================================= -->
 
-    <div class="card border-0 shadow-sm mb-4">
+    <div class="card border-0 shadow-sm mb-4 quick-actions-card">
 
         <div class="card-body">
 
-            <div class="d-flex flex-wrap gap-2">
+            <h6 class="fw-bold mb-3">
+                <i class="fas fa-bolt text-warning"></i>
+                Quick Actions
+            </h6>
+
+            <div class="quick-actions">
 
                 <a href="{% url 'add_rental' %}"
-                   class="btn btn-primary">
+                   class="quick-btn btn-primary">
 
                     <i class="fas fa-motorcycle"></i>
-                    New Rental
+                    <span>New Rental</span>
 
                 </a>
+
 
                 <a href="{% url 'add_customer' %}"
-                   class="btn btn-success">
+                   class="quick-btn btn-success">
 
                     <i class="fas fa-user-plus"></i>
-                    Add Customer
+                    <span>Add Customer</span>
 
                 </a>
+
 
                 <a href="{% url 'add_bike' %}"
-                   class="btn btn-info text-white">
+                   class="quick-btn btn-info">
 
                     <i class="fas fa-plus"></i>
-                    Add Bike
+                    <span>Add Bike</span>
 
                 </a>
+
 
                 <a href="{% url 'payment_list' %}"
-                   class="btn btn-warning">
+                   class="quick-btn btn-warning">
 
-                    <i class="fas fa-money-bill"></i>
-                    Payments
+                    <i class="fas fa-money-bill-wave"></i>
+                    <span>Payments</span>
 
                 </a>
 
+
                 <a href="{% url 'expense_list' %}"
-                   class="btn btn-secondary">
+                   class="quick-btn btn-secondary">
 
                     <i class="fas fa-wallet"></i>
-                    Expenses
+                    <span>Expenses</span>
 
                 </a>
 
@@ -833,34 +390,30 @@
     </div>
 
 
-    <!-- ========================= -->
-    <!-- CHART + PAYMENT -->
-    <!-- ========================= -->
+    <!-- ================================================= -->
+    <!-- CHART + PAYMENTS -->
+    <!-- ================================================= -->
 
     <div class="row g-3 mb-4">
 
-
-        <!-- CHART -->
+        <!-- BUSINESS SUMMARY -->
 
         <div class="col-lg-8">
 
             <div class="card border-0 shadow-sm h-100">
 
-                <div class="card-header bg-primary text-white">
+                <div class="card-header chart-header">
 
                     <h5 class="mb-0">
-
                         <i class="fas fa-chart-bar"></i>
-
                         Business Summary
-
                     </h5>
 
                 </div>
 
                 <div class="card-body">
 
-                    <div style="height:320px;">
+                    <div class="chart-container">
 
                         <canvas id="incomeChart"></canvas>
 
@@ -879,14 +432,11 @@
 
             <div class="card border-0 shadow-sm h-100">
 
-                <div class="card-header bg-success text-white">
+                <div class="card-header payment-header">
 
                     <h5 class="mb-0">
-
                         <i class="fas fa-money-bill-wave"></i>
-
                         Recent Payments
-
                     </h5>
 
                 </div>
@@ -900,11 +450,8 @@
                             <thead>
 
                                 <tr>
-
                                     <th>Customer</th>
-
                                     <th>Amount</th>
-
                                 </tr>
 
                             </thead>
@@ -916,15 +463,11 @@
                                 <tr>
 
                                     <td>
-
                                         {{ payment.rental.customer.customer_name }}
-
                                     </td>
 
                                     <td class="text-success fw-bold">
-
                                         ₹ {{ payment.amount }}
-
                                     </td>
 
                                 </tr>
@@ -934,7 +477,7 @@
                                 <tr>
 
                                     <td colspan="2"
-                                        class="text-center text-muted">
+                                        class="text-center text-muted py-4">
 
                                         No payments found
 
@@ -959,12 +502,11 @@
     </div>
 
 
-    <!-- ========================= -->
+    <!-- ================================================= -->
     <!-- RECENT ACTIVITY -->
-    <!-- ========================= -->
+    <!-- ================================================= -->
 
-    <div class="row g-3">
-
+    <div class="row g-3 mb-4">
 
         <!-- RECENT RENTALS -->
 
@@ -972,14 +514,11 @@
 
             <div class="card border-0 shadow-sm">
 
-                <div class="card-header bg-info text-white">
+                <div class="card-header recent-rental-header">
 
                     <h5 class="mb-0">
-
                         <i class="fas fa-history"></i>
-
                         Recent Rentals
-
                     </h5>
 
                 </div>
@@ -995,9 +534,7 @@
                                 <tr>
 
                                     <th>Customer</th>
-
                                     <th>Bike</th>
-
                                     <th>Status</th>
 
                                 </tr>
@@ -1043,7 +580,7 @@
                                 <tr>
 
                                     <td colspan="3"
-                                        class="text-center text-muted">
+                                        class="text-center text-muted py-4">
 
                                         No rentals found
 
@@ -1072,12 +609,11 @@
 
             <div class="card border-0 shadow-sm">
 
-                <div class="card-header bg-danger text-white">
+                <div class="card-header expense-header">
 
                     <h5 class="mb-0">
 
                         <i class="fas fa-wallet"></i>
-
                         Recent Expenses
 
                     </h5>
@@ -1095,7 +631,6 @@
                                 <tr>
 
                                     <th>Category</th>
-
                                     <th>Amount</th>
 
                                 </tr>
@@ -1113,9 +648,7 @@
                                     </td>
 
                                     <td class="text-danger fw-bold">
-
                                         ₹ {{ expense.amount }}
-
                                     </td>
 
                                 </tr>
@@ -1125,7 +658,7 @@
                                 <tr>
 
                                     <td colspan="2"
-                                        class="text-center text-muted">
+                                        class="text-center text-muted py-4">
 
                                         No expenses found
 
@@ -1138,6 +671,465 @@
                             </tbody>
 
                         </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- SMART ALERTS -->
+    <!-- ================================================= -->
+    <!--
+        IMPORTANT:
+        This section is placed LAST.
+
+        Desktop:
+        Alerts will appear after the main dashboard content.
+
+        Mobile:
+        Alerts will also remain at the bottom.
+    -->
+
+    <div class="alerts-section">
+
+        <div class="alerts-title mb-3">
+
+            <div>
+
+                <h4 class="fw-bold mb-1">
+
+                    <i class="fas fa-bell text-warning"></i>
+                    Smart Alerts
+
+                </h4>
+
+                <p class="text-muted mb-0">
+                    Important rental and payment notifications
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="row g-3">
+
+
+            <!-- ================================================= -->
+            <!-- OVERDUE -->
+            <!-- ================================================= -->
+
+            <div class="col-xl-3 col-md-6">
+
+                <div class="card border-0 shadow-sm h-100 alert-card overdue-card">
+
+                    <div class="card-body">
+
+                        <div class="d-flex justify-content-between align-items-start">
+
+                            <div>
+
+                                <span class="badge bg-danger mb-2">
+
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                    OVERDUE
+
+                                </span>
+
+                                <h3 class="fw-bold mb-1">
+
+                                    {{ overdue_rentals|length }}
+
+                                </h3>
+
+                                <p class="text-muted mb-0">
+
+                                    Bikes overdue
+
+                                </p>
+
+                            </div>
+
+
+                            <div class="alert-icon bg-danger">
+
+                                <i class="fas fa-clock"></i>
+
+                            </div>
+
+                        </div>
+
+
+                        {% if overdue_rentals %}
+
+                        <hr>
+
+                        {% for rental in overdue_rentals|slice:":3" %}
+
+                        <div class="alert-item mb-3">
+
+                            <div class="d-flex justify-content-between">
+
+                                <strong>
+                                    {{ rental.bike.registration_number }}
+                                </strong>
+
+                                <span class="badge bg-danger">
+                                    Overdue
+                                </span>
+
+                            </div>
+
+                            <small class="text-muted">
+
+                                {{ rental.customer.customer_name }}
+
+                            </small>
+
+                            <br>
+
+                            <small class="text-danger">
+
+                                IN:
+                                {{ rental.expected_return_date|date:"d-m-Y h:i A" }}
+
+                            </small>
+
+                        </div>
+
+                        {% endfor %}
+
+                        {% else %}
+
+                        <div class="mt-3 text-success">
+
+                            <i class="fas fa-check-circle"></i>
+
+                            No overdue bikes
+
+                        </div>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================================================= -->
+            <!-- TODAY RETURN -->
+            <!-- ================================================= -->
+
+            <div class="col-xl-3 col-md-6">
+
+                <div class="card border-0 shadow-sm h-100 alert-card today-card">
+
+                    <div class="card-body">
+
+                        <div class="d-flex justify-content-between align-items-start">
+
+                            <div>
+
+                                <span class="badge bg-info mb-2">
+
+                                    <i class="fas fa-calendar-day"></i>
+                                    TODAY'S RETURN
+
+                                </span>
+
+                                <h3 class="fw-bold mb-1">
+
+                                    {{ return_today|length }}
+
+                                </h3>
+
+                                <p class="text-muted mb-0">
+
+                                    Bikes due today
+
+                                </p>
+
+                            </div>
+
+
+                            <div class="alert-icon bg-info">
+
+                                <i class="fas fa-calendar-check"></i>
+
+                            </div>
+
+                        </div>
+
+
+                        {% if return_today %}
+
+                        <hr>
+
+                        {% for rental in return_today|slice:":3" %}
+
+                        <div class="alert-item mb-3">
+
+                            <div class="d-flex justify-content-between">
+
+                                <strong>
+                                    {{ rental.bike.registration_number }}
+                                </strong>
+
+                                <span class="badge bg-info">
+                                    TODAY
+                                </span>
+
+                            </div>
+
+                            <small class="text-muted">
+
+                                {{ rental.customer.customer_name }}
+
+                            </small>
+
+                            <br>
+
+                            <small class="text-info">
+
+                                IN:
+                                {{ rental.expected_return_date|date:"d-m-Y h:i A" }}
+
+                            </small>
+
+                            <br>
+
+                            <small class="text-muted">
+
+                                OUT:
+                                {{ rental.rent_date|date:"d-m-Y h:i A" }}
+
+                            </small>
+
+                        </div>
+
+                        {% endfor %}
+
+                        {% else %}
+
+                        <div class="mt-3 text-success">
+
+                            <i class="fas fa-check-circle"></i>
+
+                            No returns today
+
+                        </div>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================================================= -->
+            <!-- UPCOMING -->
+            <!-- ================================================= -->
+
+            <div class="col-xl-3 col-md-6">
+
+                <div class="card border-0 shadow-sm h-100 alert-card upcoming-card">
+
+                    <div class="card-body">
+
+                        <div class="d-flex justify-content-between align-items-start">
+
+                            <div>
+
+                                <span class="badge bg-primary mb-2">
+
+                                    <i class="fas fa-calendar-alt"></i>
+                                    UPCOMING
+
+                                </span>
+
+                                <h3 class="fw-bold mb-1">
+
+                                    {{ upcoming_returns|length }}
+
+                                </h3>
+
+                                <p class="text-muted mb-0">
+
+                                    Returns tomorrow
+
+                                </p>
+
+                            </div>
+
+
+                            <div class="alert-icon bg-primary">
+
+                                <i class="fas fa-calendar-plus"></i>
+
+                            </div>
+
+                        </div>
+
+
+                        {% if upcoming_returns %}
+
+                        <hr>
+
+                        {% for rental in upcoming_returns|slice:":3" %}
+
+                        <div class="alert-item mb-3">
+
+                            <div class="d-flex justify-content-between">
+
+                                <strong>
+                                    {{ rental.bike.registration_number }}
+                                </strong>
+
+                                <span class="badge bg-primary">
+                                    TOMORROW
+                                </span>
+
+                            </div>
+
+                            <small class="text-muted">
+
+                                {{ rental.customer.customer_name }}
+
+                            </small>
+
+                            <br>
+
+                            <small class="text-primary">
+
+                                IN:
+                                {{ rental.expected_return_date|date:"d-m-Y h:i A" }}
+
+                            </small>
+
+                        </div>
+
+                        {% endfor %}
+
+                        {% else %}
+
+                        <div class="mt-3 text-muted">
+
+                            <i class="fas fa-info-circle"></i>
+
+                            No upcoming returns
+
+                        </div>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================================================= -->
+            <!-- PAYMENT PENDING -->
+            <!-- ================================================= -->
+
+            <div class="col-xl-3 col-md-6">
+
+                <div class="card border-0 shadow-sm h-100 alert-card payment-card">
+
+                    <div class="card-body">
+
+                        <div class="d-flex justify-content-between align-items-start">
+
+                            <div>
+
+                                <span class="badge bg-warning text-dark mb-2">
+
+                                    <i class="fas fa-money-bill-wave"></i>
+                                    PAYMENT PENDING
+
+                                </span>
+
+                                <h3 class="fw-bold mb-1">
+
+                                    {{ pending_rentals|length }}
+
+                                </h3>
+
+                                <p class="text-muted mb-0">
+
+                                    Rentals have balance
+
+                                </p>
+
+                            </div>
+
+
+                            <div class="alert-icon bg-warning">
+
+                                <i class="fas fa-rupee-sign"></i>
+
+                            </div>
+
+                        </div>
+
+
+                        {% if pending_rentals %}
+
+                        <hr>
+
+                        {% for rental in pending_rentals|slice:":3" %}
+
+                        <div class="alert-item mb-3">
+
+                            <div class="d-flex justify-content-between">
+
+                                <strong>
+
+                                    {{ rental.customer.customer_name }}
+
+                                </strong>
+
+                                <span class="badge bg-warning text-dark">
+
+                                    ₹ {{ rental.remaining_amount }}
+
+                                </span>
+
+                            </div>
+
+                            <small class="text-muted">
+
+                                {{ rental.bike.registration_number }}
+
+                            </small>
+
+                        </div>
+
+                        {% endfor %}
+
+                        {% else %}
+
+                        <div class="mt-3 text-success">
+
+                            <i class="fas fa-check-circle"></i>
+
+                            No pending payments
+
+                        </div>
+
+                        {% endif %}
 
                     </div>
 
@@ -1219,9 +1211,7 @@ document.addEventListener("DOMContentLoaded", function () {
             scales: {
 
                 y: {
-
                     beginAtZero: true
-
                 }
 
             }
@@ -1234,49 +1224,578 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </script>
 
+
 <style>
 
-.alert-card {
-    transition: all 0.25s ease;
-    overflow: hidden;
-    position: relative;
+/* =====================================================
+   GENERAL
+===================================================== */
+
+.dashboard-page {
+    padding-bottom: 30px;
 }
 
-.alert-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.12) !important;
+.dashboard-header {
+    min-height: 70px;
 }
 
-.overdue-card {
-    border-left: 5px solid #dc3545 !important;
-}
 
-.today-card {
-    border-left: 5px solid #17a2b8 !important;
-}
-
-.payment-card {
-    border-left: 5px solid #ffc107 !important;
-}
-
-.alert-icon,
-.dashboard-icon {
-    width: 50px;
-    height: 50px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 20px;
-}
+/* =====================================================
+   DASHBOARD CARDS
+===================================================== */
 
 .dashboard-card {
+
+    background: #ffffff;
+
+    border-radius: 14px;
+
     transition: all 0.25s ease;
+
+    height: 100%;
+
 }
 
 .dashboard-card:hover {
+
     transform: translateY(-4px);
+
+    box-shadow: 0 10px 25px rgba(0,0,0,0.10) !important;
+
+}
+
+
+.dashboard-card .card-body {
+
+    padding: 20px;
+
+}
+
+
+.dashboard-card-content {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+}
+
+
+.card-label {
+
+    color: #6c757d;
+
+    font-size: 14px;
+
+    margin-bottom: 5px;
+
+}
+
+
+.dashboard-card h3 {
+
+    margin: 0;
+
+    font-size: 26px;
+
+    font-weight: 700;
+
+}
+
+
+/* =====================================================
+   ICONS
+===================================================== */
+
+.dashboard-icon,
+.alert-icon {
+
+    width: 50px;
+
+    height: 50px;
+
+    min-width: 50px;
+
+    border-radius: 13px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: white;
+
+    font-size: 20px;
+
+}
+
+
+/* =====================================================
+   QUICK ACTIONS
+===================================================== */
+
+.quick-actions {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+}
+
+
+.quick-btn {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    border-radius: 8px;
+
+    padding: 10px 16px;
+
+    text-decoration: none;
+
+    color: white;
+
+    font-weight: 500;
+
+    transition: all 0.2s ease;
+
+}
+
+
+.quick-btn:hover {
+
+    color: white;
+
+    transform: translateY(-2px);
+
+}
+
+
+.quick-btn.btn-primary {
+    background: #007bff;
+}
+
+.quick-btn.btn-success {
+    background: #28a745;
+}
+
+.quick-btn.btn-info {
+    background: #17a2b8;
+}
+
+.quick-btn.btn-warning {
+    background: #ffc107;
+    color: #212529;
+}
+
+.quick-btn.btn-secondary {
+    background: #6c757d;
+}
+
+
+/* =====================================================
+   CHART
+===================================================== */
+
+.chart-container {
+
+    height: 320px;
+
+    position: relative;
+
+}
+
+
+.chart-header {
+
+    background: #007bff;
+
+    color: white;
+
+}
+
+
+.payment-header {
+
+    background: #28a745;
+
+    color: white;
+
+}
+
+
+.recent-rental-header {
+
+    background: #17a2b8;
+
+    color: white;
+
+}
+
+
+.expense-header {
+
+    background: #dc3545;
+
+    color: white;
+
+}
+
+
+/* =====================================================
+   ALERTS
+===================================================== */
+
+.alerts-section {
+
+    margin-top: 10px;
+
+    margin-bottom: 30px;
+
+}
+
+
+.alerts-title {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+}
+
+
+.alert-card {
+
+    border-radius: 14px;
+
+    overflow: hidden;
+
+    position: relative;
+
+    transition: all 0.25s ease;
+
+}
+
+
+.alert-card:hover {
+
+    transform: translateY(-5px);
+
+    box-shadow: 0 10px 25px rgba(0,0,0,0.12) !important;
+
+}
+
+
+.overdue-card {
+
+    border-left: 5px solid #dc3545 !important;
+
+}
+
+
+.today-card {
+
+    border-left: 5px solid #17a2b8 !important;
+
+}
+
+
+.upcoming-card {
+
+    border-left: 5px solid #007bff !important;
+
+}
+
+
+.payment-card {
+
+    border-left: 5px solid #ffc107 !important;
+
+}
+
+
+.alert-item {
+
+    padding: 8px;
+
+    border-radius: 8px;
+
+    background: #f8f9fa;
+
+}
+
+
+/* =====================================================
+   TABLE
+===================================================== */
+
+.table {
+
+    margin-bottom: 0;
+
+}
+
+
+.table th {
+
+    font-size: 13px;
+
+    white-space: nowrap;
+
+}
+
+
+.table td {
+
+    vertical-align: middle;
+
+    font-size: 14px;
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 767.98px) {
+
+    .dashboard-page {
+
+        padding-left: 4px;
+
+        padding-right: 4px;
+
+    }
+
+
+    .dashboard-header {
+
+        align-items: flex-start !important;
+
+        margin-bottom: 20px !important;
+
+    }
+
+
+    .dashboard-header h2 {
+
+        font-size: 21px;
+
+    }
+
+
+    .dashboard-header p {
+
+        font-size: 12px;
+
+    }
+
+
+    .dashboard-date {
+
+        font-size: 12px;
+
+    }
+
+
+    /* Summary cards */
+
+    .dashboard-card .card-body {
+
+        padding: 14px;
+
+    }
+
+
+    .card-label {
+
+        font-size: 12px;
+
+    }
+
+
+    .dashboard-card h3 {
+
+        font-size: 20px;
+
+    }
+
+
+    .dashboard-icon {
+
+        width: 38px;
+
+        height: 38px;
+
+        min-width: 38px;
+
+        font-size: 16px;
+
+        border-radius: 10px;
+
+    }
+
+
+    /* Quick actions */
+
+    .quick-actions {
+
+        display: grid;
+
+        grid-template-columns: 1fr 1fr;
+
+        gap: 8px;
+
+    }
+
+
+    .quick-btn {
+
+        padding: 10px 6px;
+
+        font-size: 12px;
+
+        width: 100%;
+
+    }
+
+
+    .quick-btn i {
+
+        font-size: 14px;
+
+    }
+
+
+    /* Chart */
+
+    .chart-container {
+
+        height: 250px;
+
+    }
+
+
+    /* Tables */
+
+    .table th,
+    .table td {
+
+        font-size: 12px;
+
+        padding: 10px 8px;
+
+    }
+
+
+    /* Alerts */
+
+    .alerts-section {
+
+        margin-top: 20px;
+
+        padding-top: 10px;
+
+    }
+
+
+    .alerts-title h4 {
+
+        font-size: 19px;
+
+    }
+
+
+    .alerts-title p {
+
+        font-size: 12px;
+
+    }
+
+
+    .alert-card .card-body {
+
+        padding: 16px;
+
+    }
+
+
+    .alert-icon {
+
+        width: 42px;
+
+        height: 42px;
+
+        min-width: 42px;
+
+        font-size: 17px;
+
+    }
+
+
+    .alert-card h3 {
+
+        font-size: 24px;
+
+    }
+
+
+}
+
+
+/* =====================================================
+   VERY SMALL MOBILE
+===================================================== */
+
+@media (max-width: 400px) {
+
+    .dashboard-card h3 {
+
+        font-size: 18px;
+
+    }
+
+
+    .dashboard-icon {
+
+        width: 34px;
+
+        height: 34px;
+
+        min-width: 34px;
+
+        font-size: 14px;
+
+    }
+
+
+    .quick-btn {
+
+        font-size: 11px;
+
+    }
+
+
+    .quick-btn i {
+
+        font-size: 13px;
+
+    }
+
 }
 
 </style>

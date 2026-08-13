@@ -647,3 +647,160 @@ body {
     }
 
 }
+
+/* =====================================================
+   MOBILE - ALERTS AT BOTTOM
+   ===================================================== */
+
+@media (max-width: 767px) {
+
+    .dashboard-alerts {
+        order: 99 !important;
+    }
+
+    .dashboard-main {
+        order: 1 !important;
+    }
+
+}
+
+/* ================================
+   DASHBOARD UI
+================================ */
+
+.dashboard-row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* Normal Desktop */
+.dashboard-main-content {
+    order: 1;
+}
+
+.alerts-section {
+    order: 2;
+}
+
+
+/* ================================
+   MOBILE DASHBOARD
+================================ */
+
+@media (max-width: 767.98px) {
+
+    .dashboard-row {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Main dashboard first */
+    .dashboard-main-content {
+        order: 1;
+        width: 100%;
+    }
+
+    /* Alerts always at bottom */
+    .alerts-section {
+        order: 99;
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    /* Alert card */
+    .overdue-card {
+        border-radius: 18px;
+        margin-bottom: 20px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    }
+
+}
+
+
+.overdue-card {
+    border-radius: 18px;
+    border-left: 5px solid #dc3545;
+    overflow: hidden;
+}
+
+.overdue-card .card-header {
+    background: #fff;
+    border-bottom: 1px solid #eee;
+    padding: 18px;
+}
+
+.overdue-card .card-body {
+    padding: 18px;
+}
+
+.overdue-item {
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.overdue-item:last-child {
+    border-bottom: none;
+}
+
+.overdue-number {
+    font-size: 18px;
+    font-weight: 700;
+    color: #111827;
+}
+
+.overdue-customer {
+    color: #64748b;
+    margin-top: 4px;
+}
+
+.overdue-date {
+    color: #dc3545;
+    font-size: 14px;
+    margin-top: 6px;
+}
+
+.overdue-badge {
+    background: #dc3545;
+    color: white;
+    padding: 7px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+/* =====================================================
+   DASHBOARD ALERTS
+   ===================================================== */
+
+/* Desktop */
+.dashboard-alerts {
+    order: 1;
+}
+
+
+/* Mobile */
+@media (max-width: 767.98px) {
+
+    .dashboard-alerts {
+        order: 99 !important;
+        margin-top: 25px !important;
+    }
+
+}
+
+.dashboard-alerts {
+    width: 100%;
+}
+
+@media (max-width: 767.98px) {
+
+    .dashboard-alerts {
+        margin-top: 25px;
+    }
+
+    .dashboard-alerts .alert-card {
+        border-radius: 16px;
+    }
+
+}

@@ -29,7 +29,6 @@ def dashboard(request):
 
     tomorrow = today + timedelta(days=1)
 
-
     # =========================
     # BIKE SUMMARY
     # =========================
@@ -44,13 +43,11 @@ def dashboard(request):
         status="Rented"
     ).count()
 
-
     # =========================
     # CUSTOMER SUMMARY
     # =========================
 
     total_customers = Customer.objects.count()
-
 
     # =========================
     # ACTIVE RENTALS
@@ -59,7 +56,6 @@ def dashboard(request):
     active_rentals = Rental.objects.filter(
         status="Active"
     ).count()
-
 
     # =========================
     # RETURN TODAY
@@ -75,7 +71,6 @@ def dashboard(request):
         "expected_return_date"
     )
 
-
     # =========================
     # OVERDUE RENTALS
     # =========================
@@ -90,10 +85,8 @@ def dashboard(request):
         "expected_return_date"
     )
 
-
     # =========================
     # UPCOMING RETURNS
-    # TOMORROW
     # =========================
 
     upcoming_returns = Rental.objects.filter(
@@ -105,7 +98,6 @@ def dashboard(request):
     ).order_by(
         "expected_return_date"
     )
-
 
     # =========================
     # PENDING PAYMENTS
@@ -121,9 +113,7 @@ def dashboard(request):
         "-remaining_amount"
     )
 
-
     pending_payments = pending_rentals.count()
-
 
     # =========================
     # TODAY INCOME
@@ -134,7 +124,6 @@ def dashboard(request):
     ).aggregate(
         total=Sum("amount")
     )["total"] or Decimal("0.00")
-
 
     # =========================
     # MONTHLY INCOME
@@ -150,7 +139,6 @@ def dashboard(request):
         total=Sum("amount")
     )["total"] or Decimal("0.00")
 
-
     # =========================
     # TOTAL INCOME
     # =========================
@@ -159,7 +147,6 @@ def dashboard(request):
         total=Sum("amount")
     )["total"] or Decimal("0.00")
 
-
     # =========================
     # TOTAL EXPENSE
     # =========================
@@ -167,7 +154,6 @@ def dashboard(request):
     total_expense = Expense.objects.aggregate(
         total=Sum("amount")
     )["total"] or Decimal("0.00")
-
 
     # =========================
     # TODAY EXPENSE
@@ -179,7 +165,6 @@ def dashboard(request):
         total=Sum("amount")
     )["total"] or Decimal("0.00")
 
-
     # =========================
     # TOTAL PROFIT
     # =========================
@@ -189,7 +174,6 @@ def dashboard(request):
     total_profit = total_profit.quantize(
         Decimal("0.01")
     )
-
 
     # =========================
     # RECENT PAYMENTS
@@ -203,7 +187,6 @@ def dashboard(request):
         "-payment_date"
     )[:5]
 
-
     # =========================
     # RECENT RENTALS
     # =========================
@@ -215,7 +198,6 @@ def dashboard(request):
         "-rent_date"
     )[:5]
 
-
     # =========================
     # RECENT EXPENSES
     # =========================
@@ -224,14 +206,11 @@ def dashboard(request):
         "-expense_date"
     )[:5]
 
-
     # =========================
     # DASHBOARD CONTEXT
     # =========================
 
     context = {
-
-        # Date
         "today": today,
 
         # Bikes
@@ -266,12 +245,11 @@ def dashboard(request):
         # Profit
         "total_profit": total_profit,
 
-        # Recent activity
+        # Recent Activity
         "recent_payments": recent_payments,
         "recent_rentals": recent_rentals,
         "recent_expenses": recent_expenses,
     }
-
 
     return render(
         request,
@@ -308,7 +286,6 @@ def bike_search(request):
                 "customer",
                 "bike"
             ).first()
-
 
     return render(
         request,
