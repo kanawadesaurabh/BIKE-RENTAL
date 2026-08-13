@@ -285,4 +285,365 @@ body{
 
 .upcoming-card {
     border-left: 5px solid #007bff !important;
+}       
+
+
+
+/* =========================================================
+   BIKE RENTAL - MODERN UI
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #f4f7fb;
+    color: #1f2937;
+}
+
+/* ================= NAVBAR ================= */
+
+.main-header {
+    height: 60px;
+    border: none !important;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    background: #ffffff !important;
+}
+
+.main-header .navbar-brand {
+    color: #1f2937 !important;
+    font-size: 18px;
+}
+
+.main-header .nav-link {
+    color: #374151 !important;
+    font-size: 18px;
+}
+
+/* ================= SIDEBAR ================= */
+
+.main-sidebar {
+    background: linear-gradient(180deg, #111827 0%, #172033 100%) !important;
+}
+
+.brand-link {
+    border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+    padding: 18px 10px !important;
+}
+
+.brand-text {
+    color: #ffffff !important;
+    font-size: 19px;
+}
+
+.nav-sidebar .nav-item {
+    margin-bottom: 5px;
+}
+
+.nav-sidebar .nav-link {
+    margin: 0 10px;
+    border-radius: 10px;
+    color: #d1d5db !important;
+    padding: 11px 14px;
+    transition: all 0.2s ease;
+}
+
+.nav-sidebar .nav-link:hover {
+    background: rgba(37, 99, 235, 0.18);
+    color: #ffffff !important;
+    transform: translateX(3px);
+}
+
+.nav-sidebar .nav-link.active {
+    background: linear-gradient(90deg, #2563eb, #3b82f6);
+    color: #ffffff !important;
+    box-shadow: 0 5px 15px rgba(37, 99, 235, 0.25);
+}
+
+.nav-sidebar .nav-icon {
+    margin-right: 8px;
+}
+
+/* ================= CONTENT ================= */
+
+.content-wrapper {
+    background: #f4f7fb !important;
+}
+
+.content {
+    padding-bottom: 30px;
+}
+
+.container-fluid {
+    max-width: 1500px;
+}
+
+/* ================= PAGE TITLE ================= */
+
+.page-title {
+    font-size: 28px;
+    font-weight: 600;
+    color: #111827;
+}
+
+.page-subtitle {
+    color: #6b7280;
+    font-size: 14px;
+}
+
+/* ================= CARDS ================= */
+
+.card {
+    border: none !important;
+    border-radius: 16px !important;
+    box-shadow: 0 5px 20px rgba(15, 23, 42, 0.07) !important;
+    overflow: hidden;
+}
+
+.card-header {
+    background: #ffffff !important;
+    border-bottom: 1px solid #eef0f4 !important;
+    padding: 16px 20px;
+}
+
+.card-title {
+    font-weight: 600;
+    color: #111827;
+}
+
+/* ================= DASHBOARD STAT CARDS ================= */
+
+.small-box {
+    border-radius: 16px !important;
+    border: none !important;
+    overflow: hidden;
+    box-shadow: 0 5px 18px rgba(15, 23, 42, 0.08);
+    transition: 0.25s ease;
+}
+
+.small-box:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.12);
+}
+
+.small-box .inner {
+    padding: 22px;
+}
+
+.small-box h3 {
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.small-box p {
+    font-size: 14px;
+    margin-bottom: 0;
+}
+
+.small-box .icon {
+    opacity: 0.18;
+    right: 15px;
+    top: 15px;
+}
+
+/* ================= TABLE ================= */
+
+.table {
+    background: #ffffff;
+    margin-bottom: 0;
+}
+
+.table thead th {
+    background: #f8fafc;
+    color: #475569;
+    font-size: 13px;
+    font-weight: 600;
+    border-bottom: 1px solid #e5e7eb;
+    white-space: nowrap;
+}
+
+.table tbody td {
+    vertical-align: middle;
+    font-size: 13px;
+    color: #374151;
+}
+
+.table tbody tr {
+    transition: 0.15s ease;
+}
+
+.table tbody tr:hover {
+    background: #f8fbff;
+}
+
+/* ================= BUTTONS ================= */
+
+.btn {
+    border-radius: 9px !important;
+    font-weight: 500;
+    padding: 8px 14px;
+}
+
+.btn-primary {
+    background: #2563eb !important;
+    border-color: #2563eb !important;
+}
+
+.btn-primary:hover {
+    background: #1d4ed8 !important;
+}
+
+.btn-success {
+    background: #16a34a !important;
+    border-color: #16a34a !important;
+}
+
+.btn-danger {
+    background: #dc2626 !important;
+    border-color: #dc2626 !important;
+}
+
+/* ================= BADGES ================= */
+
+.badge {
+    padding: 7px 10px;
+    border-radius: 20px;
+    font-weight: 500;
+}
+
+/* ================= FORMS ================= */
+
+.form-control,
+.form-select {
+    border: 1px solid #dbe1ea;
+    border-radius: 9px;
+    min-height: 42px;
+    box-shadow: none !important;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #2563eb;
+}
+
+/* ================= SEARCH ================= */
+
+.search-box {
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 14px;
+    box-shadow: 0 4px 15px rgba(15, 23, 42, 0.06);
+}
+
+/* ================= FOOTER ================= */
+
+.main-footer {
+    background: #ffffff !important;
+    border-top: 1px solid #e5e7eb !important;
+    color: #64748b;
+    font-size: 13px;
+}
+
+/* =========================================================
+   MOBILE RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 767px) {
+
+    .main-header {
+        height: 58px;
+    }
+
+    .main-header .navbar-brand {
+        font-size: 16px;
+        margin-left: 5px;
+    }
+
+    .content {
+        padding: 12px 8px !important;
+    }
+
+    .container-fluid {
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+    }
+
+    .page-title {
+        font-size: 22px;
+    }
+
+    .page-subtitle {
+        font-size: 13px;
+    }
+
+    .small-box {
+        margin-bottom: 14px;
+        border-radius: 14px !important;
+    }
+
+    .small-box .inner {
+        padding: 18px;
+    }
+
+    .small-box h3 {
+        font-size: 25px;
+    }
+
+    .card {
+        border-radius: 13px !important;
+    }
+
+    .card-header {
+        padding: 13px 15px;
+    }
+
+    .table-responsive {
+        border-radius: 10px;
+    }
+
+    .btn {
+        font-size: 13px;
+        padding: 7px 11px;
+    }
+
+    .main-footer {
+        text-align: center;
+        font-size: 11px;
+    }
+
+    /* Mobile sidebar */
+
+    .main-sidebar {
+        width: 250px;
+    }
+
+}
+
+/* ================= EXTRA SMALL MOBILE ================= */
+
+@media (max-width: 480px) {
+
+    .main-header .navbar-brand {
+        font-size: 15px;
+    }
+
+    .small-box h3 {
+        font-size: 23px;
+    }
+
+    .small-box p {
+        font-size: 13px;
+    }
+
+    .card-title {
+        font-size: 16px;
+    }
+
+    .form-control,
+    .form-select {
+        font-size: 13px;
+    }
+
 }
